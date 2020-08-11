@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'booking-new-service',
@@ -6,8 +7,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./new-service.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewServiceComponent implements OnInit {
-  constructor() {}
+export class NewServiceComponent {
+  newServiceForm = this._formBuilder.group({
+    serviceName: [''],
+  });
 
-  ngOnInit(): void {}
+  constructor(private _formBuilder: FormBuilder) {}
+
+  onSubmit() {
+    console.log(this.newServiceForm.value);
+  }
 }
