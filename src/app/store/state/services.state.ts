@@ -16,7 +16,7 @@ export class ServicesStateModel {
 @Injectable()
 export class ServicesState {
   @Selector()
-  static getServices(state: ServicesStateModel) {
+  static getServices(state: ServicesStateModel): ServiceModel[] {
     return state.services;
   }
 
@@ -24,7 +24,7 @@ export class ServicesState {
   add(
     { getState, patchState }: StateContext<ServicesStateModel>,
     { payload }: AddService
-  ) {
+  ): void {
     const state = getState();
     patchState({
       services: [...state.services, payload],

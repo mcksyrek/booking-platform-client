@@ -22,7 +22,6 @@ export class NewServiceComponent {
 
   constructor(private _formBuilder: FormBuilder, private _store: Store) {}
 
-  // TODO add typedef
   onSubmit(): void {
     this._addService(this.newServiceForm.value.serviceName);
   }
