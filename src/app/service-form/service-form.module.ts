@@ -6,7 +6,7 @@ import { ServiceFormComponent } from './service-form/service-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 
-import { ServicesState } from '@app/store/state/services.state';
+import { ServicesState } from '@state/services.state';
 
 @NgModule({
   declarations: [ServiceFormComponent],

@@ -3,9 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { AddService } from '../../store/actions/service.actions';
-import { ServicesState } from '../../store/state/services.state';
-import { ServiceModel } from '../../models/service.model';
+import { AddService } from '@actions/service.actions';
+import { ServicesState } from '@state/services.state';
+import { ServiceModel } from '@models/service.model';
 
 @Component({
   selector: 'booking-service-form',
