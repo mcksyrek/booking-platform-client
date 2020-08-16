@@ -8,22 +8,22 @@ import { ServicesState } from '../../store/state/services.state';
 import { ServiceModel } from '../../models/service.model';
 
 @Component({
-  selector: 'booking-new-service',
-  templateUrl: './new-service.component.html',
-  styleUrls: ['./new-service.component.scss'],
+  selector: 'booking-service-form',
+  templateUrl: './service-form.component.html',
+  styleUrls: ['./service-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewServiceComponent {
+export class ServiceFormComponent {
   @Select(ServicesState.getServices) services$: Observable<ServiceModel[]>;
 
-  newServiceForm = this._formBuilder.group({
+  serviceForm = this._formBuilder.group({
     serviceName: [''],
   });
 
   constructor(private _formBuilder: FormBuilder, private _store: Store) {}
 
   onSubmit(): void {
-    this._addService(this.newServiceForm.value.serviceName);
+    this._addService(this.serviceForm.value.serviceName);
   }
 
   private _addService(name: string): void {
