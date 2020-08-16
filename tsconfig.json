@@ -10,6 +10,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@assets/*": ["src/assets/*"]
+    },
     "target": "es2015",
     "lib": ["es2018", "dom"]
   },
