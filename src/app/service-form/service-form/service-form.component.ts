@@ -14,9 +14,10 @@ import { ServiceModel } from '../../models/service.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceFormComponent {
-  @Select(ServicesState.getServices) services$: Observable<ServiceModel[]>;
+  @Select(ServicesState.getServices)
+  readonly services$: Observable<ServiceModel[]>;
 
-  serviceForm = this._formBuilder.group({
+  readonly serviceForm = this._formBuilder.group({
     serviceName: [''],
   });
 
