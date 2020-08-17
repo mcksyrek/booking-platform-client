@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { AddService } from '@actions/service.actions';
+import { AddServiceAction } from '@actions/service.actions';
 import { ServicesState } from '@state/services.state';
 import { IService } from '@booking/models/service.interface';
 
@@ -28,6 +28,6 @@ export class ServiceFormComponent {
   }
 
   private _addService(name: string): void {
-    this._store.dispatch(new AddService({ name }));
+    this._store.dispatch(new AddServiceAction({ name }));
   }
 }

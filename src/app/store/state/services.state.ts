@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { patch, append } from '@ngxs/store/operators';
 
 import { IService } from '@booking/models/service.interface';
-import { AddService } from '@actions/service.actions';
+import { AddServiceAction } from '@actions/service.actions';
 
 export class ServicesStateModel {
   services?: IService[];
@@ -20,10 +20,10 @@ export class ServicesState {
     return services;
   }
 
-  @Action(AddService)
+  @Action(AddServiceAction)
   addService(
     ctx: StateContext<ServicesStateModel>,
-    { service }: AddService
+    { service }: AddServiceAction
   ): void {
     ctx.setState(
       patch({
