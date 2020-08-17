@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@app/*": ["src/app/*"],
+      "@booking/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"],
       "@actions/*": ["src/app/store/actions/*"],
       "@state/*": ["src/app/store/state/*"],

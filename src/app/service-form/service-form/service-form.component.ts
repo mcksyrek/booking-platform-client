@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AddService } from '@actions/service.actions';
 import { ServicesState } from '@state/services.state';
-import { IService } from '@app/models/service.interface';
+import { IService } from '@booking/models/service.interface';
 
 @Component({
   selector: 'booking-service-form',
