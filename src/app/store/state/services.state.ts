@@ -16,18 +16,18 @@ export class ServicesStateModel {
 @Injectable()
 export class ServicesState {
   @Selector()
-  static getServices(state: ServicesStateModel): IService[] {
-    return state.services;
+  static getServices({ services }: ServicesStateModel): IService[] {
+    return services;
   }
 
   @Action(AddService)
   addService(
     ctx: StateContext<ServicesStateModel>,
-    { payload }: AddService
+    { service }: AddService
   ): void {
     ctx.setState(
       patch({
-        services: append([payload]),
+        services: append([service]),
       })
     );
   }
