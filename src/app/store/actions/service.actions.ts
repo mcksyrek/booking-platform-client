@@ -1,7 +1,7 @@
-import { ServiceModel } from '@models/service.model';
+import { IService } from '@app/models/service.interface';
 
 export class AddService {
   static readonly type = '[SERVICE] Add';
 
-  constructor(public payload: ServiceModel) {}
+  constructor(public payload: IService) {}
 }

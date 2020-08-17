@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AddService } from '@actions/service.actions';
 import { ServicesState } from '@state/services.state';
-import { ServiceModel } from '@models/service.model';
+import { IService } from '@app/models/service.interface';
 
 @Component({
   selector: 'booking-service-form',
@@ -15,7 +15,7 @@ import { ServiceModel } from '@models/service.model';
 })
 export class ServiceFormComponent {
   @Select(ServicesState.getServices)
-  readonly services$: Observable<ServiceModel[]>;
+  readonly services$: Observable<IService[]>;
 
   readonly serviceForm = this._formBuilder.group({
     serviceName: [''],

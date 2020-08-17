@@ -2,11 +2,11 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { patch, append } from '@ngxs/store/operators';
 
-import { IServiceModel } from '@models/service.model';
+import { IService } from '@app/models/service.interface';
 import { AddService } from '@actions/service.actions';
 
 export class ServicesStateModel {
-  services?: IServiceModel[];
+  services?: IService[];
 }
 
 @State<ServicesStateModel>({
@@ -16,7 +16,7 @@ export class ServicesStateModel {
 @Injectable()
 export class ServicesState {
   @Selector()
-  static getServices(state: ServicesStateModel): IServiceModel[] {
+  static getServices(state: ServicesStateModel): IService[] {
     return state.services;
   }
 
