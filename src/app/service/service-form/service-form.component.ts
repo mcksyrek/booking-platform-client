@@ -18,7 +18,11 @@ export class ServiceFormComponent {
 
   readonly serviceForm: FormGroup;
 
-  constructor(formBuilder: FormBuilder, private _store: Store) {
+  get disabledSubmit(): boolean {
+    return !this.serviceForm.dirty && this.serviceForm.valid;
+  }
+
+  constructor(formBuilder: FormBuilder) {
     this.serviceForm = formBuilder.group({
       serviceName: [''],
     });
