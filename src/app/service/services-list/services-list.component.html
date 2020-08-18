@@ -1,6 +1,11 @@
-<h1>All services:</h1>
-<ul>
-  <li *ngFor="let service of services$ | async">
-    {{ service.serviceName }}
-  </li>
-</ul>
+<article>
+  <h1>All services:</h1>
+  <ul>
+    <li *ngFor="let service of services$ | async">
+      {{ service.serviceName }}
+    </li>
+  </ul>
+
+  <booking-service-form (submitForm)="handleFormSubmit($event)">
+  </booking-service-form>
+</article>
