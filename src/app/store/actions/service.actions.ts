@@ -1,4 +1,4 @@
-import { IService } from '@booking/models/service.interface';
+import { IService } from '@booking/service/shared/service.interface';
 
 export class AddServiceAction {
   static readonly type = '[SERVICE] Add';

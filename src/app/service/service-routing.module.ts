@@ -9,4 +9,4 @@ const routes: Routes = [{ path: '', component: ServiceFormComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ServiceFormRoutingModule {}
+export class ServiceRoutingModule {}

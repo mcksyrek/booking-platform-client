@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ServiceFormRoutingModule } from './service-form-routing.module';
-import { ServiceFormComponent } from './service-form/service-form.component';
+import { ServiceRoutingModule } from './service-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 
+import { ServiceFormComponent } from './service-form/service-form.component';
 import { ServicesState } from '@state/services.state';
 
 @NgModule({
   declarations: [ServiceFormComponent],
   imports: [
     CommonModule,
-    ServiceFormRoutingModule,
+    ServiceRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgxsModule.forRoot([ServicesState]),
   ],
 })
-export class ServiceFormModule {}
+export class ServiceModule {}
