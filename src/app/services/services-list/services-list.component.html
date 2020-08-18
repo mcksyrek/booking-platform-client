@@ -1,10 +1,13 @@
 <article>
   <h1>All services:</h1>
-  <ul>
-    <li *ngFor="let service of services$ | async">
+  <ul *ngIf="services$ | async as services; else noServices">
+    <li *ngFor="let service of services">
       {{ service.serviceName }}
     </li>
   </ul>
+  <ng-template #noServices>
+    <h3>no services to show</h3>
+  </ng-template>
 
   <booking-service-form
     *ngIf="showServiceForm; else addNewService"
