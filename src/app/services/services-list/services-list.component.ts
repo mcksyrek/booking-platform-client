@@ -22,10 +22,10 @@ export class ServicesListComponent {
 
   handleFormSubmit(formValue: IService): void {
     this._servicesService.addService(formValue);
-    this.toggleShowServiceForm();
+    this.toggleServiceForm();
   }
 
-  toggleShowServiceForm(): void {
+  toggleServiceForm(): void {
     this.showServiceForm = !this.showServiceForm;
   }
 }

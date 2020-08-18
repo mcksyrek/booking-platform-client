@@ -10,13 +10,13 @@
   </ng-template>
 
   <booking-service-form
-    *ngIf="showServiceForm; else addNewService"
+    *ngIf="showServiceForm; else addNewServiceButton"
     (submitForm)="handleFormSubmit($event)"
   >
   </booking-service-form>
 
-  <ng-template #addNewService>
-    <button (click)="toggleShowServiceForm()">
+  <ng-template #addNewServiceButton>
+    <button (click)="toggleServiceForm()">
       Add new service
     </button>
   </ng-template>
