@@ -16,9 +16,16 @@ export class ServicesListComponent {
   @Select(ServicesState.getServices)
   readonly services$: Observable<IService[]>;
 
+  showServiceForm = false;
+
   constructor(private _servicesService: ServicesService) {}
 
   handleFormSubmit(formValue: IService): void {
     this._servicesService.addService(formValue);
+    this.toggleShowServiceForm();
+  }
+
+  toggleShowServiceForm(): void {
+    this.showServiceForm = !this.showServiceForm;
   }
 }

@@ -6,6 +6,15 @@
     </li>
   </ul>
 
-  <booking-service-form (submitForm)="handleFormSubmit($event)">
+  <booking-service-form
+    *ngIf="showServiceForm; else addNewService"
+    (submitForm)="handleFormSubmit($event)"
+  >
   </booking-service-form>
+
+  <ng-template #addNewService>
+    <button (click)="toggleShowServiceForm()">
+      Add new service
+    </button>
+  </ng-template>
 </article>
