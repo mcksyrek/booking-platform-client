@@ -1,0 +1,6 @@
+<h1>All services:</h1>
+<ul>
+  <li *ngFor="let service of services$ | async">
+    {{ service.serviceName }}
+  </li>
+</ul>

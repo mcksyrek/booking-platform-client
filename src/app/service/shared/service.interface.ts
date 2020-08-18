@@ -1,3 +1,3 @@
 export interface IService {
-  name: string;
+  serviceName: string;
 }
