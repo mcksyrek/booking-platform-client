@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Store } from '@ngxs/store';
 
 import { ServicesState } from '@state/services.state';
 import { IService } from '../shared/service.interface';
-import { AddServiceAction } from '@actions/service.actions';
+import { ServicesService } from '../shared/services.service';
 
 @Component({
   selector: 'booking-services-list',
@@ -17,13 +16,9 @@ export class ServicesListComponent {
   @Select(ServicesState.getServices)
   readonly services$: Observable<IService[]>;
 
-  constructor(private _store: Store) {}
+  constructor(private _servicesService: ServicesService) {}
 
   handleFormSubmit(formValue: IService): void {
-    this._addService(formValue);
-  }
-
-  private _addService(newService: IService): void {
-    this._store.dispatch(new AddServiceAction(newService));
+    this._servicesService.addService(formValue);
   }
 }
