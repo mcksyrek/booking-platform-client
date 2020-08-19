@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ServicesState } from '@state/services.state';
 import { IService } from '../shared/service.interface';
-import { ServicesService } from '../shared/services.service';
+import { ServicesStoreService } from '../shared/services-store.service';
 
 @Component({
   selector: 'booking-services-list',
@@ -18,10 +18,10 @@ export class ServicesListComponent {
 
   showServiceForm = false;
 
-  constructor(private _servicesService: ServicesService) {}
+  constructor(private _ServicesStoreService: ServicesStoreService) {}
 
   handleFormSubmit(formValue: IService): void {
-    this._servicesService.addService(formValue);
+    this._ServicesStoreService.addService(formValue);
     this.toggleServiceForm();
   }
 

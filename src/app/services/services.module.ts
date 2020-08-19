@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { ServiceFormComponent } from './service-form/service-form.component';
 import { ServicesState } from '@state/services.state';
 import { ServicesListComponent } from './services-list/services-list.component';
-import { ServicesService } from './shared/services.service';
+import { ServicesStoreService } from './shared/services-store.service';
 
 @NgModule({
   declarations: [ServiceFormComponent, ServicesListComponent],
@@ -19,6 +19,6 @@ import { ServicesService } from './shared/services.service';
     FormsModule,
     NgxsModule.forRoot([ServicesState]),
   ],
-  providers: [ServicesService],
+  providers: [ServicesStoreService],
 })
 export class ServicesModule {}

@@ -5,7 +5,7 @@ import { AddServiceAction } from '@actions/service.actions';
 import { IService } from './service.interface';
 
 @Injectable()
-export class ServicesService {
+export class ServicesStoreService {
   constructor(private _store: Store) {}
 
   addService(newService: IService): void {
