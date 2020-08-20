@@ -18,10 +18,10 @@ export class ServicesListComponent {
 
   showServiceForm = false;
 
-  constructor(private _ServicesStoreService: ServicesStoreService) {}
+  constructor(private _servicesStoreService: ServicesStoreService) {}
 
   handleFormSubmit(formValue: IService): void {
-    this._ServicesStoreService.addService(formValue);
+    this._servicesStoreService.addService(formValue);
     this.toggleServiceForm();
   }
 
