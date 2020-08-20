@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 import { ServicesState } from '../state/services.state';
 import { IService } from '../shared/service.interface';
-import { ServicesStoreService } from '../shared/services-store.service';
+import { AddServiceAction } from '../state/service.actions';
 
 @Component({
   selector: 'booking-services-list',
@@ -18,10 +19,11 @@ export class ServicesListComponent {
 
   showServiceForm = false;
 
-  constructor(private _servicesStoreService: ServicesStoreService) {}
+  constructor(private _store: Store) {}
 
   handleFormSubmit(formValue: IService): void {
-    this._servicesStoreService.addService(formValue);
+    this._store.dispatch(new AddServiceAction(formValue));
+
     this.toggleServiceForm();
   }
 
