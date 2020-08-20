@@ -11,9 +11,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@booking/*": ["src/app/*"],
-      "@actions/*": ["src/app/store/actions/*"],
-      "@state/*": ["src/app/store/state/*"]
+      "@booking/*": ["src/app/*"]
     },
     "target": "es2015",
     "lib": ["es2018", "dom"]

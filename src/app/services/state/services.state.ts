@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { patch, append } from '@ngxs/store/operators';
 
 import { IService } from '@booking/services/shared/service.interface';
-import { AddServiceAction } from '@actions/service.actions';
+import { AddServiceAction } from './service.actions';
 
 export class ServicesStateModel {
   services?: IService[];
