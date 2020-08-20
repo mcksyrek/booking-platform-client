@@ -4,8 +4,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Store } from '@ngxs/store';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'booking-offer-form',
@@ -14,17 +13,17 @@ import { Store } from '@ngxs/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferFormComponent {
-  @Output() submitForm = new EventEmitter();
+  @Output() readonly submitForm = new EventEmitter();
 
   readonly offerForm: FormGroup;
 
   get disabledSubmit(): boolean {
-    return !this.offerForm.dirty && this.offerForm.valid;
+    return !this.offerForm.dirty || !this.offerForm.valid;
   }
 
   constructor(formBuilder: FormBuilder) {
     this.offerForm = formBuilder.group({
-      offerName: [''],
+      offerName: ['', Validators.required],
     });
   }
 
