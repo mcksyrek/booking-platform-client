@@ -1,0 +1,8 @@
+<form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+  <label>
+    New offer name:
+    <input type="text" formControlName="offerName" />
+  </label>
+
+  <button [disabled]="disabledSubmit">Submit</button>
+</form>

@@ -8,27 +8,27 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
 
 @Component({
-  selector: 'booking-service-form',
-  templateUrl: './service-form.component.html',
-  styleUrls: ['./service-form.component.scss'],
+  selector: 'booking-offer-form',
+  templateUrl: './offer-form.component.html',
+  styleUrls: ['./offer-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceFormComponent {
+export class OfferFormComponent {
   @Output() submitForm = new EventEmitter();
 
-  readonly serviceForm: FormGroup;
+  readonly offerForm: FormGroup;
 
   get disabledSubmit(): boolean {
-    return !this.serviceForm.dirty && this.serviceForm.valid;
+    return !this.offerForm.dirty && this.offerForm.valid;
   }
 
   constructor(formBuilder: FormBuilder) {
-    this.serviceForm = formBuilder.group({
-      serviceName: [''],
+    this.offerForm = formBuilder.group({
+      offerName: [''],
     });
   }
 
   onSubmit(): void {
-    this.submitForm.emit(this.serviceForm.value);
+    this.submitForm.emit(this.offerForm.value);
   }
 }

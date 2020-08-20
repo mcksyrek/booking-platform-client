@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ServicesListComponent } from './services-list/services-list.component';
+import { OffersListComponent } from './offers-list/offers-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'all', pathMatch: 'full' },
-  { path: 'all', component: ServicesListComponent },
+  { path: 'all', component: OffersListComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ServicesRoutingModule {}
+export class OffersRoutingModule {}
