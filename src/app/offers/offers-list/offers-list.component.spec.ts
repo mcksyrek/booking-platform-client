@@ -41,7 +41,7 @@ describe('OffersListComponent', () => {
     const mockOffer = { offerName: '123' };
     store.dispatch(new AddOfferAction(mockOffer));
 
-    const offers = store.selectSnapshot(state => [...state.offers.offers]);
-    expect(offers.find(offer => offer === mockOffer)).toBeTruthy();
+    const offers = store.selectSnapshot(OffersState.getOffers);
+    expect(offers).toEqual([mockOffer]);
   });
 });
