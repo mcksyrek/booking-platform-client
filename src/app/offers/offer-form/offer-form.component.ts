@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { IOffer } from '../offer.interface';
+
 @Component({
   selector: 'booking-offer-form',
   templateUrl: './offer-form.component.html',
@@ -13,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferFormComponent {
-  @Output() readonly submitForm = new EventEmitter();
+  @Output() readonly submitForm = new EventEmitter<IOffer>();
 
   readonly offerForm: FormGroup;
 

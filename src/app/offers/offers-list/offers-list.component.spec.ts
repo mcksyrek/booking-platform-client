@@ -1,7 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { OffersListComponent } from './offers-list.component';
 import { OffersState } from '../state/offers.state';
@@ -15,7 +14,7 @@ describe('OffersListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OffersListComponent],
-      imports: [ReactiveFormsModule, NgxsModule.forRoot([OffersState])],
+      imports: [NgxsModule.forRoot([OffersState])],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(Store);
