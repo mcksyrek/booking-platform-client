@@ -20,7 +20,7 @@ export class OfferFormComponent {
   readonly offerForm: FormGroup;
 
   get disabledSubmit(): boolean {
-    return !this.offerForm.dirty || !this.offerForm.valid;
+    return !this.offerForm.valid;
   }
 
   constructor(formBuilder: FormBuilder) {
