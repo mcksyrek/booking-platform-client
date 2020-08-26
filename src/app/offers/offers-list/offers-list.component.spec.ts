@@ -14,7 +14,7 @@ describe('OffersListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OffersListComponent],
-      imports: [NgxsModule.forRoot([OffersState])],
+      imports: [NgxsModule.forRoot([])],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(Store);
@@ -31,16 +31,19 @@ describe('OffersListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(' toggleOfferForm should toggle `showOfferForm` ', () => {
-    component.toggleOfferForm();
-    expect(component.showOfferForm).toBeTruthy();
+  describe('toggleOfferForm', () => {
+    it('should toggle OffersListComponent#showOfferForm', () => {
+      component.toggleOfferForm();
+      expect(component.showOfferForm).toBeTruthy();
+    });
   });
 
-  it('should access offers from Store', () => {
-    const mockOffer = { offerName: '123' };
-    store.dispatch(new AddOfferAction(mockOffer));
+  // TODO move this test to state test suit or remove it
+  // it('should access offers from Store', () => {
+  //   const mockOffer = { offerName: '123' };
+  //   store.dispatch(new AddOfferAction(mockOffer));
 
-    const offers = store.selectSnapshot(OffersState.getOffers);
-    expect(offers).toEqual([mockOffer]);
-  });
+  //   const offers = store.selectSnapshot(OffersState.getOffers);
+  //   expect(offers).toEqual([mockOffer]);
+  // });
 });
