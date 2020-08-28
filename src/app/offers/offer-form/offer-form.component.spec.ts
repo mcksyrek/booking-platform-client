@@ -1,31 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 import { OfferFormComponent } from './offer-form.component';
 
 describe('OfferFormComponent', () => {
   let component: OfferFormComponent;
   let fixture: ComponentFixture<OfferFormComponent>;
-
-  let formBuilderSpy: any;
+  let formBuilder: FormBuilder;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OfferFormComponent],
       imports: [ReactiveFormsModule],
-      providers: [FormBuilder],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    const formBuilder = TestBed.inject(FormBuilder);
-    formBuilderSpy = jest.spyOn(formBuilder, 'group');
+    formBuilder = TestBed.inject(FormBuilder);
+    jest.spyOn(formBuilder, 'group');
 
     fixture = TestBed.createComponent(OfferFormComponent);
     component = fixture.componentInstance;
@@ -49,14 +41,9 @@ describe('OfferFormComponent', () => {
 
   describe('offerForm', () => {
     it('should be initialised empty with validators ', () => {
-      expect(formBuilderSpy).toHaveBeenCalledWith({
+      expect(formBuilder.group).toHaveBeenCalledWith({
         offerName: ['', Validators.required],
       });
-    });
-
-    it('form should be valid when has proper content', () => {
-      component.offerForm.controls.offerName.setValue('testName');
-      expect(component.offerForm.valid).toBeTruthy();
     });
   });
 
