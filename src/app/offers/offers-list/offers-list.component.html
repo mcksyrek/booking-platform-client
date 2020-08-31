@@ -1,0 +1,23 @@
+<article>
+  <h1>All offered services:</h1>
+  <ul *ngIf="offers$ | async as offers; else noOffers">
+    <li *ngFor="let offer of offers">
+      {{ offer.offerName }}
+    </li>
+  </ul>
+  <ng-template #noOffers>
+    <h3>no offered services to show</h3>
+  </ng-template>
+
+  <booking-offer-form
+    *ngIf="showOfferForm; else addNewOfferButton"
+    (submitForm)="handleFormSubmit($event)"
+  >
+  </booking-offer-form>
+
+  <ng-template #addNewOfferButton>
+    <button (click)="toggleOfferForm()">
+      Add new offer
+    </button>
+  </ng-template>
+</article>
