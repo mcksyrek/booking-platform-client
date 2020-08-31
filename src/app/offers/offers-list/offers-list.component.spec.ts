@@ -37,13 +37,4 @@ describe('OffersListComponent', () => {
       expect(component.showOfferForm).toBeTruthy();
     });
   });
-
-  // TODO move this test to state test suit or remove it
-  // it('should access offers from Store', () => {
-  //   const mockOffer = { offerName: '123' };
-  //   store.dispatch(new AddOfferAction(mockOffer));
-
-  //   const offers = store.selectSnapshot(OffersState.getOffers);
-  //   expect(offers).toEqual([mockOffer]);
-  // });
 });
