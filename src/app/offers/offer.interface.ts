@@ -1,3 +1,4 @@
 export interface IOffer {
-  offerName: string;
+  name: string;
+  id: string;
 }

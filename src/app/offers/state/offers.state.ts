@@ -29,9 +29,6 @@ export class OffersState {
   getOffersList(ctx: StateContext<OffersStateModel>): Observable<IOffer[]> {
     return this._offerService.getOffersList().pipe(
       tap(offersList => {
-        console.log('req sent');
-        console.log(offersList);
-
         ctx.setState({ offers: [...offersList] });
       })
     );
