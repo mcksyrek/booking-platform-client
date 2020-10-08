@@ -5,3 +5,8 @@ export class AddOfferAction {
 
   constructor(public readonly offer: IOffer) {}
 }
+
+export class GetOfferListAction {
+  // TODO naming of actions' type
+  static readonly type = '[OFFER] Get offers list';
+}
