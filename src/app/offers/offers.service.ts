@@ -11,7 +11,6 @@ import { Endpoints } from '@booking/shared/constants';
 export class OffersService {
   constructor(private _http: HttpClient) {}
 
-  // TODO service and repo service separately
   getOffersList(): Observable<IOffer[]> {
     return this._http.get<IOffer[]>(Endpoints.Offers);
   }

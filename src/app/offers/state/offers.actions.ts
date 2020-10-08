@@ -1,12 +1,11 @@
 import { IOffer } from '../offer.interface';
 
 export class AddOfferAction {
-  static readonly type = '[OFFER] Add';
+  static readonly type = '[Offers] Add new offer';
 
   constructor(public readonly offer: IOffer) {}
 }
 
 export class GetOfferListAction {
-  // TODO naming of actions' type
-  static readonly type = '[OFFER] Get offers list';
+  static readonly type = '[Offers] Get offers list';
 }
