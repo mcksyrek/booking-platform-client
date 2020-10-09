@@ -1,7 +1,7 @@
 <form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
   <label>
     New offer name:
-    <input type="text" formControlName="offerName" />
+    <input type="text" formControlName="name" />
   </label>
 
   <button [disabled]="disabledSubmit">Submit</button>
