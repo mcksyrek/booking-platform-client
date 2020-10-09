@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { IOffer } from './offer.interface';
-import { Endpoints } from '@booking/shared/constants';
+import { Endpoints } from '@booking/shared/enums';
 
 @Injectable({
   providedIn: 'root',

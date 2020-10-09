@@ -6,7 +6,7 @@ import {
 
 import { OffersService } from './offers.service';
 import { IOffer } from './offer.interface';
-import { Endpoints } from '@booking/shared/constants';
+import { Endpoints } from '@booking/shared/enums';
 
 describe('OffersService', () => {
   let service: OffersService;
