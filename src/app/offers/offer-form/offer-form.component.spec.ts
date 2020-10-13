@@ -32,7 +32,7 @@ describe('OfferFormComponent', () => {
 
   describe('#submitForm', () => {
     it('should emit formValue', () => {
-      const spy = spyOn(component.submitForm, 'emit');
+      const spy = jest.spyOn(component.submitForm, 'emit');
       component.offerForm.setValue(mockOffer);
 
       component.onSubmit();

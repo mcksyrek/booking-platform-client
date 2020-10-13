@@ -25,9 +25,9 @@ describe('OffersService', () => {
         { id: 'mockID1', name: 'Mock Name1' },
         { id: 'mockID2', name: 'Mock Name2' },
       ];
-      const httpSpy = spyOn(httpClient, 'get').and.returnValue(
-        of(mockResponse)
-      );
+      const httpSpy = jest
+        .spyOn(httpClient, 'get')
+        .mockReturnValue(of(mockResponse));
 
       service.getOffersList().subscribe(response => {
         expect(response).toEqual(mockResponse);
