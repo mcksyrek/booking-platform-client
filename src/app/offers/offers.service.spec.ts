@@ -1,46 +1,39 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { OffersService } from './offers.service';
 import { IOffer } from './offer.interface';
-import { Endpoints } from '@booking/shared/enums';
+import { of } from 'rxjs';
 
 describe('OffersService', () => {
   let service: OffersService;
-  let httpMock: HttpTestingController;
+  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [OffersService],
+      imports: [HttpClientModule],
+      providers: [OffersService, HttpClient],
     });
 
-    httpMock = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
     service = TestBed.inject(OffersService);
   });
 
-  afterEach(() => {
-    httpMock.verify();
-  });
-
   describe('#getOffersList', () => {
-    it('should return an Observable<IOffer[]>', () => {
+    it('should make GET request', () => {
       const mockResponse: IOffer[] = [
-        { name: 'mockName1', id: 'mockID1' },
-        { name: 'mockName2', id: 'mockID2' },
+        { id: 'mockID1', name: 'Mock Name1' },
+        { id: 'mockID2', name: 'Mock Name2' },
       ];
+      const httpSpy = spyOn(httpClient, 'get').and.returnValue(
+        of(mockResponse)
+      );
 
-      service.getOffersList().subscribe(offers => {
-        expect(offers.length).toBe(2);
-        expect(offers).toEqual(mockResponse);
+      service.getOffersList().subscribe(response => {
+        expect(response).toEqual(mockResponse);
       });
 
-      const req = httpMock.expectOne(Endpoints.Offers);
-      expect(req.request.method).toBe('GET');
-      req.flush(mockResponse);
+      expect(httpSpy).toHaveBeenCalledTimes(1);
     });
   });
 });
