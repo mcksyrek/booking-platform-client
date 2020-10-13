@@ -26,6 +26,7 @@ export class OfferFormComponent {
   constructor(formBuilder: FormBuilder) {
     this.offerForm = formBuilder.group({
       name: ['', Validators.required],
+      id: [''],
     });
   }
 

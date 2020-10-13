@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { IOffer } from '../offer.interface';
 
 import { OfferFormComponent } from './offer-form.component';
 
@@ -7,6 +8,7 @@ describe('OfferFormComponent', () => {
   let component: OfferFormComponent;
   let fixture: ComponentFixture<OfferFormComponent>;
   let formBuilder: FormBuilder;
+  const mockOffer: IOffer = { name: 'Mock Name', id: 'mockID' };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,32 +30,32 @@ describe('OfferFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('submitForm', () => {
+  describe('#submitForm', () => {
     it('should emit formValue', () => {
-      const mockOffer = { offerName: 'testName' };
-      spyOn(component.submitForm, 'emit');
-      component.offerForm.controls.offerName.setValue(mockOffer.offerName);
+      const spy = spyOn(component.submitForm, 'emit');
+      component.offerForm.setValue(mockOffer);
 
       component.onSubmit();
-      expect(component.submitForm.emit).toHaveBeenCalledWith(mockOffer);
+      expect(spy).toHaveBeenCalledWith(mockOffer);
     });
   });
 
-  describe('offerForm', () => {
-    it('should be initialised empty with validators ', () => {
+  describe('#offerForm', () => {
+    it('should be initialized with empty controls ', () => {
       expect(formBuilder.group).toHaveBeenCalledWith({
-        offerName: ['', Validators.required],
+        name: ['', Validators.required],
+        id: [''],
       });
     });
   });
 
-  describe('disabledSubmit', () => {
+  describe('#disabledSubmit', () => {
     it('should be true if no form value', () => {
       expect(component.disabledSubmit).toBeTruthy();
     });
 
     it('should be false if form value is correct ', () => {
-      component.offerForm.setValue({ offerName: 'testName' });
+      component.offerForm.setValue(mockOffer);
       expect(component.disabledSubmit).toBeFalsy();
     });
   });
