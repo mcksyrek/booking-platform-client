@@ -1,3 +1,3 @@
 export enum Endpoints {
-  Offers = '/api/offers',
+  Offers = '/offers',
 }
