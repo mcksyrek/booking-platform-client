@@ -22,7 +22,7 @@ export class OffersListComponent implements OnInit {
   constructor(private _store: Store) {}
 
   ngOnInit(): void {
-    this._store.dispatch(GetOfferListAction);
+    this._store.dispatch(new GetOfferListAction());
   }
 
   handleFormSubmit(formValue: IOffer): void {

@@ -32,11 +32,11 @@ describe('OfferFormComponent', () => {
 
   describe('#submitForm', () => {
     it('should emit formValue', () => {
-      const spy = jest.spyOn(component.submitForm, 'emit');
+      const emitFormspy = jest.spyOn(component.submitForm, 'emit');
       component.offerForm.setValue(mockOffer);
 
       component.onSubmit();
-      expect(spy).toHaveBeenCalledWith(mockOffer);
+      expect(emitFormspy).toHaveBeenCalledWith(mockOffer);
     });
   });
 

@@ -14,7 +14,7 @@ export class OffersService {
 
   getOffersList(): Observable<IOffer[]> {
     return this._http.get<IOffer[]>(
-      `${environment.serverUrl}${Endpoints.Offers}`
+      `${environment.apiPrefix}${Endpoints.Offers}`
     );
   }
 }
