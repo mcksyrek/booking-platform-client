@@ -22,4 +22,8 @@ module.exports = {
       ],
     },
   },
+  moduleNameMapper: {
+    '@booking/environments/(.*)$': '<rootDir>/src/environments/$1',
+    '@booking/(.*)$': '<rootDir>/src/app/$1',
+  },
 };
