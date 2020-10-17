@@ -7,9 +7,10 @@ import { NgxsModule } from '@ngxs/store';
 import { OfferFormComponent } from './offer-form/offer-form.component';
 import { OffersState } from './state/offers.state';
 import { OffersListComponent } from './offers-list/offers-list.component';
+import { OfferCardComponent } from './offer-card/offer-card.component';
 
 @NgModule({
-  declarations: [OfferFormComponent, OffersListComponent],
+  declarations: [OfferFormComponent, OffersListComponent, OfferCardComponent],
   imports: [
     CommonModule,
     OffersRoutingModule,

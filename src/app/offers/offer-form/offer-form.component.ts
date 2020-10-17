@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
+  Input,
+  OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,8 +16,9 @@ import { IOffer } from '../offer.interface';
   styleUrls: ['./offer-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferFormComponent {
+export class OfferFormComponent implements OnInit {
   @Output() readonly submitForm = new EventEmitter<IOffer>();
+  @Input() offerData: IOffer;
 
   readonly offerForm: FormGroup;
 
@@ -28,6 +31,12 @@ export class OfferFormComponent {
       name: ['', Validators.required],
       id: [''],
     });
+  }
+
+  ngOnInit(): void {
+    if (this.offerData) {
+      this.offerForm.setValue(this.offerData);
+    }
   }
 
   onSubmit(): void {

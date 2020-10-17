@@ -1,0 +1,26 @@
+<div>
+  <div *ngIf="!editing; else editForm">
+    <div>offer name: {{ offer.name }}</div>
+    <div>id: {{ offer.id }}</div>
+  </div>
+
+  <ng-template #editForm>
+    <booking-offer-form
+      [offerData]="offer"
+      (submitForm)="updateOffer($event)"
+    ></booking-offer-form>
+  </ng-template>
+
+  <div *ngIf="!editing; else finishEditing">
+    <button (click)="toggleEditing()">
+      Edit offer
+    </button>
+    <button (click)="deleteOffer()">Delete offer</button>
+  </div>
+
+  <ng-template #finishEditing>
+    <button (click)="toggleEditing()">
+      Cancel editing
+    </button>
+  </ng-template>
+</div>

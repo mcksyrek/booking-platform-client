@@ -9,6 +9,7 @@ import {
   AddOfferAction,
   GetOfferListAction,
   DeleteOfferAction,
+  UpdateOfferAction,
 } from '../state/offers.actions';
 
 @Component({
@@ -41,5 +42,9 @@ export class OffersListComponent implements OnInit {
 
   deleteOffer(id: number): void {
     this._store.dispatch(new DeleteOfferAction(id));
+  }
+
+  updateOffer(offer: IOffer): void {
+    this._store.dispatch(new UpdateOfferAction(offer.id, offer));
   }
 }

@@ -36,4 +36,16 @@ export class OffersService {
       }
     );
   }
+
+  updateOffer(id: number, updatedOffer: IOffer): Observable<null> {
+    return this._http.put<null>(
+      `${environment.apiPrefix}${Endpoints.Offers}`,
+      updatedOffer,
+      {
+        params: {
+          id: id.toString(),
+        },
+      }
+    );
+  }
 }

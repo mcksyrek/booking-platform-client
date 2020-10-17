@@ -9,6 +9,7 @@ import {
   AddOfferAction,
   GetOfferListAction,
   DeleteOfferAction,
+  UpdateOfferAction,
 } from './offers.actions';
 import { OffersService } from '../offers.service';
 
@@ -31,26 +32,19 @@ export class OffersState {
 
   @Action(GetOfferListAction)
   getOffersList(ctx: StateContext<OffersStateModel>): Observable<IOffer[]> {
-    return this._offerService.getOffersList().pipe(
-      tap(offersList => {
-        ctx.setState({ offers: [...offersList] });
-      })
-    );
+    return this._offerService
+      .getOffersList()
+      .pipe(tap(offersList => ctx.setState({ offers: [...offersList] })));
   }
 
   @Action(AddOfferAction)
   addOffer(
     ctx: StateContext<OffersStateModel>,
     { offer }: AddOfferAction
-  ): Observable<any> {
+  ): Observable<IOffer[]> {
     return this._offerService.postNewOffer(offer).pipe(
-      tap(() =>
-        ctx.setState(
-          patch({
-            offers: append([offer]),
-          })
-        )
-      )
+      switchMap(() => this._offerService.getOffersList()),
+      tap(offersList => ctx.setState({ offers: [...offersList] }))
     );
   }
 
@@ -67,6 +61,17 @@ export class OffersState {
           })
         )
       )
+    );
+  }
+
+  @Action(UpdateOfferAction)
+  editOffer(
+    ctx: StateContext<OffersStateModel>,
+    { id, offer }: UpdateOfferAction
+  ): Observable<IOffer[]> {
+    return this._offerService.updateOffer(id, offer).pipe(
+      switchMap(() => this._offerService.getOffersList()),
+      tap(offersList => ctx.setState({ offers: [...offersList] }))
     );
   }
 }
