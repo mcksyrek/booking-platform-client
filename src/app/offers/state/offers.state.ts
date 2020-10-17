@@ -38,11 +38,15 @@ export class OffersState {
   addOffer(
     ctx: StateContext<OffersStateModel>,
     { offer }: AddOfferAction
-  ): void {
-    ctx.setState(
-      patch({
-        offers: append([offer]),
-      })
+  ): Observable<any> {
+    return this._offerService.postNewOffer(offer).pipe(
+      tap(() =>
+        ctx.setState(
+          patch({
+            offers: append([offer]),
+          })
+        )
+      )
     );
   }
 }
