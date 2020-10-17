@@ -1,11 +1,15 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { patch, append } from '@ngxs/store/operators';
+import { patch, append, removeItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { IOffer } from '../offer.interface';
-import { AddOfferAction, GetOfferListAction } from './offers.actions';
+import {
+  AddOfferAction,
+  GetOfferListAction,
+  DeleteOfferAction,
+} from './offers.actions';
 import { OffersService } from '../offers.service';
 
 export class OffersStateModel {
@@ -44,6 +48,22 @@ export class OffersState {
         ctx.setState(
           patch({
             offers: append([offer]),
+          })
+        )
+      )
+    );
+  }
+
+  @Action(DeleteOfferAction)
+  deleteOffer(
+    ctx: StateContext<OffersStateModel>,
+    { id }: DeleteOfferAction
+  ): Observable<ArrayBuffer> {
+    return this._offerService.deleteOffer(id).pipe(
+      tap(() =>
+        ctx.setState(
+          patch({
+            offers: removeItem<IOffer>(offer => offer.id === id),
           })
         )
       )

@@ -5,7 +5,11 @@ import { Store } from '@ngxs/store';
 
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
-import { AddOfferAction, GetOfferListAction } from '../state/offers.actions';
+import {
+  AddOfferAction,
+  GetOfferListAction,
+  DeleteOfferAction,
+} from '../state/offers.actions';
 
 @Component({
   selector: 'booking-offers-list',
@@ -33,5 +37,9 @@ export class OffersListComponent implements OnInit {
 
   toggleOfferForm(): void {
     this.showOfferForm = !this.showOfferForm;
+  }
+
+  deleteOffer(id: number): void {
+    this._store.dispatch(new DeleteOfferAction(id));
   }
 }

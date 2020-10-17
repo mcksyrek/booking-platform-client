@@ -25,4 +25,15 @@ export class OffersService {
       newOffer
     );
   }
+
+  deleteOffer(id: number): Observable<ArrayBuffer> {
+    return this._http.delete<null>(
+      `${environment.apiPrefix}${Endpoints.Offers}`,
+      {
+        params: {
+          id: id.toString(),
+        },
+      }
+    );
+  }
 }
