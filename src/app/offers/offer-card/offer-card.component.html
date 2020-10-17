@@ -1,7 +1,28 @@
-<div>
+<mat-card class="card">
   <div *ngIf="!editing; else editForm">
-    <div>offer name: {{ offer.name }}</div>
-    <div>id: {{ offer.id }}</div>
+    <mat-card-title>{{ offer.name }}</mat-card-title>
+    <mat-card-subtitle>Author name placeholder </mat-card-subtitle>
+    <img
+      mat-card-image
+      src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+      alt="Placeholder of service ad image"
+    />
+
+    <mat-card-content>
+      <p>
+        <b>LOCATION PLACEHOLDER</b>
+      </p>
+      <p>
+        <b>id: {{ offer.id }}</b>
+      </p>
+
+      <p>
+        Description placeholder Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat
+      </p>
+    </mat-card-content>
   </div>
 
   <ng-template #editForm>
@@ -23,4 +44,4 @@
       Cancel editing
     </button>
   </ng-template>
-</div>
+</mat-card>

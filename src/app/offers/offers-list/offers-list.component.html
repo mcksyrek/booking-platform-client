@@ -1,6 +1,7 @@
-<article>
+<article class="offers">
   <h1>All offered services:</h1>
-  <ul *ngIf="offers$ | async as offers; else noOffers">
+
+  <ul class="offers__list" *ngIf="offers$ | async as offers; else noOffers">
     <li *ngFor="let offer of offers">
       <booking-offer-card
         [offer]="offer"
