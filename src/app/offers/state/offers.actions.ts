@@ -19,5 +19,8 @@ export class DeleteOfferAction {
 export class UpdateOfferAction {
   static readonly type = '[Offers] Edit offer';
 
-  constructor(public readonly id: number, public readonly offer: IOffer) {}
+  constructor(
+    public readonly id: number,
+    public readonly updatedOffer: IOffer
+  ) {}
 }
