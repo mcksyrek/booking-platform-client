@@ -1,4 +1,4 @@
 export interface IOffer {
   name: string;
-  id: string;
+  id: number;
 }

@@ -8,7 +8,7 @@ describe('OfferFormComponent', () => {
   let component: OfferFormComponent;
   let fixture: ComponentFixture<OfferFormComponent>;
   let formBuilder: FormBuilder;
-  const mockOffer: IOffer = { name: 'Mock Name', id: 'mockID' };
+  const mockOffer: IOffer = { name: 'Mock Name', id: 1 };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

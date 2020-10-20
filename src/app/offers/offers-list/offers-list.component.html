@@ -2,7 +2,11 @@
   <h1>All offered services:</h1>
   <ul *ngIf="offers$ | async as offers; else noOffers">
     <li *ngFor="let offer of offers">
-      {{ offer.name }}
+      <booking-offer-card
+        [offer]="offer"
+        (delete)="deleteOffer($event.id)"
+        (update)="updateOffer($event)"
+      ></booking-offer-card>
     </li>
   </ul>
   <ng-template #noOffers>
