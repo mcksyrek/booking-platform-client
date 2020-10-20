@@ -45,6 +45,6 @@ export class OffersListComponent implements OnInit {
   }
 
   updateOffer(offer: IOffer): void {
-    this._store.dispatch(new UpdateOfferAction(offer.id, offer));
+    this._store.dispatch(new UpdateOfferAction(offer));
   }
 }

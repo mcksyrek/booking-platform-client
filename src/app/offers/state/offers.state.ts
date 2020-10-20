@@ -72,9 +72,9 @@ export class OffersState {
   @Action(UpdateOfferAction)
   editOffer(
     ctx: StateContext<OffersStateModel>,
-    { id, updatedOffer }: UpdateOfferAction
+    { updatedOffer }: UpdateOfferAction
   ): Observable<IOffer> {
-    return this._offerService.updateOffer(id, updatedOffer).pipe(
+    return this._offerService.updateOffer(updatedOffer).pipe(
       tap(returnedOffer =>
         ctx.setState(
           patch({
