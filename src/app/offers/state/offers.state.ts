@@ -41,12 +41,12 @@ export class OffersState {
   addOffer(
     ctx: StateContext<OffersStateModel>,
     { offer }: AddOfferAction
-  ): Observable<null> {
+  ): Observable<IOffer> {
     return this._offerService.postNewOffer(offer).pipe(
-      tap(() =>
+      tap(returnedOffer =>
         ctx.setState(
           patch({
-            offers: append([offer]),
+            offers: append([returnedOffer]),
           })
         )
       )
@@ -73,14 +73,14 @@ export class OffersState {
   editOffer(
     ctx: StateContext<OffersStateModel>,
     { id, updatedOffer }: UpdateOfferAction
-  ): Observable<null> {
+  ): Observable<IOffer> {
     return this._offerService.updateOffer(id, updatedOffer).pipe(
-      tap(() =>
+      tap(returnedOffer =>
         ctx.setState(
           patch({
             offers: updateItem<IOffer>(
-              existingOffer => existingOffer.id === updatedOffer.id,
-              updatedOffer
+              existingOffer => existingOffer.id === returnedOffer.id,
+              returnedOffer
             ),
           })
         )
