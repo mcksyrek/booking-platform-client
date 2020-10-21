@@ -1,5 +1,7 @@
 <article class="offers">
-  <h1>All offered services:</h1>
+  <mat-toolbar>
+    <h1 class="offers__title">All offered services:</h1>
+  </mat-toolbar>
 
   <ul class="offers__list" *ngIf="offers$ | async as offers; else noOffers">
     <booking-offer-card
