@@ -22,8 +22,8 @@ describe('OffersService', () => {
   describe('#getOffersList', () => {
     it('should make GET request', () => {
       const mockResponse: IOffer[] = [
-        { id: 'mockID1', name: 'Mock Name1' },
-        { id: 'mockID2', name: 'Mock Name2' },
+        { id: 1, name: 'Mock Name1' },
+        { id: 2, name: 'Mock Name2' },
       ];
       const httpSpy = jest
         .spyOn(httpClient, 'get')

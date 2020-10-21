@@ -19,8 +19,8 @@ export class OffersService {
     );
   }
 
-  postNewOffer(newOffer: IOffer): Observable<null> {
-    return this._http.post<null>(
+  postNewOffer(newOffer: IOffer): Observable<IOffer> {
+    return this._http.post<IOffer>(
       `${environment.apiPrefix}${Endpoints.Offers}`,
       newOffer
     );
@@ -37,15 +37,10 @@ export class OffersService {
     );
   }
 
-  updateOffer(id: number, updatedOffer: IOffer): Observable<null> {
-    return this._http.put<null>(
+  updateOffer(updatedOffer: IOffer): Observable<IOffer> {
+    return this._http.put<IOffer>(
       `${environment.apiPrefix}${Endpoints.Offers}`,
-      updatedOffer,
-      {
-        params: {
-          id: id.toString(),
-        },
-      }
+      updatedOffer
     );
   }
 }
