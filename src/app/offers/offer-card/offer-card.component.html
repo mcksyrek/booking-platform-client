@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="offer-card">
   <div *ngIf="!editing; else editForm">
     <mat-card-title>{{ offer.name }}</mat-card-title>
     <mat-card-subtitle>Author name placeholder </mat-card-subtitle>
@@ -32,15 +32,20 @@
     ></booking-offer-form>
   </ng-template>
 
-  <div *ngIf="!editing; else finishEditing">
-    <button (click)="toggleEditing()">
+  <article
+    class="offer-card__button-container"
+    *ngIf="!editing; else finishEditing"
+  >
+    <button mat-raised-button color="primary" (click)="toggleEditing()">
       Edit offer
     </button>
-    <button (click)="deleteOffer()">Delete offer</button>
-  </div>
+    <button mat-raised-button color="primary" (click)="deleteOffer()">
+      Delete offer
+    </button>
+  </article>
 
   <ng-template #finishEditing>
-    <button (click)="toggleEditing()">
+    <button mat-raised-button color="primary" (click)="toggleEditing()">
       Cancel editing
     </button>
   </ng-template>
