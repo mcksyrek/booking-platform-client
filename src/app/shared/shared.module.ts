@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const ANGULAR_MODULES: any[] = [
   ReactiveFormsModule,
@@ -10,7 +11,7 @@ const ANGULAR_MODULES: any[] = [
   HttpClientModule,
 ];
 
-const MATERIAL_MODULES: any[] = [MatCardModule];
+const MATERIAL_MODULES: any[] = [MatCardModule, MatToolbarModule];
 
 @NgModule({
   declarations: [],
