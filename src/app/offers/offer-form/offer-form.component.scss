@@ -1,0 +1,36 @@
+.offer-form {
+  padding: 0 2.5%;
+
+  &__column {
+    padding: 1rem 0;
+    display: flex;
+
+    &--left {
+    }
+    &--right {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__input {
+    &--wide {
+      width: 90%;
+    }
+
+    &--small {
+      width: 48%;
+    }
+  }
+
+  figure {
+    margin: 0;
+    width: 50%;
+  }
+
+  .space-between {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

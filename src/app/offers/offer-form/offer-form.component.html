@@ -1,8 +1,58 @@
-<form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
-  <label>
-    New offer name:
-    <input type="text" formControlName="name" />
-  </label>
+<form class="offer-form" [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+  <article class="offer-form__column">
+    <figure class="offer-form__column--left">
+      <mat-form-field class="offer-form__input--wide">
+        <mat-label>New offer name</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="offer-form__input--wide">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+
+      <figure class="space-between">
+        <mat-form-field class="offer-form__input--small">
+          <mat-label>City</mat-label>
+          <input matInput type="text" />
+        </mat-form-field>
+
+        <mat-form-field class="offer-form__input--small">
+          <mat-label>Postal Code</mat-label>
+          <input matInput type="text" maxlength="5" />
+        </mat-form-field>
+      </figure>
+
+      <figure class="space-between">
+        <mat-form-field class="offer-form__input--small">
+          <mat-label>Phone number</mat-label>
+          <span matPrefix>+48 &nbsp;</span>
+          <input matInput type="tel" />
+        </mat-form-field>
+
+        <mat-form-field class="offer-form__input--small">
+          <mat-label>e-mail</mat-label>
+          <input matInput type="email" />
+        </mat-form-field>
+      </figure>
+    </figure>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <figure class="offer-form__column--right">
+      <mat-form-field class="offer-form__input--wide">
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="10"></textarea>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width">
+        <mat-label>Address</mat-label>
+        <textarea matInput placeholder="Ex. 100 Main St">
+1600 Amphitheatre Pkwy</textarea
+        > -->
+      <!-- </mat-form-field> -->
+    </figure>
+  </article>
 
   <button mat-raised-button color="primary" [disabled]="disabledSubmit">
     Submit
