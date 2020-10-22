@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+import { LayoutService } from '../layout.service';
+
 @Component({
   selector: 'booking-topbar',
   templateUrl: './topbar.component.html',
@@ -7,7 +9,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopbarComponent {
-  openMenu(): void {
-    alert('open menu');
+  constructor(private _layoutService: LayoutService) {}
+
+  toggleMenu(): void {
+    this._layoutService.toggleMenu();
   }
 }
