@@ -3,22 +3,30 @@
     <h1 class="offers__title">All offered services:</h1>
   </mat-toolbar>
 
-  <ul class="offers__list" *ngIf="offers$ | async as offers; else noOffers">
-    <booking-offer-card
-      li
-      class="offers__item"
-      *ngFor="let offer of offers"
-      [offer]="offer"
-      (delete)="deleteOffer($event.id)"
-      (update)="updateOffer($event)"
-    ></booking-offer-card>
+  <ul class="offers__list" *ngIf="offers$ | async as offers; else loading">
+    <ng-container *ngIf="offers.length !== 0; else noOffers">
+      <booking-offer-card
+        li
+        class="offers__item"
+        *ngFor="let offer of offers"
+        [offer]="offer"
+        (delete)="deleteOffer($event.id)"
+        (update)="updateOffer($event)"
+      ></booking-offer-card>
+    </ng-container>
+
+    <ng-template #noOffers>
+      <h1>No offers found!</h1>
+    </ng-template>
   </ul>
 
-  <ng-template #noOffers>
-    <h3>no offered services to show</h3>
+  <ng-template #loading>
+    <div class="offers__loading">
+      <mat-spinner></mat-spinner>
+    </div>
   </ng-template>
 
-  <booking-offer-form
+  <!-- <booking-offer-form
     *ngIf="showOfferForm; else addNewOfferButton"
     (submitForm)="handleFormSubmit($event)"
   >
@@ -28,5 +36,5 @@
     <button (click)="toggleOfferForm()">
       Add new offer
     </button>
-  </ng-template>
+  </ng-template> -->
 </article>
