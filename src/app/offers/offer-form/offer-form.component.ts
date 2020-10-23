@@ -9,6 +9,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IOffer } from '../offer.interface';
+import { OFFER_CATEGORIES } from '@booking/shared/constants/categories.constant';
 
 @Component({
   selector: 'booking-offer-form',
@@ -21,6 +22,7 @@ export class OfferFormComponent implements OnInit {
   @Input() offerData: IOffer;
 
   readonly offerForm: FormGroup;
+  readonly categories = OFFER_CATEGORIES;
 
   get disabledSubmit(): boolean {
     return !this.offerForm.valid;

@@ -25,14 +25,18 @@
 
       <figure class="space-between">
         <mat-form-field class="offer-form__input--small">
-          <mat-label>Phone number</mat-label>
+          <mat-label>Contact number</mat-label>
           <span matPrefix>+48 &nbsp;</span>
           <input matInput type="tel" />
         </mat-form-field>
 
         <mat-form-field class="offer-form__input--small">
-          <mat-label>e-mail</mat-label>
-          <input matInput type="email" />
+          <mat-label>Offer category</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </figure>
     </figure>
