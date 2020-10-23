@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { IOffer } from '../offer.interface';
+import { Endpoints } from '@booking/shared/enums/endpoints.enum';
 
 @Component({
   selector: 'booking-offer-card',
@@ -16,21 +17,12 @@ import { IOffer } from '../offer.interface';
 })
 export class OfferCardComponent {
   @Input() readonly offer: IOffer;
-  @Output() readonly update = new EventEmitter<IOffer>();
-  @Output() readonly delete = new EventEmitter<IOffer>();
 
-  editing = false;
-
-  toggleEditing(): void {
-    this.editing = !this.editing;
+  getSource(): string {
+    return `/assets/icons/${this.offer.category}.svg`;
   }
 
-  updateOffer(updatedOffer: IOffer): void {
-    this.update.emit(updatedOffer);
-    this.editing = false;
-  }
-
-  deleteOffer(): void {
-    this.delete.emit(this.offer);
+  getRedirectLink(): string[] {
+    return [`${Endpoints.Offers}/${this.offer.id}`];
   }
 }

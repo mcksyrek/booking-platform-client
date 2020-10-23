@@ -10,8 +10,6 @@
         class="offers__item"
         *ngFor="let offer of offers"
         [offer]="offer"
-        (delete)="deleteOffer($event.id)"
-        (update)="updateOffer($event)"
       ></booking-offer-card>
     </ng-container>
 
@@ -25,16 +23,4 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
-
-  <!-- <booking-offer-form
-    *ngIf="showOfferForm; else addNewOfferButton"
-    (submitForm)="handleFormSubmit($event)"
-  >
-  </booking-offer-form>
-
-  <ng-template #addNewOfferButton>
-    <button (click)="toggleOfferForm()">
-      Add new offer
-    </button>
-  </ng-template> -->
 </article>
