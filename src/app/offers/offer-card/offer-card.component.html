@@ -1,52 +1,19 @@
-<mat-card class="offer-card">
-  <div *ngIf="!editing; else editForm">
-    <mat-card-title>{{ offer.name }}</mat-card-title>
-    <mat-card-subtitle>Author name placeholder </mat-card-subtitle>
-    <img
-      mat-card-image
-      src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-      alt="Placeholder of service ad image"
-    />
+<mat-card class="offer-card" [routerLink]="getRedirectLink()">
+  <mat-card-title>{{ offer.name }}</mat-card-title>
+  <mat-card-subtitle>
+    <b>{{ offer.city }}</b>
+  </mat-card-subtitle>
+  <img
+    mat-card-image
+    class="offer-card__icon"
+    [src]="getSource()"
+    alt="service category image"
+  />
 
-    <mat-card-content>
-      <p>
-        <b>LOCATION PLACEHOLDER</b>
-      </p>
-      <p>
-        <b>id: {{ offer.id }}</b>
-      </p>
-
-      <p>
-        Description placeholder Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat
-      </p>
-    </mat-card-content>
-  </div>
-
-  <ng-template #editForm>
-    <booking-offer-form
-      [offerData]="offer"
-      (submitForm)="updateOffer($event)"
-    ></booking-offer-form>
-  </ng-template>
-
-  <article
-    class="offer-card__button-container"
-    *ngIf="!editing; else finishEditing"
-  >
-    <button mat-raised-button color="primary" (click)="toggleEditing()">
-      Edit offer
-    </button>
-    <button mat-raised-button color="primary" (click)="deleteOffer()">
-      Delete offer
-    </button>
-  </article>
-
-  <ng-template #finishEditing>
-    <button mat-raised-button color="primary" (click)="toggleEditing()">
-      Cancel editing
-    </button>
-  </ng-template>
+  <mat-card-content>
+    <p>{{ offer.description }}</p>
+    <p>
+      <b> {{ offer.category | titlecase }} </b>
+    </p>
+  </mat-card-content>
 </mat-card>

@@ -1,3 +1,4 @@
+import { OFFER_CATEGORIES } from './categories.constant';
 export const ICON_PATH = 'assets/icons';
 
-export const ICONS = ['menu'];
+export const ICONS = ['menu', ...OFFER_CATEGORIES];
