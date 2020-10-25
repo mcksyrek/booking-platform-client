@@ -4,4 +4,8 @@
   &__icon {
     height: 8rem;
   }
+
+  :focus {
+    outline: none;
+  }
 }

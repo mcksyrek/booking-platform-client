@@ -1,4 +1,4 @@
-<mat-card class="offer-card" [routerLink]="getRedirectLink()">
+<mat-card matRipple class="offer-card" (click)="redirectToOffer()">
   <mat-card-title>{{ offer.name }}</mat-card-title>
   <mat-card-subtitle>
     <b>{{ offer.city }}</b>

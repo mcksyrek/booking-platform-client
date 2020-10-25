@@ -10,6 +10,12 @@ export class GetOfferListAction {
   static readonly type = '[Offers] Get offers list';
 }
 
+export class GetOfferByIdAction {
+  static readonly type = '[Offers] Get offer by ID';
+
+  constructor(public readonly id: number) {}
+}
+
 export class DeleteOfferAction {
   static readonly type = '[Offers] Delete offer';
 

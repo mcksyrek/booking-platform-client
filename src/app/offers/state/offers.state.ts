@@ -2,7 +2,7 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { patch, append, removeItem, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { IOffer } from '../offer.interface';
 import {
@@ -10,16 +10,20 @@ import {
   GetOfferListAction,
   DeleteOfferAction,
   UpdateOfferAction,
+  GetOfferByIdAction,
 } from './offers.actions';
 import { OffersService } from '../offers.service';
 
 export class OffersStateModel {
   offers?: IOffer[];
+  selectedOffer?: IOffer;
 }
 
 @State<OffersStateModel>({
   name: 'offers',
-  defaults: {},
+  defaults: {
+    offers: [],
+  },
 })
 @Injectable()
 export class OffersState {
@@ -30,11 +34,26 @@ export class OffersState {
     return offers;
   }
 
+  @Selector()
+  static getSelectedOffer({ selectedOffer }: OffersStateModel): IOffer {
+    return selectedOffer;
+  }
+
   @Action(GetOfferListAction)
   getOffersList(ctx: StateContext<OffersStateModel>): Observable<IOffer[]> {
     return this._offerService
       .getOffersList()
-      .pipe(tap(offersList => ctx.setState({ offers: [...offersList] })));
+      .pipe(tap(offersList => ctx.patchState({ offers: [...offersList] })));
+  }
+
+  @Action(GetOfferByIdAction)
+  getOfferById(
+    ctx: StateContext<OffersStateModel>,
+    { id }: GetOfferByIdAction
+  ): Observable<IOffer> {
+    return this._offerService
+      .getOfferById(id)
+      .pipe(tap(selectedOffer => ctx.patchState({ selectedOffer })));
   }
 
   @Action(AddOfferAction)
@@ -79,7 +98,7 @@ export class OffersState {
         ctx.setState(
           patch({
             offers: updateItem<IOffer>(
-              existingOffer => existingOffer.id === returnedOffer.id,
+              existingOffer => existingOffer?.id === returnedOffer.id,
               returnedOffer
             ),
           })

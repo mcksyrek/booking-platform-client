@@ -19,6 +19,12 @@ export class OffersService {
     );
   }
 
+  getOfferById(id: number): Observable<IOffer> {
+    return this._http.get<IOffer>(
+      `${environment.apiPrefix}${Endpoints.Offers}/${id}`
+    );
+  }
+
   postNewOffer(newOffer: IOffer): Observable<IOffer> {
     return this._http.post<IOffer>(
       `${environment.apiPrefix}${Endpoints.Offers}`,
