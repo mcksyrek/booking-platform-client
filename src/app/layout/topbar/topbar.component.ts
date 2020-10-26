@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngxs/store';
 
-import { LayoutService } from '../layout.service';
+import { ToggleMenuAction } from '../layout.actions';
 
 @Component({
   selector: 'booking-topbar',
@@ -9,9 +10,9 @@ import { LayoutService } from '../layout.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopbarComponent {
-  constructor(private _layoutService: LayoutService) {}
+  constructor(private _store: Store) {}
 
   toggleMenu(): void {
-    this._layoutService.toggleMenu();
+    this._store.dispatch(new ToggleMenuAction());
   }
 }
