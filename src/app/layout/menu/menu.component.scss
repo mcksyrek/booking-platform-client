@@ -1,14 +1,12 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
 .menu {
   height: 100%;
 
   &__drawer {
     width: 30%;
-    @media all and (max-width: 1000px) {
-      width: 60%;
-    }
-    @media all and (max-width: 500px) {
-      width: 80%;
-    }
+    @include media-width(60%, 80%);
   }
   &__content {
     min-height: 90vh;
