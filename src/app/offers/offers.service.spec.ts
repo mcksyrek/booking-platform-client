@@ -34,4 +34,47 @@ describe('OffersService', () => {
       expect(httpSpy).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('#postNewOffer', () => {
+    it('should make POST request', () => {
+      const mockResponse: IOffer = OFFER_MOCK;
+      const httpSpy = jest
+        .spyOn(httpClient, 'post')
+        .mockReturnValue(of(mockResponse));
+
+      service.postNewOffer(OFFER_MOCK).subscribe(response => {
+        expect(response).toEqual(mockResponse);
+      });
+
+      expect(httpSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('#deleteOffer', () => {
+    it('should make DELETE request', () => {
+      const httpSpy = jest.spyOn(httpClient, 'delete');
+
+      service.deleteOffer(1).subscribe(response => {
+        expect(response).toEqual(null);
+      });
+
+      expect(httpSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('#updateOffer', () => {
+    it('should make PUT request', () => {
+      const mockResponse: IOffer = OFFER_MOCK;
+
+      const httpSpy = jest
+        .spyOn(httpClient, 'put')
+        .mockReturnValue(of(mockResponse));
+
+      service.updateOffer(mockResponse).subscribe(response => {
+        expect(response).toEqual(mockResponse);
+      });
+
+      expect(httpSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });

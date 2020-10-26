@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { IOffer } from './offer.interface';
 import { Endpoints } from '@booking/shared/enums';
 import { environment } from '@booking/environments/environment';
-import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
