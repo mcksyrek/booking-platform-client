@@ -8,5 +8,5 @@ export interface IOffer {
   phoneNumber?: number;
   category: string;
   description: string;
-  postedDate: Date;
+  postedDate?: Date;
 }

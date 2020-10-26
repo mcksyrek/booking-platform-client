@@ -3,12 +3,13 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { IOffer } from '../offer.interface';
 
 import { OfferFormComponent } from './offer-form.component';
+import { OFFER_MOCK } from '@booking/shared/testing/offer-mock-data.constant';
 
 describe('OfferFormComponent', () => {
   let component: OfferFormComponent;
   let fixture: ComponentFixture<OfferFormComponent>;
   let formBuilder: FormBuilder;
-  const mockOffer: IOffer = { name: 'Mock Name', id: 1 };
+  const mockOffer: IOffer = OFFER_MOCK;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,8 +44,15 @@ describe('OfferFormComponent', () => {
   describe('#offerForm', () => {
     it('should be initialized with empty controls ', () => {
       expect(formBuilder.group).toHaveBeenCalledWith({
-        name: ['', Validators.required],
         id: [''],
+        name: ['', Validators.required],
+        author: ['', Validators.required],
+        address: ['', Validators.required],
+        city: ['', Validators.required],
+        postalCode: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
+        category: ['', Validators.required],
+        description: ['', Validators.required],
       });
     });
   });
