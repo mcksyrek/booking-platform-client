@@ -6,13 +6,13 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscriber } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { IOffer } from '../offer.interface';
+import { IOffer, IProduct } from '../offer.interface';
 import { OFFER_CATEGORIES } from '@booking/shared/constants/categories.constant';
 import {
   DeleteOfferAction,
@@ -40,12 +40,14 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   private _selectedOfferId: number;
   private _subscriber = new Subscriber();
 
+  productsList$: Observable<IProduct[]>;
+
   get disabledSubmit(): boolean {
     return !this.offerForm.valid;
   }
 
   constructor(
-    formBuilder: FormBuilder,
+    private _formBuilder: FormBuilder,
     activatedRoute: ActivatedRoute,
     private _store: Store,
     private _router: Router
@@ -55,7 +57,7 @@ export class OfferFormComponent implements OnInit, OnDestroy {
       this._store.dispatch(new GetOfferByIdAction(this._selectedOfferId));
     }
 
-    this.offerForm = formBuilder.group({
+    this.offerForm = _formBuilder.group({
       id: [''],
       name: ['', Validators.required],
       author: ['', Validators.required],
@@ -65,16 +67,17 @@ export class OfferFormComponent implements OnInit, OnDestroy {
       phoneNumber: ['', Validators.required],
       category: ['', Validators.required],
       description: ['', Validators.required],
-      // TODO products as arrayForm
-      products: [],
+      products: _formBuilder.array([]),
     });
+
+    this.productsList$ = this.offerForm.controls.products.valueChanges;
   }
 
   ngOnInit(): void {
     this._subscriber.add(
       this.selectedOffer$
         .pipe(filter(selectedOfferData => !!selectedOfferData))
-        .subscribe(offerData => this.offerForm.setValue(offerData))
+        .subscribe(offerData => this._setOfferForm(offerData))
     );
   }
 
@@ -97,5 +100,16 @@ export class OfferFormComponent implements OnInit, OnDestroy {
       this._store.dispatch(new DeleteOfferAction(this._selectedOfferId));
     }
     this._router.navigateByUrl(Routes.Offers + Routes.All);
+  }
+
+  private _setOfferForm(offerData: IOffer): void {
+    const products = [...offerData.products];
+    const productsArray = this.offerForm.controls.products as FormArray;
+    delete offerData.products;
+
+    this.offerForm.patchValue(offerData);
+    products.forEach(product =>
+      productsArray.push(this._formBuilder.control(product))
+    );
   }
 }

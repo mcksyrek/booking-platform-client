@@ -9,4 +9,9 @@ export interface IOffer {
   category: string;
   description: string;
   postedDate?: Date;
+  products?: IProduct[];
+}
+
+export interface IProduct {
+  name: string;
 }

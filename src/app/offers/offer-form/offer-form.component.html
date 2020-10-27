@@ -50,6 +50,21 @@
 
     <figure class="offer-form__column--right">
       <h2>List offered services here:</h2>
+      <section *ngFor="let product of productsList$ | async">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{ product.name | titlecase }}</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            duration price
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Some approval action</button>
+            <button mat-raised-button color="accent">Delete</button>
+          </mat-card-actions>
+        </mat-card>
+      </section>
     </figure>
   </article>
 
