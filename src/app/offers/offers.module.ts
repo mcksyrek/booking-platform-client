@@ -8,9 +8,15 @@ import { OfferFormComponent } from './offer-form/offer-form.component';
 import { OffersState } from './state/offers.state';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [OfferFormComponent, OffersListComponent, OfferCardComponent],
+  declarations: [
+    OfferFormComponent,
+    OffersListComponent,
+    OfferCardComponent,
+    ToolbarComponent,
+  ],
   imports: [
     CommonModule,
     OffersRoutingModule,
