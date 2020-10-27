@@ -19,6 +19,7 @@ import {
   GetOfferByIdAction,
   UpdateOfferAction,
   AddOfferAction,
+  UnselectOfferAction,
 } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
 import { Routes } from '@booking/shared/enums/index';
@@ -49,7 +50,6 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     private _store: Store,
     private _router: Router
   ) {
-    // WARN this component is not rebuild on switch from EDIT->CREATE
     if (activatedRoute.snapshot.params.id) {
       this._selectedOfferId = activatedRoute.snapshot.params.id;
       this._store.dispatch(new GetOfferByIdAction(this._selectedOfferId));
@@ -75,13 +75,12 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     this._subscriber.add(
       this.selectedOffer$
         .pipe(filter(selectedOfferData => !!selectedOfferData))
-        .subscribe(offerData => {
-          this.offerForm.setValue(offerData);
-        })
+        .subscribe(offerData => this.offerForm.setValue(offerData))
     );
   }
 
   ngOnDestroy(): void {
+    this._store.dispatch(new UnselectOfferAction());
     this._subscriber.unsubscribe();
   }
 
