@@ -1,3 +1,6 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
 .offers {
   display: flex;
   flex-direction: column;
@@ -16,7 +19,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 
-    @media all and (max-width: 1000px) {
+    @media all and (max-width: $medium-screen) {
       justify-content: center;
     }
 
@@ -31,15 +34,9 @@
     width: 23%;
     min-width: 200px;
     margin: 1%;
+    margin-bottom: 1rem;
 
-    @media all and (max-width: 1000px) {
-      width: 45%;
-      margin-bottom: 1rem;
-    }
-
-    @media all and (max-width: 500px) {
-      width: 85%;
-    }
+    @include media-width(45%, 85%);
   }
 
   &__loading {

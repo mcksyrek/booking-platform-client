@@ -56,10 +56,9 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     }
 
     this.offerForm = formBuilder.group({
-      id: [],
-      author: [''],
-      postedDate: [''],
+      id: [''],
       name: ['', Validators.required],
+      author: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
       postalCode: ['', Validators.required],

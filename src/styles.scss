@@ -1,15 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/styles/variables';
 
 html,
 body {
   height: 100%;
   font-size: 18px;
 
-  @media all and (max-width: 1000px) {
+  @media all and (max-width: $medium-screen) {
     font-size: 15px;
   }
 
-  @media all and (max-width: 500px) {
+  @media all and (max-width: $small-screen) {
     font-size: 13px;
   }
 }

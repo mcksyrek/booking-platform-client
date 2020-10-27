@@ -15,7 +15,7 @@ import { OfferCardComponent } from './offer-card/offer-card.component';
     CommonModule,
     OffersRoutingModule,
     SharedModule,
-    NgxsModule.forRoot([OffersState]),
+    NgxsModule.forFeature([OffersState]),
   ],
 })
 export class OffersModule {}
