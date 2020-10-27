@@ -5,22 +5,18 @@ import { ToggleMenuAction } from './layout.actions';
 import { patch } from '@ngxs/store/operators';
 
 export class LayoutStateModel {
-  menuAction: null;
+  menuAction: boolean;
 }
 
 @State<LayoutStateModel>({
   name: 'layout',
-  defaults: { menuAction: null },
+  defaults: { menuAction: false },
 })
 @Injectable()
 export class LayoutState {
-  @Selector()
-  static getMenuAction({ menuAction }: LayoutStateModel): null {
-    return menuAction;
-  }
-
   @Action(ToggleMenuAction)
   toggleMenu(ctx: StateContext<LayoutStateModel>): void {
-    ctx.setState(patch({ menuAction: null }));
+    const prevState = ctx.getState().menuAction;
+    ctx.setState(patch({ menuAction: !prevState }));
   }
 }
