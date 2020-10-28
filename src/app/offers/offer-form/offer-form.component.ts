@@ -40,7 +40,7 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   private _selectedOfferId: number;
   private _subscriber = new Subscriber();
 
-  productsList$: Observable<IProduct[]>;
+  readonly productsArray: FormArray;
 
   get disabledSubmit(): boolean {
     return !this.offerForm.valid;
@@ -70,7 +70,7 @@ export class OfferFormComponent implements OnInit, OnDestroy {
       products: _formBuilder.array([]),
     });
 
-    this.productsList$ = this.offerForm.controls.products.valueChanges;
+    this.productsArray = this.offerForm.controls.products as FormArray;
   }
 
   ngOnInit(): void {
@@ -102,14 +102,18 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     this._router.navigateByUrl(Routes.Offers + Routes.All);
   }
 
+  addProduct(): void {
+    const emptyProduct: IProduct = { name: '' };
+    this.productsArray.push(this._formBuilder.group(emptyProduct));
+  }
+
   private _setOfferForm(offerData: IOffer): void {
     const products = [...offerData.products];
-    const productsArray = this.offerForm.controls.products as FormArray;
     delete offerData.products;
 
     this.offerForm.patchValue(offerData);
     products.forEach(product =>
-      productsArray.push(this._formBuilder.control(product))
+      this.productsArray.push(this._formBuilder.group(product))
     );
   }
 }

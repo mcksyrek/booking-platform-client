@@ -1,0 +1,30 @@
+.products-list {
+  width: 100%;
+  margin: 0;
+
+  &__container {
+    margin: 0;
+  }
+
+  &__card {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // TODO move input from this file & offerForm to shared style file
+  &__input {
+    &--wide {
+      width: 90%;
+    }
+
+    &--medium {
+      width: 48%;
+    }
+
+    &--small {
+      width: 20%;
+    }
+  }
+}

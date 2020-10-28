@@ -1,0 +1,16 @@
+<article [formGroup]="parentForm" class="products-list">
+  <figure formArrayName="products" class="products-list__container">
+    <section *ngFor="let product of productsArray.controls; let index = index">
+      <mat-card class="products-list__card" [formGroupName]="index">
+        <mat-form-field class="products-list__input--medium">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" (click)="deleteProduct(index)">
+          Delete
+        </button>
+      </mat-card>
+    </section>
+  </figure>
+</article>
