@@ -13,18 +13,21 @@
     align-items: center;
   }
 
-  // TODO move input from this file & offerForm to shared style file
   &__input {
-    &--wide {
-      width: 90%;
-    }
-
     &--medium {
-      width: 48%;
+      width: 40%;
     }
 
     &--small {
       width: 20%;
     }
+
+    &--smaller {
+      width: 15%;
+    }
+  }
+
+  &__add-product {
+    float: left;
   }
 }

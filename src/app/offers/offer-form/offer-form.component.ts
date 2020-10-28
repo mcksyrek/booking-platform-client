@@ -92,18 +92,22 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     } else {
       this._store.dispatch(new AddOfferAction(this.offerForm.value));
     }
-    this._router.navigateByUrl(Routes.Offers + Routes.All);
+    this.redirectToMainPage();
   }
 
   onDelete(): void {
     if (this._selectedOfferId) {
       this._store.dispatch(new DeleteOfferAction(this._selectedOfferId));
     }
+    this.redirectToMainPage();
+  }
+
+  redirectToMainPage(): void {
     this._router.navigateByUrl(Routes.Offers + Routes.All);
   }
 
   addProduct(): void {
-    const emptyProduct: IProduct = { name: '' };
+    const emptyProduct: IProduct = { name: '', duration: null, price: null };
     this.productsArray.push(this._formBuilder.group(emptyProduct));
   }
 

@@ -19,7 +19,8 @@ export class ProductsListComponent implements OnInit {
   // productsList passed down to component to trigger changeDetection
   @Input() readonly productsList: IProduct[];
   productsArray: FormArray;
-
+  // TODO move hours to consts
+  readonly hours = [1, 2, 3, 4, 5, 6, 7, 8];
   ngOnInit(): void {
     this.productsArray = this.parentForm.controls.products as FormArray;
   }

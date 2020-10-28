@@ -1,16 +1,32 @@
 <article [formGroup]="parentForm" class="products-list">
-  <figure formArrayName="products" class="products-list__container">
-    <section *ngFor="let product of productsArray.controls; let index = index">
-      <mat-card class="products-list__card" [formGroupName]="index">
-        <mat-form-field class="products-list__input--medium">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name" />
-        </mat-form-field>
+  <figure
+    class="products-list__container"
+    formArrayName="products"
+    *ngFor="let product of productsArray.controls; let index = index"
+  >
+    <mat-card class="products-list__card" [formGroupName]="index">
+      <mat-form-field class="products-list__input--medium">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
 
-        <button mat-raised-button color="accent" (click)="deleteProduct(index)">
-          Delete
-        </button>
-      </mat-card>
-    </section>
+      <mat-form-field class="products-list__input--smaller">
+        <mat-label>Duration</mat-label>
+        <mat-select formControlName="duration">
+          <mat-option *ngFor="let hour of hours" [value]="hour">
+            {{ hour }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="products-list__input--small">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="deleteProduct(index)">
+        Delete
+      </button>
+    </mat-card>
   </figure>
 </article>

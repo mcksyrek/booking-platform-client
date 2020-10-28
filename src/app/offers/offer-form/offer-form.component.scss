@@ -5,8 +5,12 @@
     padding: 1rem 0;
     display: flex;
 
-    &--left {
+    > figure {
+      width: 50%;
     }
+
+    // &--left {
+    // }
     &--right {
       padding-left: 1rem;
     }
@@ -26,9 +30,12 @@
     }
   }
 
+  &__add-product {
+    float: left;
+  }
+
   figure {
     margin: 0;
-    width: 50%;
   }
 
   .space-between {
@@ -36,5 +43,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &__button-container {
+    float: right;
+    button {
+      margin: 0.5rem;
+    }
   }
 }

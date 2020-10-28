@@ -14,4 +14,6 @@ export interface IOffer {
 
 export interface IProduct {
   name: string;
+  duration: number;
+  price: number;
 }
