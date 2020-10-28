@@ -1,24 +1,32 @@
+@import 'src/styles/variables';
+
 .offer-form {
-  padding: 0 2.5%;
-
   &__column {
-    padding: 1rem 0;
-    display: flex;
+    &--wrapper {
+      display: flex;
+    }
 
-    > figure {
+    &--right,
+    &--left {
       width: 50%;
     }
 
-    // &--left {
-    // }
-    &--right {
-      padding-left: 1rem;
+    @media all and (max-width: $medium-screen) {
+      &--wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &--right,
+      &--left {
+        width: 90%;
+      }
     }
   }
 
   &__input {
     &--wide {
-      width: 90%;
+      width: 100%;
     }
 
     &--medium {
@@ -30,25 +38,17 @@
     }
   }
 
-  &__add-product {
-    float: left;
-  }
-
-  figure {
-    margin: 0;
-  }
-
-  .space-between {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   &__button-container {
     float: right;
     button {
       margin: 0.5rem;
     }
+  }
+
+  // Move to _style
+  .space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

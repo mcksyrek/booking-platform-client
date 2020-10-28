@@ -37,7 +37,7 @@ export class OfferFormComponent implements OnInit, OnDestroy {
 
   readonly offerForm: FormGroup;
   readonly categories = OFFER_CATEGORIES;
-  private _selectedOfferId: number;
+  readonly selectedOfferId: number;
   private _subscriber = new Subscriber();
 
   readonly productsArray: FormArray;
@@ -53,8 +53,8 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
     if (activatedRoute.snapshot.params.id) {
-      this._selectedOfferId = activatedRoute.snapshot.params.id;
-      this._store.dispatch(new GetOfferByIdAction(this._selectedOfferId));
+      this.selectedOfferId = activatedRoute.snapshot.params.id;
+      this._store.dispatch(new GetOfferByIdAction(this.selectedOfferId));
     }
 
     this.offerForm = _formBuilder.group({
@@ -87,7 +87,7 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this._selectedOfferId) {
+    if (this.selectedOfferId) {
       this._store.dispatch(new UpdateOfferAction(this.offerForm.value));
     } else {
       this._store.dispatch(new AddOfferAction(this.offerForm.value));
@@ -96,8 +96,8 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    if (this._selectedOfferId) {
-      this._store.dispatch(new DeleteOfferAction(this._selectedOfferId));
+    if (this.selectedOfferId) {
+      this._store.dispatch(new DeleteOfferAction(this.selectedOfferId));
     }
     this.redirectToMainPage();
   }
@@ -107,8 +107,13 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   }
 
   addProduct(): void {
+    // TODO trigger IProduct fromBuilder with validators
     const emptyProduct: IProduct = { name: '', duration: null, price: null };
     this.productsArray.push(this._formBuilder.group(emptyProduct));
+  }
+
+  removeProduct(index: number): void {
+    this.productsArray.removeAt(index);
   }
 
   private _setOfferForm(offerData: IOffer): void {

@@ -1,5 +1,13 @@
+<mat-toolbar>
+  <h1 *ngIf="selectedOfferId; else newOffer">Edit your offer</h1>
+
+  <ng-template #newOffer>
+    <h1>Create new offer</h1>
+  </ng-template>
+</mat-toolbar>
+
 <form class="offer-form" [formGroup]="offerForm">
-  <article class="offer-form__column">
+  <article class="offer-form__column--wrapper">
     <figure class="offer-form__column--left">
       <mat-form-field class="offer-form__input--wide">
         <mat-label>New offer name</mat-label>
@@ -11,7 +19,7 @@
         <input matInput type="text" formControlName="address" />
       </mat-form-field>
 
-      <figure class="space-between">
+      <section class="space-between">
         <mat-form-field class="offer-form__input--medium">
           <mat-label>City</mat-label>
           <input matInput type="text" formControlName="city" />
@@ -21,9 +29,9 @@
           <mat-label>Postal Code</mat-label>
           <input matInput type="text" formControlName="postalCode" />
         </mat-form-field>
-      </figure>
+      </section>
 
-      <figure class="space-between">
+      <section class="space-between">
         <mat-form-field class="offer-form__input--medium">
           <mat-label>Contact number</mat-label>
           <span matPrefix>+48 &nbsp;</span>
@@ -38,7 +46,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      </figure>
+      </section>
 
       <mat-form-field class="offer-form__input--wide">
         <mat-label>Description</mat-label>
@@ -46,22 +54,16 @@
       </mat-form-field>
     </figure>
 
-    <mat-divider [vertical]="true"></mat-divider>
+    <!-- <mat-divider [vertical]="true"></mat-divider> -->
 
     <figure class="offer-form__column--right">
-      <h2>List offered services here:</h2>
+      <!-- <h2>List offered services here:</h2> -->
       <booking-products-list
         [parentForm]="offerForm"
         [productsList]="productsArray.valueChanges | async"
+        (removeProduct)="removeProduct($event)"
+        (addProduct)="addProduct()"
       ></booking-products-list>
-      <button
-        class="offer-form__add-product"
-        mat-raised-button
-        color="primary"
-        (click)="addProduct()"
-      >
-        Add product
-      </button>
     </figure>
   </article>
 
@@ -80,7 +82,7 @@
       Cancel
     </button>
 
-    <button mat-raised-button color="accent" (click)="onDelete()">
+    <button mat-raised-button color="warn" (click)="onDelete()">
       Delete
     </button>
   </section>

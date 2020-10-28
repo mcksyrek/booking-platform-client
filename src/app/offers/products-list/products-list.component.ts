@@ -3,6 +3,8 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
@@ -18,6 +20,10 @@ export class ProductsListComponent implements OnInit {
   @Input() readonly parentForm: FormGroup;
   // productsList passed down to component to trigger changeDetection
   @Input() readonly productsList: IProduct[];
+
+  @Output() readonly removeProduct = new EventEmitter<number>();
+  @Output() readonly addProduct = new EventEmitter<null>();
+
   productsArray: FormArray;
   // TODO move hours to consts
   readonly hours = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -25,7 +31,11 @@ export class ProductsListComponent implements OnInit {
     this.productsArray = this.parentForm.controls.products as FormArray;
   }
 
+  addNewProduct(): void {
+    this.addProduct.emit();
+  }
+
   deleteProduct(index: number): void {
-    this.productsArray.removeAt(index);
+    this.removeProduct.emit(index);
   }
 }

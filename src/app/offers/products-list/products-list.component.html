@@ -1,16 +1,21 @@
 <article [formGroup]="parentForm" class="products-list">
+  <h4>List of services that you offer:</h4>
   <figure
     class="products-list__container"
     formArrayName="products"
     *ngFor="let product of productsArray.controls; let index = index"
   >
     <mat-card class="products-list__card" [formGroupName]="index">
-      <mat-form-field class="products-list__input--medium">
+      <button mat-mini-fab color="warn" (click)="deleteProduct(index)">
+        <mat-icon>remove</mat-icon>
+      </button>
+
+      <mat-form-field class="products-list__input--wide">
         <mat-label>Name</mat-label>
         <input matInput type="text" formControlName="name" />
       </mat-form-field>
 
-      <mat-form-field class="products-list__input--smaller">
+      <mat-form-field class="products-list__input--small">
         <mat-label>Duration</mat-label>
         <mat-select formControlName="duration">
           <mat-option *ngFor="let hour of hours" [value]="hour">
@@ -19,14 +24,19 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="products-list__input--small">
+      <mat-form-field class="products-list__input--medium">
         <mat-label>Price</mat-label>
         <input matInput type="number" formControlName="price" />
       </mat-form-field>
-
-      <button mat-raised-button color="accent" (click)="deleteProduct(index)">
-        Delete
-      </button>
     </mat-card>
   </figure>
+
+  <button
+    mat-mini-fab
+    class="products-list__add"
+    color="primary"
+    (click)="addNewProduct()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </article>

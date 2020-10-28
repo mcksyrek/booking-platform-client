@@ -14,20 +14,20 @@
   }
 
   &__input {
-    &--medium {
+    &--wide {
       width: 40%;
     }
 
-    &--small {
+    &--medium {
       width: 20%;
     }
 
-    &--smaller {
+    &--small {
       width: 15%;
     }
   }
 
-  &__add-product {
-    float: left;
+  &__add {
+    margin-left: 16px;
   }
 }
