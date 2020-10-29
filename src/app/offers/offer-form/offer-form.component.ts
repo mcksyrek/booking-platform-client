@@ -9,7 +9,7 @@ import {
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { IOffer, IProduct } from '../offer.interface';
@@ -23,6 +23,7 @@ import {
 } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
 import { Routes } from '@booking/shared/enums/index';
+import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 
 @Component({
   selector: 'booking-offer-form',
@@ -30,7 +31,8 @@ import { Routes } from '@booking/shared/enums/index';
   styleUrls: ['./offer-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferFormComponent implements OnInit, OnDestroy {
+export class OfferFormComponent extends AbstractSubscriber
+  implements OnInit, OnDestroy {
   @Output() readonly submitForm = new EventEmitter<IOffer>();
   @Select(OffersState.getSelectedOffer)
   readonly selectedOffer$: Observable<IOffer>;
@@ -38,7 +40,6 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   readonly offerForm: FormGroup;
   readonly categories = OFFER_CATEGORIES;
   readonly selectedOfferId: number;
-  private _subscriber = new Subscriber();
 
   readonly productsArray: FormArray;
 
@@ -52,6 +53,8 @@ export class OfferFormComponent implements OnInit, OnDestroy {
     private _store: Store,
     private _router: Router
   ) {
+    super();
+
     if (activatedRoute.snapshot.params.id) {
       this.selectedOfferId = activatedRoute.snapshot.params.id;
       this._store.dispatch(new GetOfferByIdAction(this.selectedOfferId));
@@ -83,7 +86,6 @@ export class OfferFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._store.dispatch(new UnselectOfferAction());
-    this._subscriber.unsubscribe();
   }
 
   onSubmit(): void {
@@ -107,9 +109,8 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   }
 
   addProduct(): void {
-    // TODO trigger IProduct fromBuilder with validators
     const emptyProduct: IProduct = { name: '', duration: null, price: null };
-    this.productsArray.push(this._formBuilder.group(emptyProduct));
+    this.productsArray.push(this._buildProductGroup(emptyProduct));
   }
 
   removeProduct(index: number): void {
@@ -117,12 +118,20 @@ export class OfferFormComponent implements OnInit, OnDestroy {
   }
 
   private _setOfferForm(offerData: IOffer): void {
-    const products = [...offerData.products];
+    const products = offerData.products ? [...offerData.products] : [];
     delete offerData.products;
 
     this.offerForm.patchValue(offerData);
     products.forEach(product =>
-      this.productsArray.push(this._formBuilder.group(product))
+      this.productsArray.push(this._buildProductGroup(product))
     );
+  }
+
+  private _buildProductGroup({ name, duration, price }: IProduct): FormGroup {
+    return this._formBuilder.group({
+      name: [name, Validators.required],
+      duration: [duration, Validators.required],
+      price: [price, Validators.required],
+    });
   }
 }
