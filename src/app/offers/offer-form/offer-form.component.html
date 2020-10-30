@@ -59,7 +59,7 @@
     <figure class="offer-form__column--right">
       <!-- <h2>List offered services here:</h2> -->
       <booking-products-list
-        [parentForm]="offerForm"
+        [parentForm]="null"
         [productsList]="productsArray.valueChanges | async"
         (removeProduct)="removeProduct($event)"
         (addProduct)="addProduct()"

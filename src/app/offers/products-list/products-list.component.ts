@@ -9,6 +9,7 @@ import {
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { IProduct } from '../offer.interface';
+import { DURATION_HOURS } from '@booking/shared/constants/numeric.constants';
 
 @Component({
   selector: 'booking-products-list',
@@ -23,12 +24,13 @@ export class ProductsListComponent implements OnInit {
 
   @Output() readonly removeProduct = new EventEmitter<number>();
   @Output() readonly addProduct = new EventEmitter<null>();
+  @Output() readonly selectProduct = new EventEmitter<IProduct>();
 
   productsArray: FormArray;
-  // TODO move hours to consts
-  readonly hours = [1, 2, 3, 4, 5, 6, 7, 8];
+  readonly hours = DURATION_HOURS;
+
   ngOnInit(): void {
-    this.productsArray = this.parentForm.controls.products as FormArray;
+    this.productsArray = this.parentForm?.controls.products as FormArray;
   }
 
   addNewProduct(): void {
@@ -37,5 +39,9 @@ export class ProductsListComponent implements OnInit {
 
   deleteProduct(index: number): void {
     this.removeProduct.emit(index);
+  }
+
+  handleSelectedProduct(product: IProduct): void {
+    this.selectProduct.emit(product);
   }
 }

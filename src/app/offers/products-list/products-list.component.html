@@ -1,4 +1,8 @@
-<article [formGroup]="parentForm" class="products-list">
+<article
+  *ngIf="parentForm; else nonEditableList"
+  [formGroup]="parentForm"
+  class="products-list"
+>
   <h4>List of services that you offer:</h4>
   <figure
     class="products-list__container"
@@ -10,12 +14,12 @@
         <mat-icon>remove</mat-icon>
       </button>
 
-      <mat-form-field class="products-list__input--wide">
+      <mat-form-field class="products-list__section--wide">
         <mat-label>Name</mat-label>
         <input matInput type="text" formControlName="name" />
       </mat-form-field>
 
-      <mat-form-field class="products-list__input--small">
+      <mat-form-field class="products-list__section--small">
         <mat-label>Duration</mat-label>
         <mat-select formControlName="duration">
           <mat-option *ngFor="let hour of hours" [value]="hour">
@@ -24,7 +28,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="products-list__input--medium">
+      <mat-form-field class="products-list__section--medium">
         <mat-label>Price</mat-label>
         <input matInput type="number" formControlName="price" />
       </mat-form-field>
@@ -40,3 +44,30 @@
     <mat-icon>add</mat-icon>
   </button>
 </article>
+
+<!-- below is template prepared to use that component also for displaying offer for client -->
+<ng-template #nonEditableList>
+  <h4>List of services in chosen offer:</h4>
+  <article *ngFor="let product of productsList">
+    <mat-card class="products-list__card">
+      <h4 class="products-list__section--wide card-title">
+        {{ product.name }}
+      </h4>
+
+      <span class="products-list__section--medium">
+        {{ product.duration }} hours
+      </span>
+
+      <span class="products-list__section--medium">
+        {{ product.price }} PLN
+      </span>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="handleSelectedProduct(product)"
+      >
+        Select
+      </button>
+    </mat-card>
+  </article>
+</ng-template>
