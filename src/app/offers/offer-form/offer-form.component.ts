@@ -61,6 +61,7 @@ export class OfferFormComponent extends AbstractSubscriber
     }
 
     this.offerForm = _formBuilder.group({
+      // TODO add validators
       id: [''],
       name: ['', Validators.required],
       author: ['', Validators.required],
