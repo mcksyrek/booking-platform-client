@@ -8,7 +8,7 @@ import {
 import { Select } from '@ngxs/store';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { MENU_LIST_ITEMS } from './menu.constant';
+import { MenuListEnum } from './menu.enum';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 import { LayoutState } from '../layout.state';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ import { skip } from 'rxjs/operators';
 })
 export class MenuComponent extends AbstractSubscriber implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
-  readonly menuList = MENU_LIST_ITEMS;
+  readonly menuList = Object.values(MenuListEnum);
 
   @Select(LayoutState.toggleMenu)
   toggleMenu$: Observable<boolean>;
