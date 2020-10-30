@@ -20,7 +20,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 
-    @media all and (max-width: $medium-screen) {
+    @include medium-width {
       justify-content: center;
     }
 
@@ -37,7 +37,13 @@
     margin: 1%;
     margin-bottom: 1rem;
 
-    @include media-width(45%, 85%);
+    @include medium-width {
+      width: 45%;
+    }
+
+    @include small-width {
+      width: 85%;
+    }
   }
 
   &__loading {
