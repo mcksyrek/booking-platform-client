@@ -8,6 +8,7 @@
     width: 30%;
     @include media-width(60%, 80%);
   }
+
   &__content {
     min-height: 90vh;
     width: 100vw;

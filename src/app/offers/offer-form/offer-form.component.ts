@@ -28,6 +28,7 @@ export class OfferFormComponent implements OnInit {
 
   constructor(formBuilder: FormBuilder) {
     this.offerForm = formBuilder.group({
+      // TODO add validators
       id: [''],
       name: ['', Validators.required],
       author: ['', Validators.required],

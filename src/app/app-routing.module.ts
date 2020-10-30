@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: 'offers',
         loadChildren: () =>
-          import('./offers/offers.module').then(m => m.OffersModule),
+          import('@booking/offers/offers.module').then(m => m.OffersModule),
       },
     ],
   },
