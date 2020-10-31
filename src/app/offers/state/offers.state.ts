@@ -99,7 +99,7 @@ export class OffersState {
         ctx.setState(
           patch({
             offers: updateItem<IOffer>(
-              existingOffer => existingOffer?.id === returnedOffer.id,
+              existingOffer => existingOffer.id === returnedOffer.id,
               returnedOffer
             ),
           })
