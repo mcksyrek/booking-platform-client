@@ -18,7 +18,6 @@ export class OffersService {
     );
   }
 
-  // TODO tests
   getOfferById(id: number): Observable<IOffer> {
     return this._http.get<IOffer>(
       `${environment.apiPrefix}${Endpoints.Offers}/${id}`

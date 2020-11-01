@@ -35,6 +35,21 @@ describe('OffersService', () => {
     });
   });
 
+  describe('#getOfferById', () => {
+    it('should make GET request', () => {
+      const mockResponse: IOffer = OFFER_MOCK;
+      const httpSpy = jest
+        .spyOn(httpClient, 'get')
+        .mockReturnValue(of(mockResponse));
+
+      service.getOfferById(1).subscribe(response => {
+        expect(response).toEqual(mockResponse);
+      });
+
+      expect(httpSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('#postNewOffer', () => {
     it('should make POST request', () => {
       const mockResponse: IOffer = OFFER_MOCK;
