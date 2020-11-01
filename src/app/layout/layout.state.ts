@@ -9,9 +9,17 @@ import { Injectable } from '@angular/core';
 
 import { ToggleMenuAction } from './layout.actions';
 
-function toggleMenuOperator(): StateOperator<LayoutStateModel> {
+// tslint:disable-next-line: interface-over-type-literal
+type BoolStateObject = {
+  [objectKey: string]: boolean;
+};
+
+export function toggleBoolStateOperator(
+  boolStateObject: BoolStateObject
+): StateOperator<LayoutStateModel> {
   return (state: Readonly<LayoutStateModel>) => {
-    return { ...state, toggleMenu: !state.toggleMenu };
+    const objectKey = Object.keys(boolStateObject)[0];
+    return { ...state, [objectKey]: !boolStateObject[objectKey] };
   };
 }
 
@@ -32,6 +40,7 @@ export class LayoutState {
 
   @Action(ToggleMenuAction)
   toggleMenu(ctx: StateContext<LayoutStateModel>): void {
-    ctx.setState(toggleMenuOperator());
+    const toggleMenu = { toggleMenu: ctx.getState().toggleMenu };
+    ctx.setState(toggleBoolStateOperator(toggleMenu));
   }
 }
