@@ -9,6 +9,7 @@ import { OffersState } from './state/offers.state';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     OffersListComponent,
     OfferCardComponent,
     ToolbarComponent,
+    ProductsListComponent,
   ],
   imports: [
     CommonModule,

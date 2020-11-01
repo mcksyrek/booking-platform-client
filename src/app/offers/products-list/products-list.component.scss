@@ -1,0 +1,33 @@
+.products-list {
+  width: 100%;
+  margin: 0;
+
+  &__container {
+    margin: 0;
+  }
+
+  &__card {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__input {
+    &--wide {
+      width: 40%;
+    }
+
+    &--medium {
+      width: 20%;
+    }
+
+    &--small {
+      width: 15%;
+    }
+  }
+
+  &__add {
+    margin-left: 16px;
+  }
+}

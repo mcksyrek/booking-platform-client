@@ -1,22 +1,37 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import {
+  State,
+  Action,
+  StateContext,
+  Selector,
+  StateOperator,
+} from '@ngxs/store';
 import { Injectable } from '@angular/core';
-
-import { ToggleMenuAction } from './layout.actions';
 import { patch } from '@ngxs/store/operators';
 
+import { ToggleMenuAction } from './layout.actions';
+import { toggle } from '@booking/shared/store/operators';
+
 export class LayoutStateModel {
-  menuAction: boolean;
+  toggleMenu: boolean;
 }
 
 @State<LayoutStateModel>({
   name: 'layout',
-  defaults: { menuAction: false },
+  defaults: { toggleMenu: false },
 })
 @Injectable()
 export class LayoutState {
+  @Selector()
+  static toggleMenu({ toggleMenu }: LayoutStateModel): boolean {
+    return toggleMenu;
+  }
+
   @Action(ToggleMenuAction)
   toggleMenu(ctx: StateContext<LayoutStateModel>): void {
-    const prevState = ctx.getState().menuAction;
-    ctx.setState(patch({ menuAction: !prevState }));
+    ctx.setState(
+      patch({
+        toggleMenu: toggle(),
+      })
+    );
   }
 }

@@ -24,8 +24,8 @@ export class MenuComponent extends AbstractSubscriber implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   readonly menuList = MENU_LIST_ITEMS;
 
-  @Select(CombinedState => CombinedState.layout.menuAction)
-  menuAction$: Observable<boolean>;
+  @Select(LayoutState.toggleMenu)
+  toggleMenu$: Observable<boolean>;
 
   constructor(private _changeDetector: ChangeDetectorRef) {
     super();
@@ -33,7 +33,7 @@ export class MenuComponent extends AbstractSubscriber implements OnInit {
 
   ngOnInit(): void {
     this._subscriber.add(
-      this.menuAction$.pipe(skip(1)).subscribe(() => this.toggleMenu())
+      this.toggleMenu$.pipe(skip(1)).subscribe(() => this.toggleMenu())
     );
   }
 
