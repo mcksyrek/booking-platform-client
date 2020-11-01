@@ -10,16 +10,21 @@ import {
   GetOfferListAction,
   DeleteOfferAction,
   UpdateOfferAction,
+  GetOfferByIdAction,
+  UnselectOfferAction,
 } from './offers.actions';
 import { OffersService } from '../offers.service';
 
 export class OffersStateModel {
   offers?: IOffer[];
+  selectedOffer?: IOffer;
 }
 
 @State<OffersStateModel>({
   name: 'offers',
-  defaults: {},
+  defaults: {
+    offers: [],
+  },
 })
 @Injectable()
 export class OffersState {
@@ -30,11 +35,26 @@ export class OffersState {
     return offers;
   }
 
+  @Selector()
+  static getSelectedOffer({ selectedOffer }: OffersStateModel): IOffer {
+    return selectedOffer;
+  }
+
   @Action(GetOfferListAction)
   getOffersList(ctx: StateContext<OffersStateModel>): Observable<IOffer[]> {
     return this._offerService
       .getOffersList()
-      .pipe(tap(offersList => ctx.setState({ offers: [...offersList] })));
+      .pipe(tap(offersList => ctx.patchState({ offers: [...offersList] })));
+  }
+
+  @Action(GetOfferByIdAction)
+  getOfferById(
+    ctx: StateContext<OffersStateModel>,
+    { id }: GetOfferByIdAction
+  ): Observable<IOffer> {
+    return this._offerService
+      .getOfferById(id)
+      .pipe(tap(selectedOffer => ctx.patchState({ selectedOffer })));
   }
 
   @Action(AddOfferAction)
@@ -86,5 +106,10 @@ export class OffersState {
         )
       )
     );
+  }
+
+  @Action(UnselectOfferAction)
+  unselectOffer(ctx: StateContext<OffersStateModel>): void {
+    ctx.setState(patch({ selectedOffer: null }));
   }
 }

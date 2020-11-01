@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ICON_PATH, Icons } from './constants/icons.constant';
+import { ICON_PATH } from './constants/icons.constant';
+import { Icons } from './enums';
 
 @NgModule({
   declarations: [],
