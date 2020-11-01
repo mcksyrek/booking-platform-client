@@ -1,10 +1,10 @@
 export const ICON_PATH = 'assets/icons';
 
-export const ICONS = [
-  'menu',
-  'other',
-  'vehicle service',
-  'plumbing',
-  'renovation',
-  'electrician',
-];
+export enum Icons {
+  menu,
+  other,
+  vehicle_service,
+  plumbing,
+  renovation,
+  electrician,
+}
