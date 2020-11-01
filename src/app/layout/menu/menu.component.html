@@ -1,0 +1,14 @@
+<mat-sidenav-container class="menu">
+  <mat-sidenav #sidenav class="menu__drawer" mode="over" [autoFocus]="false">
+    <h2>Menu</h2>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let menuItem of menuList">
+        {{ menuItem.name }}
+      </button>
+    </mat-action-list>
+  </mat-sidenav>
+
+  <article class="menu__content">
+    <ng-content></ng-content>
+  </article>
+</mat-sidenav-container>

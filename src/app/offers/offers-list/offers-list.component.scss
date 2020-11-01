@@ -1,0 +1,61 @@
+@import 'src/styles/_variables';
+@import 'src/styles/_mixins';
+
+.offers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__list {
+    width: 95%;
+    list-style-type: none;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    @include medium-width {
+      justify-content: center;
+    }
+
+    :hover {
+      transition: transform 0.5s ease;
+      transform: scale(1.1);
+      z-index: 1;
+    }
+  }
+
+  &__item {
+    width: 23%;
+    min-width: 200px;
+    margin: 1%;
+    margin-bottom: 1rem;
+
+    @include medium-width {
+      width: 45%;
+    }
+
+    @include small-width {
+      width: 85%;
+    }
+  }
+
+  &__loading {
+    position: absolute;
+    top: 0;
+    background-color: grey;
+    opacity: 0.7;
+    width: 100vw;
+    height: 90vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

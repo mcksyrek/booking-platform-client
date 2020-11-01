@@ -5,12 +5,7 @@ import { Store } from '@ngxs/store';
 
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
-import {
-  AddOfferAction,
-  GetOfferListAction,
-  DeleteOfferAction,
-  UpdateOfferAction,
-} from '../state/offers.actions';
+import { GetOfferListAction } from '../state/offers.actions';
 
 @Component({
   selector: 'booking-offers-list',
@@ -22,29 +17,9 @@ export class OffersListComponent implements OnInit {
   @Select(OffersState.getOffers)
   readonly offers$: Observable<IOffer[]>;
 
-  showOfferForm = false;
-
   constructor(private _store: Store) {}
 
   ngOnInit(): void {
     this._store.dispatch(new GetOfferListAction());
-  }
-
-  handleFormSubmit(formValue: IOffer): void {
-    this._store.dispatch(new AddOfferAction(formValue));
-
-    this.toggleOfferForm();
-  }
-
-  toggleOfferForm(): void {
-    this.showOfferForm = !this.showOfferForm;
-  }
-
-  deleteOffer(id: number): void {
-    this._store.dispatch(new DeleteOfferAction(id));
-  }
-
-  updateOffer(offer: IOffer): void {
-    this._store.dispatch(new UpdateOfferAction(offer));
   }
 }

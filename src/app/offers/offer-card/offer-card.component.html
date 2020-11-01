@@ -1,26 +1,19 @@
-<div>
-  <div *ngIf="!editing; else editForm">
-    <div>offer name: {{ offer.name }}</div>
-    <div>id: {{ offer.id }}</div>
-  </div>
+<mat-card class="offer-card" [routerLink]="getRedirectLink()">
+  <mat-card-title>{{ offer.name }}</mat-card-title>
+  <mat-card-subtitle>
+    <b>{{ offer.city }}</b>
+  </mat-card-subtitle>
+  <img
+    mat-card-image
+    class="offer-card__icon"
+    [src]="getSource()"
+    alt="service category image"
+  />
 
-  <ng-template #editForm>
-    <booking-offer-form
-      [offerData]="offer"
-      (submitForm)="updateOffer($event)"
-    ></booking-offer-form>
-  </ng-template>
-
-  <div *ngIf="!editing; else finishEditing">
-    <button (click)="toggleEditing()">
-      Edit offer
-    </button>
-    <button (click)="deleteOffer()">Delete offer</button>
-  </div>
-
-  <ng-template #finishEditing>
-    <button (click)="toggleEditing()">
-      Cancel editing
-    </button>
-  </ng-template>
-</div>
+  <mat-card-content>
+    <p>{{ offer.description }}</p>
+    <p>
+      <b> {{ offer.category | titlecase }} </b>
+    </p>
+  </mat-card-content>
+</mat-card>

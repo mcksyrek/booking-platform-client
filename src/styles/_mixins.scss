@@ -1,0 +1,13 @@
+@import './_variables';
+
+@mixin medium-width {
+  @media all and (max-width: $medium-screen) {
+    @content;
+  }
+}
+
+@mixin small-width {
+  @media all and (max-width: $small-screen) {
+    @content;
+  }
+}

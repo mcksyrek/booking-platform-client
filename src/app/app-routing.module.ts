@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LayoutComponent } from '@booking/layout/layout.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'offers', pathMatch: 'full' },
   {
-    path: 'offers',
-    loadChildren: () =>
-      import('./offers/offers.module').then(m => m.OffersModule),
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'offers',
+        loadChildren: () =>
+          import('@booking/offers/offers.module').then(m => m.OffersModule),
+      },
+    ],
   },
 ];
 

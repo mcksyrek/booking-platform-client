@@ -1,0 +1,23 @@
+@import 'src/styles/_variables';
+@import 'src/styles/_mixins';
+
+.menu {
+  height: 100%;
+
+  &__drawer {
+    width: 30%;
+
+    @include medium-width {
+      width: 60%;
+    }
+
+    @include small-width {
+      width: 80%;
+    }
+  }
+
+  &__content {
+    min-height: 90vh;
+    width: 100vw;
+  }
+}

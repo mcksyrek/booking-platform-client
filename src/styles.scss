@@ -1,9 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'src/styles/_variables';
+@import 'src/styles/_mixins';
+
 html,
 body {
   height: 100%;
+  font-size: 18px;
+
+  @include medium-width {
+    font-size: 15px;
+  }
+
+  @include small-width {
+    font-size: 13px;
+  }
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
