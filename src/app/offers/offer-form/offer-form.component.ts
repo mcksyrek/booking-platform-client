@@ -58,16 +58,39 @@ export class OfferFormComponent extends AbstractSubscriber
     }
 
     this.offerForm = _formBuilder.group({
-      // TODO add validators
       id: [''],
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(50),
+        ],
+      ],
       author: ['', Validators.required],
       address: ['', Validators.required],
-      city: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      postalCode: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(6),
+          Validators.pattern(/\d{2}-\d{3}/),
+        ],
+      ],
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{9}$/)],
+      ],
       category: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(20),
+          Validators.maxLength(255),
+        ],
+      ],
       products: _formBuilder.array([]),
     });
 
