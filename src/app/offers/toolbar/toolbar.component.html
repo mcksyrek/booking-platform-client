@@ -30,4 +30,15 @@
       </mat-select>
     </mat-form-field>
   </section>
+
+  <section class="offers-toolbar__section">
+    <mat-form-field formGroupName="filters">
+      <mat-label>filter by cities</mat-label>
+      <mat-select formControlName="cities" multiple [value]="allCitiesList">
+        <mat-option *ngFor="let city of allCitiesList" [value]="city">{{
+          city
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
 </article>
