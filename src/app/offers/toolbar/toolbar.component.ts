@@ -1,12 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Select } from '@ngxs/store';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -16,6 +10,7 @@ import { sortOffers } from '@booking/shared/utils/';
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
 import { filterOffersByAttribute } from '@booking/shared/utils';
+import { SetCustomizedOffersAction } from '../state/offers.actions';
 
 @Component({
   selector: 'booking-toolbar',
@@ -24,20 +19,23 @@ import { filterOffersByAttribute } from '@booking/shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent extends AbstractSubscriber implements OnInit {
-  // TODO change architecture to use Store
-  @Output() setOffersList = new EventEmitter<IOffer[]>();
   @Select(OffersState.getOffers)
   readonly allOffers$: Observable<IOffer[]>;
+  allOffersList: IOffer[];
+
+  @Select(OffersState.getCustomizedOffers)
+  readonly customizedOffersList$: Observable<IOffer[]>;
+  customizedOffersList: IOffer[];
+
   readonly sortingTypes = Object.values(SortingTypesEnum);
 
   readonly toolbarForm: FormGroup;
   readonly filtersGroup: FormGroup;
 
-  allOffersList: IOffer[];
   allCategoriesList: string[];
   allCitiesList: string[];
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private _store: Store) {
     super();
     this.toolbarForm = _formBuilder.group({
       sort: [this.sortingTypes[0]],
@@ -53,16 +51,27 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   ngOnInit(): void {
     this.addSubscriptions([
       this.allOffers$.pipe(filter(offers => !!offers)).subscribe(offers => {
-        this.allOffersList = sortOffers(this.toolbarForm.value.sort, offers);
+        this.allOffersList = offers;
+
         this._setUniqueFilters(offers);
+        this._setCustomizedOffers(
+          sortOffers(this.toolbarForm.value.sort, offers)
+        );
       }),
 
+      this.customizedOffersList$.subscribe(
+        customizedOffersList =>
+          (this.customizedOffersList = customizedOffersList)
+      ),
+
       this.toolbarForm.controls.sort.valueChanges.subscribe(sortType =>
-        this.setOffersList.emit(sortOffers(sortType, this._combinedFilters()))
+        this._setCustomizedOffers(
+          sortOffers(sortType, this.customizedOffersList)
+        )
       ),
 
       this.filtersGroup.valueChanges.subscribe(() =>
-        this.setOffersList.emit(this._combinedFilters())
+        this._setCustomizedOffers(this._combinedFilters())
       ),
     ]);
   }
@@ -97,5 +106,9 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
 
     this.allCitiesList = this._createArrOfUniqueValues(offers, 'city');
     this.filtersGroup.controls.city.patchValue(this.allCitiesList);
+  }
+
+  private _setCustomizedOffers(newCustomOffersList: IOffer[]): void {
+    this._store.dispatch(new SetCustomizedOffersAction(newCustomOffersList));
   }
 }

@@ -15,7 +15,8 @@ import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OffersListComponent extends AbstractSubscriber implements OnInit {
-  @Select(OffersState.getOffers)
+  // TODO figure out why cannot use this observbl direct in template
+  @Select(OffersState.getCustomizedOffers)
   readonly offers$: Observable<IOffer[]>;
   offersList: IOffer[];
 
@@ -28,9 +29,5 @@ export class OffersListComponent extends AbstractSubscriber implements OnInit {
     this._subscriber.add(
       this.offers$.subscribe(offersList => (this.offersList = offersList))
     );
-  }
-
-  handleNewOffersList(customOfferList: IOffer[]): void {
-    this.offersList = customOfferList;
   }
 }

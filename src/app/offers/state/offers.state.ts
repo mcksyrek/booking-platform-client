@@ -12,11 +12,13 @@ import {
   UpdateOfferAction,
   GetOfferByIdAction,
   UnselectOfferAction,
+  SetCustomizedOffersAction,
 } from './offers.actions';
 import { OffersService } from '../offers.service';
 
 export class OffersStateModel {
   offers?: IOffer[];
+  customizedOffers?: IOffer[];
   selectedOffer?: IOffer;
 }
 
@@ -33,6 +35,11 @@ export class OffersState {
   @Selector()
   static getOffers({ offers }: OffersStateModel): IOffer[] {
     return offers;
+  }
+
+  @Selector()
+  static getCustomizedOffers({ customizedOffers }: OffersStateModel): IOffer[] {
+    return customizedOffers;
   }
 
   @Selector()
@@ -111,5 +118,13 @@ export class OffersState {
   @Action(UnselectOfferAction)
   unselectOffer(ctx: StateContext<OffersStateModel>): void {
     ctx.setState(patch({ selectedOffer: null }));
+  }
+
+  @Action(SetCustomizedOffersAction)
+  setCustomizedOffers(
+    ctx: StateContext<OffersStateModel>,
+    { customizedOffersList }: SetCustomizedOffersAction
+  ): void {
+    ctx.patchState({ customizedOffers: [...customizedOffersList] });
   }
 }

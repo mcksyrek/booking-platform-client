@@ -31,3 +31,9 @@ export class UpdateOfferAction {
 export class UnselectOfferAction {
   static readonly type = '[Offers] Unselect offer';
 }
+
+export class SetCustomizedOffersAction {
+  static readonly type = '[Offers] Set customized offers list';
+
+  constructor(public readonly customizedOffersList: IOffer[]) {}
+}

@@ -4,10 +4,7 @@
   </mat-toolbar>
 
   <mat-toolbar>
-    <booking-toolbar
-      class="offers__toolbar"
-      (setOffersList)="handleNewOffersList($event)"
-    ></booking-toolbar>
+    <booking-toolbar class="offers__toolbar"></booking-toolbar>
   </mat-toolbar>
 
   <ul class="offers__list" *ngIf="offers$ | async; else loading">
