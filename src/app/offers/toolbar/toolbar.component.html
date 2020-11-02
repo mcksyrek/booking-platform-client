@@ -18,7 +18,7 @@
     <mat-form-field formGroupName="filters">
       <mat-label>filter by categories</mat-label>
       <mat-select
-        formControlName="categories"
+        formControlName="category"
         multiple
         [value]="allCategoriesList"
       >
@@ -34,7 +34,7 @@
   <section class="offers-toolbar__section">
     <mat-form-field formGroupName="filters">
       <mat-label>filter by cities</mat-label>
-      <mat-select formControlName="cities" multiple [value]="allCitiesList">
+      <mat-select formControlName="city" multiple [value]="allCitiesList">
         <mat-option *ngFor="let city of allCitiesList" [value]="city">{{
           city
         }}</mat-option>
