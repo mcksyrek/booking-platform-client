@@ -3,9 +3,7 @@
     <h1 class="offers__title">All offers</h1>
   </mat-toolbar>
 
-  <mat-toolbar>
-    <booking-toolbar class="offers__toolbar"></booking-toolbar>
-  </mat-toolbar>
+  <booking-toolbar class="offers__toolbar"></booking-toolbar>
 
   <ul class="offers__list" *ngIf="offers$ | async; else loading">
     <ng-container *ngIf="offersList.length !== 0; else noOffers">

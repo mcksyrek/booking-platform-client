@@ -1,7 +1,23 @@
+@import 'src/styles/_mixins';
 .offers-toolbar {
   display: flex;
 
   &__section {
-    width: 30%;
+    padding: 0.5rem 2rem 0 2rem;
+  }
+
+  @include medium-width {
+    justify-content: space-around;
+    &__section {
+      padding: 0;
+    }
+  }
+  @include small-width {
+    flex-direction: column;
+    padding: 0 5vw;
+
+    ::ng-deep .mat-form-field-infix {
+      width: 90vw !important;
+    }
   }
 }
