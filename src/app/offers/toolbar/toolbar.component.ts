@@ -23,10 +23,6 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   readonly allOffers$: Observable<IOffer[]>;
   allOffersList: IOffer[];
 
-  @Select(OffersState.getCustomizedOffers)
-  readonly customizedOffersList$: Observable<IOffer[]>;
-  customizedOffersList: IOffer[];
-
   readonly sortingTypes = Object.values(SortingTypesEnum);
 
   readonly toolbarForm: FormGroup;
@@ -55,19 +51,12 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
 
         this._setUniqueFilters(offers);
         this._setCustomizedOffers(
-          sortOffers(this.toolbarForm.value.sort, offers)
+          sortOffers(this.toolbarForm.value.sort, this._combinedFilters())
         );
       }),
 
-      this.customizedOffersList$.subscribe(
-        customizedOffersList =>
-          (this.customizedOffersList = customizedOffersList)
-      ),
-
       this.toolbarForm.controls.sort.valueChanges.subscribe(sortType =>
-        this._setCustomizedOffers(
-          sortOffers(sortType, this.customizedOffersList)
-        )
+        this._setCustomizedOffers(sortOffers(sortType, this._combinedFilters()))
       ),
 
       this.filtersGroup.valueChanges.subscribe(() =>
