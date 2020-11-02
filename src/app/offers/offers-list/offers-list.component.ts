@@ -15,9 +15,10 @@ import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OffersListComponent extends AbstractSubscriber implements OnInit {
-  // TODO figure out why cannot use this observbl direct in template
   @Select(OffersState.getCustomizedOffers)
   readonly offers$: Observable<IOffer[]>;
+  // TODO figure out why cannot use Observable directly in template
+
   offersList: IOffer[];
 
   constructor(private _store: Store) {

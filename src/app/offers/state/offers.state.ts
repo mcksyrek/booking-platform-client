@@ -125,6 +125,6 @@ export class OffersState {
     ctx: StateContext<OffersStateModel>,
     { customizedOffersList }: SetCustomizedOffersAction
   ): void {
-    ctx.patchState({ customizedOffers: [...customizedOffersList] });
+    ctx.patchState({ customizedOffers: customizedOffersList });
   }
 }
