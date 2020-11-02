@@ -8,7 +8,7 @@ export abstract class AbstractSubscriber implements OnDestroy {
     this._subscriber.unsubscribe();
   }
 
-  protected addSubscriptions(...subscriptions: Subscription[]): void {
+  protected addSubscriptions(subscriptions: Subscription[]): void {
     subscriptions.forEach(subscription => this._subscriber.add(subscription));
   }
 }

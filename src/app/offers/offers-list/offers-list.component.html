@@ -3,12 +3,18 @@
     <h1 class="offers__title">All offers</h1>
   </mat-toolbar>
 
-  <ul class="offers__list" *ngIf="offers$ | async as offers; else loading">
-    <ng-container *ngIf="offers.length !== 0; else noOffers">
+  <mat-toolbar>
+    <booking-toolbar
+      (setOffersList)="handleNewOffersList($event)"
+    ></booking-toolbar>
+  </mat-toolbar>
+
+  <ul class="offers__list" *ngIf="offers$ | async; else loading">
+    <ng-container *ngIf="offersList.length !== 0; else noOffers">
       <booking-offer-card
         li
         class="offers__item"
-        *ngFor="let offer of offers"
+        *ngFor="let offer of offersList"
         [offer]="offer"
       ></booking-offer-card>
     </ng-container>

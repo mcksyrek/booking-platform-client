@@ -1,0 +1,15 @@
+<article [formGroup]="toolbarForm">
+  <section>
+    <span>Sort by:</span>
+    <mat-form-field>
+      <mat-select formControlName="sort">
+        <mat-option
+          *ngFor="let sortingType of sortingTypes"
+          [value]="sortingType"
+        >
+          {{ sortingType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+</article>
