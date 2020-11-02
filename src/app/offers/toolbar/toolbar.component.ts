@@ -5,7 +5,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { SortingTypesEnum } from '@booking/shared/enums';
 import { sortOffers } from '@booking/shared/utils/';
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
+import { filterOffersByAttribute } from '@booking/shared/utils';
 
 @Component({
   selector: 'booking-toolbar',
@@ -28,31 +29,60 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   readonly allOffers$: Observable<IOffer[]>;
   readonly sortingTypes = Object.values(SortingTypesEnum);
   readonly toolbarForm: FormGroup;
+  readonly filtersGroup: FormGroup;
+  readonly categoriesFilter: FormControl;
   allOffersList: IOffer[];
-  cities = new Set<string>();
-  categories = new Set<string>();
+  allCategoriesList: string[];
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder) {
     super();
-    this.toolbarForm = formBuilder.group({
+    this.toolbarForm = _formBuilder.group({
       sort: [this.sortingTypes[0]],
+      filters: this._formBuilder.group({
+        categories: [],
+      }),
     });
+
+    this.filtersGroup = this.toolbarForm.controls.filters as FormGroup;
+    this.categoriesFilter = this.filtersGroup.controls
+      .categories as FormControl;
   }
 
   ngOnInit(): void {
     this.addSubscriptions([
       this.allOffers$.pipe(filter(offers => !!offers)).subscribe(offers => {
         this.allOffersList = sortOffers(this.toolbarForm.value.sort, offers);
-        offers.map(offer => this._createFilterCategories(offer));
+        this.allCategoriesList = this._createArrOfUniqueValues(
+          offers,
+          'category'
+        );
+        this.categoriesFilter.patchValue(this.allCategoriesList);
       }),
+
       this.toolbarForm.controls.sort.valueChanges.subscribe(sortType =>
         this.setOffersList.emit(sortOffers(sortType, this.allOffersList))
+      ),
+
+      this.categoriesFilter.valueChanges.subscribe(selectedCategories =>
+        this.setOffersList.emit(
+          filterOffersByAttribute(
+            'category',
+            selectedCategories,
+            this.allOffersList
+          )
+        )
       ),
     ]);
   }
 
-  private _createFilterCategories(offer: IOffer): void {
-    this.cities.add(offer.city);
-    this.categories.add(offer.category);
+  private _createArrOfUniqueValues(
+    offersArray: IOffer[],
+    attribute: string
+  ): string[] {
+    const valuesSet = offersArray.reduce((valuesAcc, currOffer) => {
+      return valuesAcc.add(currOffer[attribute]);
+    }, new Set<string>());
+
+    return Array.from(valuesSet);
   }
 }

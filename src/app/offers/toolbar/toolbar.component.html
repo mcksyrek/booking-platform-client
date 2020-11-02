@@ -1,7 +1,8 @@
-<article [formGroup]="toolbarForm">
-  <section>
-    <span>Sort by:</span>
-    <mat-form-field>
+<article [formGroup]="toolbarForm" class="offers-toolbar">
+  <section class="offers-toolbar__section">
+    <mat-form-field class="offers-toolbar__input">
+      <mat-label>sort by</mat-label>
+
       <mat-select formControlName="sort">
         <mat-option
           *ngFor="let sortingType of sortingTypes"
@@ -9,6 +10,23 @@
         >
           {{ sortingType }}
         </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <section class="offers-toolbar__section">
+    <mat-form-field formGroupName="filters">
+      <mat-label>filter by categories</mat-label>
+      <mat-select
+        formControlName="categories"
+        multiple
+        [value]="allCategoriesList"
+      >
+        <mat-option
+          *ngFor="let category of allCategoriesList"
+          [value]="category"
+          >{{ category }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
   </section>
