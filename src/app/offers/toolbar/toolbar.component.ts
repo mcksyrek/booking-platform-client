@@ -9,7 +9,7 @@ import { SortingTypesEnum } from '@booking/shared/enums';
 import { sortOffers } from '@booking/shared/utils/';
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
-import { filterOffersByAttribute } from '@booking/shared/utils';
+import { filterObjectsListByAttributeValue } from '@booking/shared/utils';
 import { SetCustomizedOffersAction } from '../state/offers.actions';
 
 @Component({
@@ -79,7 +79,7 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   private _combinedFilters(): IOffer[] {
     return Object.keys(this.filtersGroup.value).reduce(
       (filteredOffers, filterType) => {
-        return filterOffersByAttribute(
+        return filterObjectsListByAttributeValue(
           filterType,
           this.filtersGroup.value[filterType],
           filteredOffers

@@ -1,9 +1,9 @@
-import { IOffer } from '@booking/offers/offer.interface';
-
-export function filterOffersByAttribute(
+export function filterObjectsListByAttributeValue<T>(
   attribute: string,
-  allowedValues: string[],
-  offersList: IOffer[]
-): IOffer[] {
-  return offersList.filter(offer => allowedValues.includes(offer[attribute]));
+  allowedAttributeValues: string[],
+  objectsList: T[]
+): T[] {
+  return objectsList.filter(object =>
+    allowedAttributeValues.includes(object[attribute])
+  );
 }
