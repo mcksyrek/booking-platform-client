@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
-import { SortingTypesEnum } from '@booking/shared/enums';
+import { SortingTypes } from '@booking/shared/enums';
 import { sortOffers } from '@booking/shared/utils/';
 import { OffersState } from '../state/offers.state';
 import { IOffer } from '../offer.interface';
@@ -23,7 +23,7 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   readonly allOffers$: Observable<IOffer[]>;
   allOffersList: IOffer[];
 
-  readonly sortingTypes = Object.values(SortingTypesEnum);
+  readonly sortingTypes = Object.values(SortingTypes);
 
   readonly toolbarForm: FormGroup;
   readonly filtersGroup: FormGroup;

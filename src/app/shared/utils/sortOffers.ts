@@ -1,11 +1,11 @@
 import { IOffer } from '@booking/offers/offer.interface';
-import { SortingTypesEnum } from '@booking/shared/enums/';
+import { SortingTypes } from '@booking/shared/enums/';
 
 export function sortOffers(sortType: string, offerList: IOffer[]): IOffer[] {
   switch (sortType) {
-    case SortingTypesEnum.Category:
-    case SortingTypesEnum.City:
-    case SortingTypesEnum.Name:
+    case SortingTypes.Category:
+    case SortingTypes.City:
+    case SortingTypes.Name:
       return sortByAttributeValue<IOffer>(sortType)(offerList);
 
     default:
