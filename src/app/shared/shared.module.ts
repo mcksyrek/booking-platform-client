@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { IconModule } from './icon.module';
 
@@ -37,11 +39,14 @@ const MATERIAL_MODULES: any[] = [
   MatSelectModule,
   MatRippleModule,
   MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, ...ANGULAR_MODULES, ...MATERIAL_MODULES, IconModule],
   exports: [CommonModule, ...ANGULAR_MODULES, ...MATERIAL_MODULES, IconModule],
+  providers: [MatDatepickerModule],
 })
 export class SharedModule {}
