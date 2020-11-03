@@ -38,6 +38,7 @@
       class="offer-display__list--right"
       [parentForm]="null"
       [productsList]="selectedOffer.products"
+      (selectProduct)="handleSelectedProduct($event)"
     ></booking-products-list>
   </article>
 </main>

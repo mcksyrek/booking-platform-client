@@ -10,6 +10,7 @@ import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { OfferDisplayComponent } from './offer-display/offer-display.component';
+import { SelectProductComponent } from './select-product/select-product.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { OfferDisplayComponent } from './offer-display/offer-display.component';
     OfferCardComponent,
     ProductsListComponent,
     OfferDisplayComponent,
+    SelectProductComponent,
   ],
   imports: [
     CommonModule,

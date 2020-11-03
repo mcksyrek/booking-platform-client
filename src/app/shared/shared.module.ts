@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { IconModule } from './icon.module';
 
@@ -35,6 +36,7 @@ const MATERIAL_MODULES: any[] = [
   MatInputModule,
   MatSelectModule,
   MatRippleModule,
+  MatDialogModule,
 ];
 
 @NgModule({

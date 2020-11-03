@@ -1,0 +1,13 @@
+<article class="select-product">
+  <h2 mat-dialog-title>{{ product.name }}</h2>
+  <mat-dialog-content class="mat-typography select-product__column">
+    <section class="select-product__column--left"></section>
+    <section class="select-product__column--right"></section>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+      Book service
+    </button>
+  </mat-dialog-actions>
+</article>
