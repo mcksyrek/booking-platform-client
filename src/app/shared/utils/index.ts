@@ -1,2 +1,1 @@
-export * from './sortOffers';
-export * from './filterOffers';
+export * from './comparators';
