@@ -33,15 +33,12 @@ import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber'
 })
 export class OfferFormComponent extends AbstractSubscriber
   implements OnInit, OnDestroy {
-  @Output() readonly submitForm = new EventEmitter<IOffer>();
   @Select(OffersState.getSelectedOffer)
   readonly selectedOffer$: Observable<IOffer>;
-
   readonly offerForm: FormGroup;
   readonly categories = OFFER_CATEGORIES;
   readonly selectedOfferId: number;
-
-  readonly productsArray: FormArray;
+  readonly productsFormArray: FormArray;
 
   get disabledSubmit(): boolean {
     return !this.offerForm.valid;
@@ -61,20 +58,43 @@ export class OfferFormComponent extends AbstractSubscriber
     }
 
     this.offerForm = _formBuilder.group({
-      // TODO add validators
       id: [''],
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(50),
+        ],
+      ],
       author: ['', Validators.required],
       address: ['', Validators.required],
-      city: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      postalCode: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(6),
+          Validators.pattern(/\d{2}-\d{3}/),
+        ],
+      ],
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{9}$/)],
+      ],
       category: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(20),
+          Validators.maxLength(255),
+        ],
+      ],
       products: _formBuilder.array([]),
     });
 
-    this.productsArray = this.offerForm.controls.products as FormArray;
+    this.productsFormArray = this.offerForm.controls.products as FormArray;
   }
 
   ngOnInit(): void {
@@ -111,11 +131,11 @@ export class OfferFormComponent extends AbstractSubscriber
 
   addProduct(): void {
     const emptyProduct: IProduct = { name: '', duration: null, price: null };
-    this.productsArray.push(this._buildProductGroup(emptyProduct));
+    this.productsFormArray.push(this._buildProductGroup(emptyProduct));
   }
 
   removeProduct(index: number): void {
-    this.productsArray.removeAt(index);
+    this.productsFormArray.removeAt(index);
   }
 
   private _setOfferForm(offerData: IOffer): void {
@@ -124,7 +144,7 @@ export class OfferFormComponent extends AbstractSubscriber
 
     this.offerForm.patchValue(offerData);
     products.forEach(product =>
-      this.productsArray.push(this._buildProductGroup(product))
+      this.productsFormArray.push(this._buildProductGroup(product))
     );
   }
 

@@ -6,14 +6,10 @@ import {
   StateOperator,
 } from '@ngxs/store';
 import { Injectable } from '@angular/core';
+import { patch } from '@ngxs/store/operators';
 
 import { ToggleMenuAction } from './layout.actions';
-
-function toggleMenuOperator(): StateOperator<LayoutStateModel> {
-  return (state: Readonly<LayoutStateModel>) => {
-    return { ...state, toggleMenu: !state.toggleMenu };
-  };
-}
+import { toggle } from '@booking/shared/store/operators';
 
 export class LayoutStateModel {
   toggleMenu: boolean;
@@ -32,6 +28,10 @@ export class LayoutState {
 
   @Action(ToggleMenuAction)
   toggleMenu(ctx: StateContext<LayoutStateModel>): void {
-    ctx.setState(toggleMenuOperator());
+    ctx.setState(
+      patch({
+        toggleMenu: toggle(),
+      })
+    );
   }
 }

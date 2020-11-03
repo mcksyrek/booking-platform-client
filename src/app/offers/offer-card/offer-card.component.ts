@@ -20,11 +20,8 @@ export class OfferCardComponent {
     return `/${ICON_PATH}/${this.offer.category}.svg`;
   }
 
-  getRedirectLink(): string {
-    return `${Endpoints.Offers}/${this.offer.id}`;
-  }
-
   redirectToOffer(): void {
-    this._router.navigateByUrl(this.getRedirectLink());
+    const offerLink = `${Endpoints.Offers}/${this.offer.id}`;
+    this._router.navigateByUrl(offerLink);
   }
 }

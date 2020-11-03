@@ -9,7 +9,7 @@ import {
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { IProduct } from '../offer.interface';
-import { DURATION_HOURS } from '@booking/shared/constants/numeric.constants';
+import { DURATION_HOURS } from '@booking/shared/constants';
 
 @Component({
   selector: 'booking-products-list',

@@ -7,7 +7,7 @@
 </mat-toolbar>
 
 <form class="offer-form" [formGroup]="offerForm">
-  <article class="offer-form__column--wrapper">
+  <article class="offer-form__column">
     <figure class="offer-form__column--left">
       <mat-form-field class="offer-form__input--wide">
         <mat-label>New offer name</mat-label>
@@ -54,13 +54,10 @@
       </mat-form-field>
     </figure>
 
-    <!-- <mat-divider [vertical]="true"></mat-divider> -->
-
     <figure class="offer-form__column--right">
-      <!-- <h2>List offered services here:</h2> -->
       <booking-products-list
-        [parentForm]="null"
-        [productsList]="productsArray.valueChanges | async"
+        [parentForm]="offerForm"
+        [productsList]="productsFormArray.valueChanges | async"
         (removeProduct)="removeProduct($event)"
         (addProduct)="addProduct()"
       ></booking-products-list>
