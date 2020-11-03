@@ -45,7 +45,7 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addSubscriptions([
+    this.addSubscriptions(
       this.allOffers$.pipe(filter(offers => !!offers)).subscribe(offers => {
         this.allOffersList = offers;
 
@@ -61,8 +61,8 @@ export class ToolbarComponent extends AbstractSubscriber implements OnInit {
 
       this.filtersGroup.valueChanges.subscribe(() =>
         this._setCustomizedOffers(this._combinedFilters())
-      ),
-    ]);
+      )
+    );
   }
 
   private _createArrOfUniqueValues(
