@@ -76,8 +76,12 @@ export class OffersService {
     allowedAttributeValues: string[],
     objectsList: T[]
   ): T[] {
+    const uniqueAttributes = new Set();
+    allowedAttributeValues.forEach(attributeValue =>
+      uniqueAttributes.add(attributeValue)
+    );
     return objectsList.filter(object =>
-      allowedAttributeValues.includes(object[attribute])
+      Array.from(uniqueAttributes).includes(object[attribute])
     );
   }
 }
