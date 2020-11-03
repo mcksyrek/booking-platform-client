@@ -45,9 +45,8 @@
   </button>
 </article>
 
-<!-- below is template prepared to use that component also for displaying offer for client -->
 <ng-template #nonEditableList>
-  <h4>List of services in chosen offer:</h4>
+  <h4>List of offered services:</h4>
   <article *ngFor="let product of productsList">
     <mat-card class="products-list__card">
       <h4 class="products-list__section--wide card-title">
