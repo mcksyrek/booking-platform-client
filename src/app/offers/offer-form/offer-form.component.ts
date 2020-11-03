@@ -10,7 +10,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { IOffer, IProduct } from '../offer.interface';
 import { OFFER_CATEGORIES } from '@booking/shared/constants/categories.constant';
@@ -19,7 +19,6 @@ import {
   GetOfferByIdAction,
   UpdateOfferAction,
   AddOfferAction,
-  UnselectOfferAction,
 } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
 import { Routes } from '@booking/shared/enums/index';
@@ -100,13 +99,14 @@ export class OfferFormComponent extends AbstractSubscriber
   ngOnInit(): void {
     this._subscriber.add(
       this.selectedOffer$
-        .pipe(filter(selectedOfferData => !!selectedOfferData))
+        .pipe(
+          map(selectedOfferData => {
+            return this.selectedOfferId ? selectedOfferData : null;
+          }),
+          filter(selectedOfferData => !!selectedOfferData)
+        )
         .subscribe(offerData => this._setOfferForm(offerData))
     );
-  }
-
-  ngOnDestroy(): void {
-    this._store.dispatch(new UnselectOfferAction());
   }
 
   onSubmit(): void {

@@ -27,7 +27,3 @@ export class UpdateOfferAction {
 
   constructor(public readonly updatedOffer: IOffer) {}
 }
-
-export class UnselectOfferAction {
-  static readonly type = '[Offers] Unselect offer';
-}
