@@ -62,6 +62,4 @@ describe('ToolbarComponent', () => {
       ).toBeGreaterThan(1);
     });
   });
-
-  describe('#_createArrOfUniqueValues', () => {});
 });
