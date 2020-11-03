@@ -9,6 +9,7 @@ import { OffersState } from './state/offers.state';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
 import { ProductsListComponent } from './products-list/products-list.component';
+import { OfferDisplayComponent } from './offer-display/offer-display.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
     OffersListComponent,
     OfferCardComponent,
     ProductsListComponent,
+    OfferDisplayComponent,
   ],
   imports: [
     CommonModule,
