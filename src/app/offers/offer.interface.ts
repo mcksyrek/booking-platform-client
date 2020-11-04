@@ -21,6 +21,6 @@ export interface IProduct {
 export interface IReservation {
   product: string;
   hour: number;
-  duration: number;
+  duration?: number;
   date?: string;
 }

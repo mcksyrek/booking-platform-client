@@ -53,12 +53,9 @@ export class OfferDisplayComponent extends AbstractSubscriber {
           switchMap(({ duration, date, hour, product }: IReservation) => {
             return this._offersService.postNewReservation(
               date,
+              duration.toString(),
               this.selectedOfferId.toString(),
-              {
-                duration,
-                hour,
-                product,
-              }
+              { hour, product }
             );
           })
         )
