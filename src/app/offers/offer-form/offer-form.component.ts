@@ -66,7 +66,8 @@ export class OfferFormComponent extends AbstractSubscriber
           Validators.maxLength(50),
         ],
       ],
-      author: ['', Validators.required],
+      // TODO set author from session data
+      author: [''],
       address: ['', Validators.required],
       city: ['', [Validators.required, Validators.maxLength(50)]],
       postalCode: [
@@ -107,6 +108,10 @@ export class OfferFormComponent extends AbstractSubscriber
         )
         .subscribe(offerData => this._setOfferForm(offerData))
     );
+
+    this.offerForm.valueChanges.subscribe(() => {
+      console.log(this.offerForm.controls);
+    });
   }
 
   onSubmit(): void {
