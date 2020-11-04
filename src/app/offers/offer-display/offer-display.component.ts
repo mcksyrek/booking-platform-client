@@ -35,10 +35,10 @@ export class OfferDisplayComponent {
   }
 
   handleSelectedProduct(product: IProduct): void {
-    // alert('received');
     const dialogRef = this._dialog.open(SelectProductComponent, {
       data: {
         product,
+        offerId: this.selectedOfferId,
       },
     });
     dialogRef.afterClosed().subscribe(result => {

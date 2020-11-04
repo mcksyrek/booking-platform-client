@@ -9,9 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IProduct } from '../offer.interface';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
-import { map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { MOCK_SERVER_RES, STATIC_AVALIABLE_HOURS } from './constants';
+import { OffersService } from '../offers.service';
+import { dateFormatter } from '@booking/shared/utils';
 
 @Component({
   selector: 'booking-select-product',
@@ -25,6 +26,8 @@ export class SelectProductComponent extends AbstractSubscriber
   readonly selectDateForm: FormGroup;
   readonly staticAvaliableHours = STATIC_AVALIABLE_HOURS;
   readonly bookedHours = MOCK_SERVER_RES;
+  readonly offerId: string;
+  readonly currentDate = new Date();
 
   avaliableHours: string[];
 
@@ -34,13 +37,16 @@ export class SelectProductComponent extends AbstractSubscriber
 
   constructor(
     formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) data: { product: IProduct }
+    private _offersService: OffersService,
+    @Inject(MAT_DIALOG_DATA) data: { product: IProduct; offerId: number }
   ) {
     super();
     this.product = data.product;
+    this.offerId = data.offerId.toString();
     this.selectDateForm = formBuilder.group({
       selectedDate: ['', Validators.required],
       selectedHour: ['', Validators.required],
+      duration: [data.product.duration, Validators.required],
     });
   }
 
@@ -48,9 +54,12 @@ export class SelectProductComponent extends AbstractSubscriber
     this._subscriber.add(
       this.selectDateForm.controls.selectedDate.valueChanges
         .pipe(
-          switchMap(selectedDate => {
-            // TODO HTTPReq here
-            return of(this.bookedHours);
+          map(dateObject => dateFormatter(dateObject)),
+          switchMap(formattedDate => {
+            return this._offersService.getReservedTerms(
+              formattedDate,
+              this.offerId
+            );
           }),
           map(bookedHours => new Set(bookedHours))
         )
