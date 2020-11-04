@@ -3,12 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ICON_PATH } from '@booking/shared/constants';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { IOffer, IProduct } from '../offer.interface';
+import { IOffer, IProduct, IReservation } from '../offer.interface';
 import { MatDialog } from '@angular/material/dialog';
 
 import { GetOfferByIdAction } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
 import { SelectProductComponent } from '../select-product/select-product.component';
+import { OffersService } from '../offers.service';
+import { switchMap } from 'rxjs/operators';
+import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 
 @Component({
   selector: 'booking-offer-display',
@@ -16,7 +19,7 @@ import { SelectProductComponent } from '../select-product/select-product.compone
   styleUrls: ['./offer-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferDisplayComponent {
+export class OfferDisplayComponent extends AbstractSubscriber {
   @Select(OffersState.getSelectedOffer)
   readonly selectedOfferData$: Observable<IOffer>;
   readonly selectedOfferId: number;
@@ -24,8 +27,10 @@ export class OfferDisplayComponent {
   constructor(
     private _store: Store,
     activatedRoute: ActivatedRoute,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _offersService: OffersService
   ) {
+    super();
     this.selectedOfferId = activatedRoute.snapshot.params.id;
     this._store.dispatch(new GetOfferByIdAction(this.selectedOfferId));
   }
@@ -34,15 +39,30 @@ export class OfferDisplayComponent {
     return `/${ICON_PATH}/${category}.svg`;
   }
 
-  handleSelectedProduct(product: IProduct): void {
+  handleSelectedProduct(selectedProduct: IProduct): void {
     const dialogRef = this._dialog.open(SelectProductComponent, {
       data: {
-        product,
+        product: selectedProduct,
         offerId: this.selectedOfferId,
       },
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this._subscriber.add(
+      dialogRef
+        .afterClosed()
+        .pipe(
+          switchMap(({ duration, date, hour, product }: IReservation) => {
+            return this._offersService.postNewReservation(
+              date,
+              this.selectedOfferId.toString(),
+              {
+                duration,
+                hour,
+                product,
+              }
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 }

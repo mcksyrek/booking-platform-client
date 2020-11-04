@@ -17,3 +17,10 @@ export interface IProduct {
   duration: number;
   price: number;
 }
+
+export interface IReservation {
+  product: string;
+  hour: number;
+  duration: number;
+  date?: string;
+}

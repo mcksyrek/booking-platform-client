@@ -7,7 +7,7 @@ import {
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { IProduct } from '../offer.interface';
+import { IProduct, IReservation } from '../offer.interface';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { MOCK_SERVER_RES, STATIC_AVALIABLE_HOURS } from './constants';
@@ -28,6 +28,8 @@ export class SelectProductComponent extends AbstractSubscriber
   readonly bookedHours = MOCK_SERVER_RES;
   readonly offerId: string;
   readonly currentDate = new Date();
+  readonly duration: number;
+  readonly productName: string;
 
   avaliableHours: string[];
 
@@ -43,10 +45,11 @@ export class SelectProductComponent extends AbstractSubscriber
     super();
     this.product = data.product;
     this.offerId = data.offerId.toString();
+    this.duration = data.product.duration;
+    this.productName = data.product.name;
     this.selectDateForm = formBuilder.group({
       selectedDate: ['', Validators.required],
       selectedHour: ['', Validators.required],
-      duration: [data.product.duration, Validators.required],
     });
   }
 
@@ -79,6 +82,16 @@ export class SelectProductComponent extends AbstractSubscriber
     this.selectDateForm.controls.selectedHour.setValue(hour);
   }
 
+  createReservation(): IReservation {
+    const { selectedDate, selectedHour } = this.selectDateForm.value;
+    return {
+      product: this.productName,
+      hour: this._mapHourStringToNumber(selectedHour),
+      duration: this.duration,
+      date: dateFormatter(selectedDate),
+    };
+  }
+
   private _checkHoursDuration(
     duration: number,
     hoursToCheck: number[]
@@ -109,5 +122,9 @@ export class SelectProductComponent extends AbstractSubscriber
 
   private _mapNumberToHourString(hour: number): string {
     return `${hour}:00`;
+  }
+
+  private _mapHourStringToNumber(hourString: string): number {
+    return parseInt(hourString.split(':')[0], 10);
   }
 }
