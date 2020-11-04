@@ -84,6 +84,9 @@ export class SelectProductComponent extends AbstractSubscriber
 
   createReservation(): IReservation {
     const { selectedDate, selectedHour } = this.selectDateForm.value;
+    if (!selectedDate) {
+      return null;
+    }
     return {
       product: this.productName,
       hour: this._mapHourStringToNumber(selectedHour),
