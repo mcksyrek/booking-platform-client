@@ -24,12 +24,13 @@ export class ProductsListComponent implements OnInit {
 
   @Output() readonly removeProduct = new EventEmitter<number>();
   @Output() readonly addProduct = new EventEmitter<null>();
+  @Output() readonly selectProduct = new EventEmitter<IProduct>();
 
   productsArray: FormArray;
   readonly hours = DURATION_HOURS;
 
   ngOnInit(): void {
-    this.productsArray = this.parentForm.controls.products as FormArray;
+    this.productsArray = this.parentForm?.controls.products as FormArray;
   }
 
   addNewProduct(): void {
@@ -38,5 +39,9 @@ export class ProductsListComponent implements OnInit {
 
   deleteProduct(index: number): void {
     this.removeProduct.emit(index);
+  }
+
+  handleSelectedProduct(product: IProduct): void {
+    this.selectProduct.emit(product);
   }
 }

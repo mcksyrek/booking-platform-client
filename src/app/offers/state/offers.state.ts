@@ -11,7 +11,6 @@ import {
   DeleteOfferAction,
   UpdateOfferAction,
   GetOfferByIdAction,
-  UnselectOfferAction,
   SetCustomizedOffersAction,
 } from './offers.actions';
 import { OffersService } from '../offers.service';
@@ -113,11 +112,6 @@ export class OffersState {
         )
       )
     );
-  }
-
-  @Action(UnselectOfferAction)
-  unselectOffer(ctx: StateContext<OffersStateModel>): void {
-    ctx.setState(patch({ selectedOffer: null }));
   }
 
   @Action(SetCustomizedOffersAction)

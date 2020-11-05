@@ -1,0 +1,46 @@
+@import 'src/styles/_mixins';
+
+.offer-display {
+  &__list {
+    margin: 0;
+    width: 95%;
+    display: flex;
+
+    &--left {
+      margin: 1% 3%;
+    }
+
+    &--right,
+    &--left {
+      width: 50%;
+    }
+
+    @include medium-width {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      &--right,
+      &--left {
+        width: 90%;
+      }
+
+      &--left {
+        margin: 0;
+      }
+    }
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item--label {
+    padding-right: 0.5rem;
+  }
+
+  &__item--content {
+    margin: 0.5rem 0;
+  }
+}

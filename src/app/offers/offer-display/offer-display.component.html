@@ -1,0 +1,50 @@
+<main class="offer-display" *ngIf="selectedOfferData$ | async as selectedOffer">
+  <mat-toolbar>
+    <h1>{{ selectedOffer.name }}</h1>
+  </mat-toolbar>
+  <article class="offer-display__list">
+    <figure class="offer-display__list--left">
+      <mat-card>
+        <mat-card-header>
+          <img mat-card-avatar [src]="getSource(selectedOffer.category)" />
+          <mat-card-title>{{ selectedOffer.name }}</mat-card-title>
+          <mat-card-subtitle>{{ selectedOffer.author }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <section class="offer-display__section">
+          <label class="offer-display__item--label">Address: </label>
+          <p class="offer-display__item--content">
+            {{ selectedOffer.address }}, {{ selectedOffer.city }},
+            {{ selectedOffer.postalCode }}
+          </p>
+        </section>
+
+        <section class="offer-display__section">
+          <label class="offer-display__item--label">Contact number: </label>
+          <p class="offer-display__item--content">
+            +48 {{ selectedOffer.phoneNumber }}
+          </p>
+        </section>
+
+        <section class="offer-display__section">
+          <label class="offer-display__item--label">Offer category:</label>
+          <p class="offer-display__item--content">
+            {{ selectedOffer.category }}
+          </p>
+        </section>
+
+        <section class="offer-display__section">
+          <p class="offer-display__item--content">
+            {{ selectedOffer.description }}
+          </p>
+        </section>
+      </mat-card>
+    </figure>
+    <booking-products-list
+      class="offer-display__list--right"
+      [parentForm]="null"
+      [productsList]="selectedOffer.products"
+      (selectProduct)="handleSelectedProduct($event)"
+    ></booking-products-list>
+  </article>
+</main>

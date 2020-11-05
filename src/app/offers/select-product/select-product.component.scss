@@ -1,0 +1,21 @@
+@import 'src/styles/_mixins';
+
+.select-product {
+  &__hour-input,
+  &__date-input {
+    width: 300px;
+  }
+
+  &__hour-input {
+    ::ng-deep .mat-form-field-infix {
+      width: 100%;
+    }
+  }
+
+  @include small-width {
+    &__hour-input,
+    &__date-input {
+      width: 60vw;
+    }
+  }
+}

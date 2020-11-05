@@ -11,9 +11,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .card-title {
+      margin-bottom: 0px;
+    }
   }
 
-  &__input {
+  &__section {
     &--wide {
       width: 40%;
     }

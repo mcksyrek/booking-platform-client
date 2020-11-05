@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IOffer } from './offer.interface';
+import { IOffer, IReservation } from './offer.interface';
 import { Endpoints } from '@booking/shared/enums';
 import { environment } from '@booking/environments/environment';
 import { SortingTypes } from '@booking/shared/enums/';
@@ -48,6 +48,26 @@ export class OffersService {
     return this._http.put<IOffer>(
       `${environment.apiPrefix}${Endpoints.Offers}`,
       updatedOffer
+    );
+  }
+
+  getReservedTerms(date: string, id: string): Observable<number[]> {
+    return this._http.get<number[]>(
+      `${environment.apiPrefix}${Endpoints.Timetable}`,
+      { params: { date, id } }
+    );
+  }
+
+  postNewReservation(
+    date: string,
+    duration: string,
+    id: string,
+    reservation: IReservation
+  ): Observable<IReservation> {
+    return this._http.post<IReservation>(
+      `${environment.apiPrefix}${Endpoints.Timetable}`,
+      reservation,
+      { params: { date, duration, id } }
     );
   }
 
