@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { IOffer, IReservation } from './offer.interface';
 import { Endpoints } from '@booking/shared/enums';
 import { environment } from '@booking/environments/environment';
+import { SortingTypes } from '@booking/shared/enums/';
+import { localeComparator } from '@booking/shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +68,37 @@ export class OffersService {
       `${environment.apiPrefix}${Endpoints.Timetable}`,
       reservation,
       { params: { date, duration, id } }
+    );
+  }
+
+  sortOffers(sortType: string, offerList: IOffer[]): IOffer[] {
+    switch (sortType) {
+      case SortingTypes.Category:
+      case SortingTypes.City:
+      case SortingTypes.Name:
+        return this.sortByAttributeValue(sortType)(offerList);
+
+      default:
+        return offerList;
+    }
+  }
+
+  sortByAttributeValue(attribute: string): (objectList: IOffer[]) => IOffer[] {
+    return (objectList: IOffer[]): IOffer[] => [
+      ...objectList.sort((offer1, offer2) =>
+        localeComparator(offer1[attribute], offer2[attribute])
+      ),
+    ];
+  }
+
+  filterObjectsListByAttributeValue<T>(
+    attribute: string,
+    allowedAttributeValues: string[],
+    objectsList: T[]
+  ): T[] {
+    const uniqueAttributesValues = new Set(allowedAttributeValues);
+    return objectsList.filter(object =>
+      uniqueAttributesValues.has(object[attribute])
     );
   }
 }
