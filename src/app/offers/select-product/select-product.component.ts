@@ -77,10 +77,6 @@ export class SelectProductComponent extends AbstractSubscriber
     );
   }
 
-  selectHour(hour: string): void {
-    this.selectDateForm.controls.selectedHour.setValue(hour);
-  }
-
   createReservation(): IReservation {
     const { selectedDate, selectedHour } = this.selectDateForm.value;
     if (!selectedDate) {
