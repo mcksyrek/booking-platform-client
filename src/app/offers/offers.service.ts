@@ -76,12 +76,14 @@ export class OffersService {
     allowedAttributeValues: string[],
     objectsList: T[]
   ): T[] {
-    const uniqueAttributes = new Set();
-    allowedAttributeValues.forEach(attributeValue =>
-      uniqueAttributes.add(attributeValue)
-    );
+    // O(n)
+    const uniqueAttributesValues = new Set(allowedAttributeValues);
+    // O(n)
     return objectsList.filter(object =>
-      Array.from(uniqueAttributes).includes(object[attribute])
+      // usual case: O(1), worst case: O(n)
+      uniqueAttributesValues.has(object[attribute])
     );
+    // total O(2n) or O(n(n+1))
+    // may it be better?
   }
 }
