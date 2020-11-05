@@ -1,0 +1,23 @@
+<article class="registration">
+  <form
+    class="registration__form"
+    [formGroup]="registrationForm"
+    (ngSubmit)="submitForm()"
+  >
+    <h3>Create new account</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="login" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+    </mat-form-field>
+    <section class="registration__buttons-container">
+      <button mat-raised-button>Cancel</button>
+      <button mat-raised-button color="primary" [disabled]="disableSubmit">
+        Create
+      </button>
+    </section>
+  </form>
+</article>

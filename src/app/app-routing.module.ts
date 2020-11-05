@@ -6,6 +6,11 @@ import { LayoutComponent } from '@booking/layout/layout.component';
 const routes: Routes = [
   { path: '', redirectTo: 'offers', pathMatch: 'full' },
   {
+    path: 'auth',
+    loadChildren: () =>
+      import('@booking/auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
