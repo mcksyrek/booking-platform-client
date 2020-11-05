@@ -34,13 +34,13 @@
   &__section {
     display: flex;
     align-items: center;
+  }
 
-    label {
-      padding-right: 0.5rem;
-    }
+  &__item--label {
+    padding-right: 0.5rem;
+  }
 
-    p {
-      margin: 0.5rem 0;
-    }
+  &__item--content {
+    margin: 0.5rem 0;
   }
 }
