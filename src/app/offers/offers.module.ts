@@ -8,6 +8,7 @@ import { OfferFormComponent } from './offer-form/offer-form.component';
 import { OffersState } from './state/offers.state';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
     OfferFormComponent,
     OffersListComponent,
     OfferCardComponent,
+    ToolbarComponent,
     ProductsListComponent,
   ],
   imports: [
