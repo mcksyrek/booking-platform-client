@@ -52,9 +52,7 @@ export class OffersService {
   getReservedTerms(date: string, id: string): Observable<number[]> {
     return this._http.get<number[]>(
       `${environment.apiPrefix}${Endpoints.Timetable}`,
-      {
-        params: { date, id },
-      }
+      { params: { date, id } }
     );
   }
 

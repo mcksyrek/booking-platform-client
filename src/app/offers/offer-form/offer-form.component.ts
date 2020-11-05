@@ -108,10 +108,6 @@ export class OfferFormComponent extends AbstractSubscriber
         )
         .subscribe(offerData => this._setOfferForm(offerData))
     );
-
-    this.offerForm.valueChanges.subscribe(() => {
-      console.log(this.offerForm.controls);
-    });
   }
 
   onSubmit(): void {
