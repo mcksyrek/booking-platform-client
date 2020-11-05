@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IProduct, IReservation } from '../offer.interface';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { MOCK_SERVER_RES, STATIC_AVALIABLE_HOURS } from './constants';
+import { STATIC_AVALIABLE_HOURS } from './constants';
 import { OffersService } from '../offers.service';
 import { dateFormatter } from '@booking/shared/utils';
 
@@ -25,7 +25,6 @@ export class SelectProductComponent extends AbstractSubscriber
   readonly product: IProduct;
   readonly selectDateForm: FormGroup;
   readonly staticAvaliableHours = STATIC_AVALIABLE_HOURS;
-  readonly bookedHours = MOCK_SERVER_RES;
   readonly offerId: string;
   readonly currentDate = new Date();
   readonly duration: number;
