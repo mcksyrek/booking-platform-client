@@ -76,14 +76,9 @@ export class OffersService {
     allowedAttributeValues: string[],
     objectsList: T[]
   ): T[] {
-    // O(n)
     const uniqueAttributesValues = new Set(allowedAttributeValues);
-    // O(n)
     return objectsList.filter(object =>
-      // usual case: O(1), worst case: O(n)
       uniqueAttributesValues.has(object[attribute])
     );
-    // total O(2n) or O(n(n+1))
-    // may it be better?
   }
 }
