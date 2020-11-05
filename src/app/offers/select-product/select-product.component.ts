@@ -94,28 +94,19 @@ export class SelectProductComponent extends AbstractSubscriber
     duration: number,
     hoursToCheck: number[]
   ): string[] {
-    // O(1)
     const hoursToCheckLength = hoursToCheck.length;
-    // O(n)
     const hoursToCheckSet = new Set(hoursToCheck);
-
-    // O(n)
     return hoursToCheck.reduce((avaliableHours, hourToCheck, index) => {
-      // best case O(1)
       if (hoursToCheckLength - index - duration < 0) {
         return avaliableHours;
       }
-      // worst case - depends on duration so O(m)
       for (let i = 0; i < duration; i++) {
-        // O(1)
         if (!hoursToCheckSet.has(hourToCheck + i)) {
           return avaliableHours;
         }
       }
       return [...avaliableHours, this._mapNumberToHourString(hourToCheck)];
     }, []);
-    // total complexity: 0(1)+0(n)+0(n)*0(1 or m) => so best 0(2n) and worst O(n(1+m))
-    // fair enough?
   }
 
   private _mapNumberToHourString(hour: number): string {
