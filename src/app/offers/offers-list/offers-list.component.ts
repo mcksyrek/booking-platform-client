@@ -28,7 +28,9 @@ export class OffersListComponent extends AbstractSubscriber implements OnInit {
   ngOnInit(): void {
     this._store.dispatch(new GetOfferListAction());
     this._subscriber.add(
-      this.offers$.subscribe(offersList => (this.offersList = offersList))
+      this.offers$.subscribe(offersList => {
+        this.offersList = offersList;
+      })
     );
   }
 }
