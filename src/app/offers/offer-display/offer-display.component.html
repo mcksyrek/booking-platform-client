@@ -12,25 +12,31 @@
         </mat-card-header>
 
         <section class="offer-display__section">
-          <label>Address: </label>
-          <p>
+          <label class="offer-display__item--label">Address: </label>
+          <p class="offer-display__item--content">
             {{ selectedOffer.address }}, {{ selectedOffer.city }},
             {{ selectedOffer.postalCode }}
           </p>
         </section>
 
         <section class="offer-display__section">
-          <label>Contact number: </label>
-          <p>+48 {{ selectedOffer.phoneNumber }}</p>
+          <label class="offer-display__item--label">Contact number: </label>
+          <p class="offer-display__item--content">
+            +48 {{ selectedOffer.phoneNumber }}
+          </p>
         </section>
 
         <section class="offer-display__section">
-          <label>Offer category:</label>
-          <p>{{ selectedOffer.category }}</p>
+          <label class="offer-display__item--label">Offer category:</label>
+          <p class="offer-display__item--content">
+            {{ selectedOffer.category }}
+          </p>
         </section>
 
         <section class="offer-display__section">
-          <p>{{ selectedOffer.description }}</p>
+          <p class="offer-display__item--content">
+            {{ selectedOffer.description }}
+          </p>
         </section>
       </mat-card>
     </figure>

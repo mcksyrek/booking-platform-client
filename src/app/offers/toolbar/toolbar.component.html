@@ -1,0 +1,44 @@
+<article [formGroup]="toolbarForm" class="offers-toolbar">
+  <section class="offers-toolbar__section">
+    <mat-form-field class="offers-toolbar__input">
+      <mat-label>sort by</mat-label>
+
+      <mat-select formControlName="sort">
+        <mat-option
+          *ngFor="let sortingType of sortingTypes"
+          [value]="sortingType"
+        >
+          {{ sortingType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <section class="offers-toolbar__section">
+    <mat-form-field formGroupName="filters">
+      <mat-label>filter by categories</mat-label>
+      <mat-select
+        formControlName="category"
+        multiple
+        [value]="allCategoriesList"
+      >
+        <mat-option
+          *ngFor="let category of allCategoriesList"
+          [value]="category"
+          >{{ category | titlecase }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <section class="offers-toolbar__section">
+    <mat-form-field formGroupName="filters">
+      <mat-label>filter by cities</mat-label>
+      <mat-select formControlName="city" multiple [value]="allCitiesList">
+        <mat-option *ngFor="let city of allCitiesList" [value]="city">{{
+          city
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+</article>

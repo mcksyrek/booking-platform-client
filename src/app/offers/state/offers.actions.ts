@@ -27,3 +27,9 @@ export class UpdateOfferAction {
 
   constructor(public readonly updatedOffer: IOffer) {}
 }
+
+export class SetCustomizedOffersAction {
+  static readonly type = '[Offers] Set customized offers list';
+
+  constructor(public readonly customizedOffersList: IOffer[]) {}
+}
