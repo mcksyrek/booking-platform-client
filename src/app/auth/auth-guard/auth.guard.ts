@@ -7,13 +7,19 @@ import {
   Router,
 } from '@angular/router';
 import { Routes } from '@booking/shared/enums';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
+import { AuthState } from '../auth.state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  @Select(AuthState.getToken)
+  token$: Observable<string>;
+
   constructor(private _auth: AuthService, public router: Router) {}
 
   canActivate(
@@ -24,12 +30,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this._auth.getTokenFromLocalStorage()) {
-      // TODO use URLTREE
-      // TODO add @auth0/angular-jwt
-      this.router.navigate([Routes.Auth + Routes.Login]);
-      return false;
-    }
-    return true;
+    // TODO redirect with UrlTree
+    return this.token$.pipe(map(token => !!token));
   }
 }

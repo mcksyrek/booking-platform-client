@@ -16,9 +16,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
 
-    button {
-      width: 45%;
-    }
+  &__button {
+    width: 45%;
   }
 }

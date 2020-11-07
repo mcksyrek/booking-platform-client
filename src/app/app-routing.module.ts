@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'offers', pathMatch: 'full' },
   {
     path: 'auth',
+    // TODO redundant lazy loading
     loadChildren: () =>
       import('@booking/auth/auth.module').then(m => m.AuthModule),
   },

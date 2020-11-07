@@ -4,7 +4,7 @@ import { IServerLoginResponse } from '../auth.interface';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngxs/store';
 import { SetTokenAction } from '../auth.actions';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthStateModel } from '../auth.state';
 import { Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class LoginComponent {
   }
 
   submitForm(): void {
-    console.log(this.loginForm.value);
+    console.log('submit');
     this._authService
       .login(this.loginForm.value)
       .pipe(
@@ -44,10 +44,13 @@ export class LoginComponent {
           this._handleServerResponse(serverRes)
         )
       )
-      .subscribe(serverRes => {
-        console.log(serverRes);
+      .subscribe(() => {
         this._router.navigateByUrl(Routes.Offers + Routes.All);
       });
+  }
+
+  redirectToRegistration(): void {
+    this._router.navigateByUrl(Routes.Auth + Routes.Registration);
   }
 
   private _handleServerResponse({
@@ -59,7 +62,9 @@ export class LoginComponent {
   }: IServerLoginResponse): Observable<AuthStateModel> {
     const joinedToken = this._joinToken(type, token);
     this._authService.setTokenInLocalStorage(joinedToken);
-    return this._store.dispatch(new SetTokenAction(joinedToken));
+    return this._store
+      .dispatch(new SetTokenAction(joinedToken))
+      .pipe(tap(res => console.log(res)));
   }
 
   private _joinToken(type: string, token: string): string {

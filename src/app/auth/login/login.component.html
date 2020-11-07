@@ -10,8 +10,21 @@
       <input type="password" matInput formControlName="password" />
     </mat-form-field>
     <section class="login__buttons-container">
-      <button mat-raised-button>Cancel</button>
-      <button mat-raised-button color="primary" [disabled]="disableSubmit">
+      <button
+        mat-raised-button
+        class="login__button"
+        type="button"
+        (click)="redirectToRegistration()"
+      >
+        Sign up
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="login__button"
+        [disabled]="disableSubmit"
+      >
         Login
       </button>
     </section>

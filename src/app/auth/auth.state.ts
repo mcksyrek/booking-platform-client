@@ -18,7 +18,10 @@ export class AuthState {
   }
 
   @Action(SetTokenAction)
-  setToken(ctx: StateContext<AuthStateModel>, { token }: SetTokenAction): void {
-    ctx.setState({ token });
+  setToken(
+    ctx: StateContext<AuthStateModel>,
+    { token }: SetTokenAction
+  ): AuthStateModel {
+    return ctx.patchState({ token });
   }
 }

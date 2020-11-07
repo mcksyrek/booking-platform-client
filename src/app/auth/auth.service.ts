@@ -31,6 +31,6 @@ export class AuthService {
   }
 
   getTokenFromLocalStorage(): string {
-    return localStorage.getItem('token') ? localStorage.getItem('token') : '';
+    return localStorage.getItem('token');
   }
 }

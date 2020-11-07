@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { SharedModule } from './shared/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +8,11 @@ import { LayoutModule } from './layout/layout.module';
 import { AuthModule } from './auth/auth.module';
 import { TokenInterceptor } from './auth/token-interceptor/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { authInitializer } from './auth/auth.initializer';
+
+import { Store } from '@ngxs/store';
+import { AuthService } from './auth/auth.service';
+import { SetTokenAction } from './auth/auth.actions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,11 +21,18 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    // TODO LayoutModule eagerly loaded?
     LayoutModule,
     AuthModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: authInitializer,
+      deps: [AuthService, Store],
+      multi: true,
+    },
   ],
 
   bootstrap: [AppComponent],

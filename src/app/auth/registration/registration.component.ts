@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Routes } from '@booking/shared/enums';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,7 +17,11 @@ export class RegistrationComponent {
     return !this.registrationForm.valid;
   }
 
-  constructor(formBuilder: FormBuilder, private _authService: AuthService) {
+  constructor(
+    formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _router: Router
+  ) {
     this.registrationForm = formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -23,7 +29,12 @@ export class RegistrationComponent {
   }
 
   submitForm(): void {
-    console.log(this.registrationForm.value);
-    this._authService.registerUser(this.registrationForm.value).subscribe();
+    this._authService
+      .registerUser(this.registrationForm.value)
+      .subscribe(() => this.redirectToLogin());
+  }
+
+  redirectToLogin(): void {
+    this._router.navigateByUrl(Routes.Auth + Routes.Login);
   }
 }
