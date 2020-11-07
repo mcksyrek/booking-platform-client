@@ -12,6 +12,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { OfferDisplayComponent } from './offer-display/offer-display.component';
 import { SelectProductComponent } from './select-product/select-product.component';
+import { ReservationsListComponent } from './reservations-list/reservations-list.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SelectProductComponent } from './select-product/select-product.componen
     ProductsListComponent,
     OfferDisplayComponent,
     SelectProductComponent,
+    ReservationsListComponent,
   ],
   imports: [
     CommonModule,

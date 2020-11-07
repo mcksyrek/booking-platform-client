@@ -72,6 +72,15 @@ export class OffersService {
     );
   }
 
+  getUserReservations(
+    username: string,
+    role: string
+  ): Observable<IReservation[]> {
+    return this._http.get<IReservation[]>(
+      `${environment.apiPrefix}${Endpoints.Timetable}/${role}/${username}`
+    );
+  }
+
   sortOffers(sortType: string, offerList: IOffer[]): IOffer[] {
     switch (sortType) {
       case SortingTypes.Category:

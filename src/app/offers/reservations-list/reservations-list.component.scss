@@ -1,0 +1,13 @@
+.reservations-list {
+  display: flex;
+  padding: 0 1rem;
+  flex-direction: column;
+  justify-content: center;
+
+  &__item {
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5rem 1rem;
+    width: 90%;
+  }
+}

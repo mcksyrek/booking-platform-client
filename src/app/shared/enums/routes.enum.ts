@@ -5,4 +5,7 @@ export enum Routes {
   Auth = '/auth',
   Login = '/login',
   Registration = '/registration',
+  Reservations = '/reservations',
+  Client = '/client',
+  Provider = '/provider',
 }

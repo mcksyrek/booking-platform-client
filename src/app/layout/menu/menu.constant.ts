@@ -8,4 +8,12 @@ interface IMenuItem {
 export const MENU_LIST_ITEMS: IMenuItem[] = [
   { name: 'Browse offers', route: Routes.Offers + Routes.All },
   { name: 'Create new offer', route: Routes.Offers + Routes.New },
+  {
+    name: 'Your reservations',
+    route: Routes.Offers + Routes.Reservations + Routes.Client,
+  },
+  {
+    name: 'Your service reservation',
+    route: Routes.Offers + Routes.Reservations + Routes.Provider,
+  },
 ];
