@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'booking-registration',
@@ -7,24 +8,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
   registrationForm: FormGroup;
 
   get disableSubmit(): boolean {
     return !this.registrationForm.valid;
   }
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, private _authService: AuthService) {
     this.registrationForm = formBuilder.group({
-      login: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void {}
-
   submitForm(): void {
-    // TODO submiting form action
-    alert('submit form');
+    console.log(this.registrationForm.value);
+    this._authService.registerUser(this.registrationForm.value).subscribe();
   }
 }

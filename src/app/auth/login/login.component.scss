@@ -1,0 +1,25 @@
+.login {
+  // TODO move that to shared style for login/registration
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 45%;
+    }
+  }
+}
