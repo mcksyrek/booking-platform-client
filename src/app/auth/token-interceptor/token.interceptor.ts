@@ -17,8 +17,6 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = this._store.selectSnapshot<string>(({ auth }) => auth.token);
-    console.log('intercerptor');
-    console.log(token);
     if (token) {
       request = request.clone({
         setHeaders: {

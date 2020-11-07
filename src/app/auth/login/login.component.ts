@@ -36,7 +36,6 @@ export class LoginComponent {
   }
 
   submitForm(): void {
-    console.log('submit');
     this._authService
       .login(this.loginForm.value)
       .pipe(
@@ -62,9 +61,7 @@ export class LoginComponent {
   }: IServerLoginResponse): Observable<AuthStateModel> {
     const joinedToken = this._joinToken(type, token);
     this._authService.setTokenInLocalStorage(joinedToken);
-    return this._store
-      .dispatch(new SetTokenAction(joinedToken))
-      .pipe(tap(res => console.log(res)));
+    return this._store.dispatch(new SetTokenAction(joinedToken));
   }
 
   private _joinToken(type: string, token: string): string {

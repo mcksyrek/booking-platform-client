@@ -15,7 +15,7 @@ import { LayoutState } from './layout.state';
     CommonModule,
     RouterModule,
     SharedModule,
-    NgxsModule.forRoot([LayoutState]),
+    NgxsModule.forFeature([LayoutState]),
   ],
   exports: [LayoutComponent],
 })

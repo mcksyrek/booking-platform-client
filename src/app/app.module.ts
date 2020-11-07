@@ -12,7 +12,6 @@ import { authInitializer } from './auth/auth.initializer';
 
 import { Store } from '@ngxs/store';
 import { AuthService } from './auth/auth.service';
-import { SetTokenAction } from './auth/auth.actions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +20,6 @@ import { SetTokenAction } from './auth/auth.actions';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    // TODO LayoutModule eagerly loaded?
     LayoutModule,
     AuthModule,
   ],
