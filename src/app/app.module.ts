@@ -10,8 +10,9 @@ import { TokenInterceptor } from './auth/token-interceptor/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { authInitializer } from './auth/auth.initializer';
 
-import { Store } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AuthService } from './auth/auth.service';
+import { AuthState } from './auth/auth.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { AuthService } from './auth/auth.service';
     SharedModule,
     LayoutModule,
     AuthModule,
+    NgxsModule.forRoot([AuthState]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

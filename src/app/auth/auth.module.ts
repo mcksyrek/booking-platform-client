@@ -10,11 +10,6 @@ import { AuthState } from './auth.state';
 
 @NgModule({
   declarations: [RegistrationComponent, LoginComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    SharedModule,
-    NgxsModule.forRoot([AuthState]),
-  ],
+  imports: [CommonModule, AuthRoutingModule, SharedModule],
 })
 export class AuthModule {}
