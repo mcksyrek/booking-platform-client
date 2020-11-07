@@ -1,35 +1,64 @@
 <article class="registration">
+  <h3>Create new account</h3>
+
   <form
     class="registration__form"
     [formGroup]="registrationForm"
     (ngSubmit)="submitForm()"
   >
-    <h3>Create new account</h3>
-    <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="password" />
-    </mat-form-field>
-    <section class="registration__buttons-container">
-      <button
-        mat-raised-button
-        class="registration__button"
-        type="button"
-        (click)="redirectToLogin()"
-      >
-        Log in
-      </button>
-      <button
-        mat-raised-button
-        class="registration__button"
-        color="primary"
-        [disabled]="disableSubmit"
-      >
-        Register
-      </button>
+    <section class="registration__colum--left">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+
+      <section class="registration__passwords" formGroupName="passwords">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Repeat password</mat-label>
+          <input type="password" matInput formControlName="confirmPassword" />
+        </mat-form-field>
+      </section>
+    </section>
+
+    <section class="registration__colum--right">
+      <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
     </section>
   </form>
+  <section class="registration__buttons-container">
+    <button
+      mat-raised-button
+      class="registration__button"
+      type="button"
+      (click)="redirectToLogin()"
+    >
+      Log in
+    </button>
+    <button
+      mat-raised-button
+      class="registration__button"
+      color="primary"
+      [disabled]="disableSubmit"
+      (click)="submitForm()"
+    >
+      Register
+    </button>
+  </section>
 </article>

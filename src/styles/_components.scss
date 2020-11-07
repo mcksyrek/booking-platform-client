@@ -1,0 +1,12 @@
+.topbar {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  &__title {
+    font-size: 2rem;
+  }
+}

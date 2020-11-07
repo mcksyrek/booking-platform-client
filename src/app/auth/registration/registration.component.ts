@@ -23,8 +23,18 @@ export class RegistrationComponent {
     private _router: Router
   ) {
     this.registrationForm = formBuilder.group({
+      // TODO length validators
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      passwords: formBuilder.group(
+        {
+          password: ['', [Validators.required]],
+          confirmPassword: ['', [Validators.required]],
+        },
+        { validator: this.checkPasswords }
+      ),
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
     });
   }
 
@@ -36,5 +46,12 @@ export class RegistrationComponent {
 
   redirectToLogin(): void {
     this._router.navigateByUrl(Routes.Auth + Routes.Login);
+  }
+
+  checkPasswords(group: FormGroup): { passwordsMissmatch: boolean } {
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+
+    return password === confirmPassword ? null : { passwordsMissmatch: true };
   }
 }
