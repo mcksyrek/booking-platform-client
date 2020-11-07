@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IServerLoginResponse } from '../auth.interface';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngxs/store';
-import { SetTokenAction } from '../auth.actions';
-import { switchMap, tap } from 'rxjs/operators';
+import { SetSessionDataAction } from '../auth.actions';
+import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthStateModel } from '../auth.state';
 import { Router } from '@angular/router';
@@ -55,13 +55,14 @@ export class LoginComponent {
   private _handleServerResponse({
     type,
     token,
-    // TODO store username and role
     username,
-    roles,
   }: IServerLoginResponse): Observable<AuthStateModel> {
     const joinedToken = this._joinToken(type, token);
     this._authService.setTokenInLocalStorage(joinedToken);
-    return this._store.dispatch(new SetTokenAction(joinedToken));
+    this._authService.setUsernameInLocalStorage(username);
+    return this._store.dispatch(
+      new SetSessionDataAction(joinedToken, username)
+    );
   }
 
   private _joinToken(type: string, token: string): string {

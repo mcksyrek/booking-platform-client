@@ -1,9 +1,10 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { SetTokenAction } from './auth.actions';
+import { SetSessionDataAction } from './auth.actions';
 
 export class AuthStateModel {
   token?: string;
+  username?: string;
 }
 
 @State<AuthStateModel>({
@@ -17,11 +18,11 @@ export class AuthState {
     return token;
   }
 
-  @Action(SetTokenAction)
+  @Action(SetSessionDataAction)
   setToken(
     ctx: StateContext<AuthStateModel>,
-    { token }: SetTokenAction
+    { token, username }: SetSessionDataAction
   ): AuthStateModel {
-    return ctx.patchState({ token });
+    return ctx.patchState({ token, username });
   }
 }

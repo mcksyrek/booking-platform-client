@@ -33,4 +33,12 @@ export class AuthService {
   getTokenFromLocalStorage(): string {
     return localStorage.getItem('token');
   }
+
+  setUsernameInLocalStorage(username: string): void {
+    window.localStorage.setItem('username', username);
+  }
+
+  getUsernameFromLocalStorage(): string {
+    return localStorage.getItem('username');
+  }
 }
