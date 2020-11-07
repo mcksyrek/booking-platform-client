@@ -39,8 +39,10 @@ export class RegistrationComponent {
   }
 
   submitForm(): void {
+    const { username } = this.registrationForm.value;
+    const password = this.registrationForm.value.passwords.password;
     this._authService
-      .registerUser(this.registrationForm.value)
+      .registerUser({ username, password })
       .subscribe(() => this.redirectToLogin());
   }
 

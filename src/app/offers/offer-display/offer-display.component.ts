@@ -40,6 +40,8 @@ export class OfferDisplayComponent extends AbstractSubscriber {
   }
 
   handleSelectedProduct(selectedProduct: IProduct): void {
+    const username = this._store.selectSnapshot(state => state.auth.username);
+
     const dialogRef = this._dialog.open(SelectProductComponent, {
       data: {
         product: selectedProduct,
@@ -55,11 +57,12 @@ export class OfferDisplayComponent extends AbstractSubscriber {
               date,
               duration.toString(),
               this.selectedOfferId.toString(),
+              username,
               { hour, product }
             );
           })
         )
-        .subscribe()
+        .subscribe(res => console.log(res))
     );
   }
 }

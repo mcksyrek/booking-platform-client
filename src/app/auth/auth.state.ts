@@ -18,6 +18,11 @@ export class AuthState {
     return token;
   }
 
+  @Selector()
+  static getUsername({ username }: AuthStateModel): string {
+    return username;
+  }
+
   @Action(SetSessionDataAction)
   setToken(
     ctx: StateContext<AuthStateModel>,

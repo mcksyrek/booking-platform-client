@@ -23,6 +23,7 @@ import {
 import { OffersState } from '../state/offers.state';
 import { Routes } from '@booking/shared/enums/index';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
+import { AuthState } from '@booking/auth/auth.state';
 
 @Component({
   selector: 'booking-offer-form',
@@ -34,6 +35,9 @@ export class OfferFormComponent extends AbstractSubscriber
   implements OnInit, OnDestroy {
   @Select(OffersState.getSelectedOffer)
   readonly selectedOffer$: Observable<IOffer>;
+  @Select(AuthState.getUsername)
+  readonly username$: Observable<string>;
+
   readonly offerForm: FormGroup;
   readonly categories = OFFER_CATEGORIES;
   readonly selectedOfferId: number;
@@ -98,7 +102,7 @@ export class OfferFormComponent extends AbstractSubscriber
   }
 
   ngOnInit(): void {
-    this._subscriber.add(
+    this.addSubscriptions(
       this.selectedOffer$
         .pipe(
           map(selectedOfferData => {
@@ -106,7 +110,11 @@ export class OfferFormComponent extends AbstractSubscriber
           }),
           filter(selectedOfferData => !!selectedOfferData)
         )
-        .subscribe(offerData => this._setOfferForm(offerData))
+        .subscribe(offerData => this._setOfferForm(offerData)),
+
+      this.username$.subscribe(username =>
+        this.offerForm.patchValue({ author: username })
+      )
     );
   }
 
