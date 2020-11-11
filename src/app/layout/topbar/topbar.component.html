@@ -3,5 +3,16 @@
     <mat-icon>menu</mat-icon>
   </button>
   <h1 class="topbar__title">Booking Platform</h1>
-  <button mat-raised-button color="accent" (click)="logout()">Log out</button>
+
+  <button
+    mat-raised-button
+    color="accent"
+    *ngIf="isLogged$ | async; else loginButton"
+    (click)="logout()"
+  >
+    Log out
+  </button>
+  <ng-template #loginButton>
+    <button mat-raised-button color="accent" (click)="login()">Log in</button>
+  </ng-template>
 </mat-toolbar>

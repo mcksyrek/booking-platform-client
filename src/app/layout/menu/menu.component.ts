@@ -8,11 +8,12 @@ import {
 import { Select } from '@ngxs/store';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { MENU_LIST_ITEMS } from './menu.constant';
+import { ALL_LIST_ITEMS, USER_LIST_ITEMS } from './menu.constant';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
 import { LayoutState } from '../layout.state';
 import { Observable } from 'rxjs';
 import { skip } from 'rxjs/operators';
+import { AuthState } from '@booking/auth/auth.state';
 
 @Component({
   selector: 'booking-menu',
@@ -22,10 +23,14 @@ import { skip } from 'rxjs/operators';
 })
 export class MenuComponent extends AbstractSubscriber implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
-  readonly menuList = MENU_LIST_ITEMS;
+  readonly allMenuList = ALL_LIST_ITEMS;
+  readonly userMenuList = USER_LIST_ITEMS;
 
   @Select(LayoutState.toggleMenu)
   toggleMenu$: Observable<boolean>;
+
+  @Select(AuthState.isLogged)
+  readonly isLogged$: Observable<boolean>;
 
   constructor(private _changeDetector: ChangeDetectorRef) {
     super();

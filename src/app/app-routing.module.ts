@@ -6,17 +6,16 @@ import { AuthGuard } from './auth/auth-guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'offers', pathMatch: 'full' },
-  {
-    path: 'auth',
-    // TODO redundant lazy loading
-    loadChildren: () =>
-      import('@booking/auth/auth.module').then(m => m.AuthModule),
-  },
+
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('@booking/auth/auth.module').then(m => m.AuthModule),
+      },
       {
         path: 'offers',
         loadChildren: () =>

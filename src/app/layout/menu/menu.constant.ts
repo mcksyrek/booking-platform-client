@@ -5,8 +5,11 @@ interface IMenuItem {
   route: string;
 }
 
-export const MENU_LIST_ITEMS: IMenuItem[] = [
+export const ALL_LIST_ITEMS: IMenuItem[] = [
   { name: 'Browse offers', route: Routes.Offers + Routes.All },
+];
+
+export const USER_LIST_ITEMS: IMenuItem[] = [
   { name: 'Create new offer', route: Routes.Offers + Routes.New },
   {
     name: 'Your reservations',

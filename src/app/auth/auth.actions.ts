@@ -6,3 +6,7 @@ export class SetSessionDataAction {
     public readonly username: string
   ) {}
 }
+
+export class RemoveSessionDataAction {
+  static readonly type = '[Auth] Remove session data';
+}

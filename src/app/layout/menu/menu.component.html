@@ -4,12 +4,22 @@
     <mat-action-list>
       <button
         mat-list-item
-        *ngFor="let menuItem of menuList"
+        *ngFor="let menuItem of allMenuList"
         [routerLink]="menuItem.route"
         (click)="sidenav.toggle()"
       >
         {{ menuItem.name }}
       </button>
+      <ng-container *ngIf="isLogged$ | async">
+        <button
+          mat-list-item
+          *ngFor="let menuItem of userMenuList"
+          [routerLink]="menuItem.route"
+          (click)="sidenav.toggle()"
+        >
+          {{ menuItem.name }}
+        </button>
+      </ng-container>
     </mat-action-list>
   </mat-sidenav>
 

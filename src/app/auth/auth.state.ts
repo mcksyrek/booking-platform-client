@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { SetSessionDataAction } from './auth.actions';
+import { SetSessionDataAction, RemoveSessionDataAction } from './auth.actions';
 
 export class AuthStateModel {
   token?: string;
@@ -23,11 +23,25 @@ export class AuthState {
     return username;
   }
 
+  @Selector()
+  static isLogged({ token }: AuthStateModel): boolean {
+    console.log(token);
+    return !!token;
+  }
+
   @Action(SetSessionDataAction)
-  setToken(
+  setSessionData(
     ctx: StateContext<AuthStateModel>,
     { token, username }: SetSessionDataAction
   ): AuthStateModel {
     return ctx.patchState({ token, username });
+  }
+
+  @Action(RemoveSessionDataAction)
+  removeSessionData(
+    ctx: StateContext<AuthStateModel>,
+    { token, username }: SetSessionDataAction
+  ): AuthStateModel {
+    return ctx.setState({});
   }
 }
