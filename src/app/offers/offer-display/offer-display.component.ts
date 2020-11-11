@@ -50,16 +50,28 @@ export class OfferDisplayComponent extends AbstractSubscriber {
       dialogRef
         .afterClosed()
         .pipe(
-          switchMap(({ duration, date, hour, product }: IReservation) => {
-            return this._offersService.postNewReservation(
+          switchMap(
+            ({
+              duration,
               date,
-              duration.toString(),
-              this.selectedOfferId.toString(),
-              { hour, product }
-            );
-          })
+              hour,
+              product,
+              clientName,
+              clientPhone,
+            }: IReservation) => {
+              return this._offersService.postNewReservation(
+                date,
+                duration.toString(),
+                this.selectedOfferId.toString(),
+                { hour, product, clientName, clientPhone }
+              );
+            }
+          )
         )
-        .subscribe()
+        .subscribe({
+          next: () => alert('success'),
+          error: () => alert('error'),
+        })
     );
   }
 }
