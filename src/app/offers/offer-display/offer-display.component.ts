@@ -13,6 +13,7 @@ import { SelectProductComponent } from '../select-product/select-product.compone
 import { OffersService } from '../offers.service';
 import { switchMap } from 'rxjs/operators';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
+import { Messages } from '@booking/shared/enums';
 
 @Component({
   selector: 'booking-offer-display',
@@ -71,8 +72,8 @@ export class OfferDisplayComponent extends AbstractSubscriber {
           )
         )
         .subscribe({
-          next: () => this._snackBar.open('Reservation made successfully'),
-          error: () => this._snackBar.open('Error, reservation is not created'),
+          complete: () => this._snackBar.open(Messages.Success),
+          error: () => this._snackBar.open(Messages.Error),
         })
     );
   }

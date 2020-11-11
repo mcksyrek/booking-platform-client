@@ -111,6 +111,7 @@ export class OfferFormComponent extends AbstractSubscriber
   }
 
   onSubmit(): void {
+    // TODO add snackBars to handleresponse
     if (this.selectedOfferId) {
       this._store.dispatch(new UpdateOfferAction(this.offerForm.value));
     } else {
