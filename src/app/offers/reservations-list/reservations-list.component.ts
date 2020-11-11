@@ -25,50 +25,34 @@ export class ReservationsListComponent extends AbstractSubscriber
   @Select(AuthState.getUsername)
   readonly username$: Observable<string>;
   reservations: any[];
-  readonly type: string;
 
   constructor(
-    activatedRoute: ActivatedRoute,
     private _offersService: OffersService,
     private _changeDetector: ChangeDetectorRef
   ) {
     super();
-    this.type = activatedRoute.snapshot.params.type;
   }
 
-  ngOnInit(): void {
-    this._subscriber.add(
-      this.username$
-        .pipe(
-          switchMap(username =>
-            this._offersService.getUserReservations(username, this.type)
-          )
-        )
-        .subscribe(reservations => {
-          this.reservations = this._handleReservations(reservations);
-          this._changeDetector.markForCheck();
-        })
-    );
-  }
+  ngOnInit(): void {}
 
-  private _handleReservations(reservationsList: any[]): any[] {
-    return reservationsList
-      .map(reservation => {
-        const splitDate = reservation.date
-          .split('/')
-          .map(dateElement => parseInt(dateElement, 10));
+  // private _handleReservations(reservationsList: any[]): any[] {
+  //   return reservationsList
+  //     .map(reservation => {
+  //       const splitDate = reservation.date
+  //         .split('/')
+  //         .map(dateElement => parseInt(dateElement, 10));
 
-        splitDate[1] = splitDate[1] - 1;
-        const date = new Date(
-          splitDate[2],
-          splitDate[1],
-          splitDate[0],
-          reservation.hour
-        );
-        return { ...reservation, date, provider: reservation.providerUsername };
-      })
-      .sort((a, b) => {
-        return a.date.getTime() - b.date.getTime();
-      });
-  }
+  //       splitDate[1] = splitDate[1] - 1;
+  //       const date = new Date(
+  //         splitDate[2],
+  //         splitDate[1],
+  //         splitDate[0],
+  //         reservation.hour
+  //       );
+  //       return { ...reservation, date, provider: reservation.providerUsername };
+  //     })
+  //     .sort((a, b) => {
+  //       return a.date.getTime() - b.date.getTime();
+  //     });
+  // }
 }

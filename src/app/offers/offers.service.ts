@@ -58,6 +58,12 @@ export class OffersService {
     );
   }
 
+  getOffersByAuthor(author: string): Observable<IOffer[]> {
+    return this._http.get<IOffer[]>(
+      `${environment.apiPrefix}${Endpoints.Offers}${Endpoints.Author}/${author}`
+    );
+  }
+
   postNewReservation(
     date: string,
     duration: string,
@@ -68,15 +74,6 @@ export class OffersService {
       `${environment.apiPrefix}${Endpoints.Timetable}`,
       reservation,
       { params: { date, duration, id } }
-    );
-  }
-
-  getUserReservations(
-    username: string,
-    role: string
-  ): Observable<IReservation[]> {
-    return this._http.get<IReservation[]>(
-      `${environment.apiPrefix}${Endpoints.Timetable}/${role}/${username}`
     );
   }
 

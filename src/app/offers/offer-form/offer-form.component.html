@@ -79,7 +79,12 @@
       Cancel
     </button>
 
-    <button mat-raised-button color="warn" (click)="onDelete()">
+    <button
+      *ngIf="selectedOfferId"
+      mat-raised-button
+      color="warn"
+      (click)="onDelete()"
+    >
       Delete
     </button>
   </section>

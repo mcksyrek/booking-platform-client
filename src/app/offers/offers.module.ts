@@ -13,6 +13,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { OfferDisplayComponent } from './offer-display/offer-display.component';
 import { SelectProductComponent } from './select-product/select-product.component';
 import { ReservationsListComponent } from './reservations-list/reservations-list.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReservationsListComponent } from './reservations-list/reservations-list
     OfferDisplayComponent,
     SelectProductComponent,
     ReservationsListComponent,
+    MyOffersComponent,
   ],
   imports: [
     CommonModule,

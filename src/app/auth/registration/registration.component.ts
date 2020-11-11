@@ -42,10 +42,11 @@ export class RegistrationComponent {
     const password = this.registrationForm.value.passwords.password;
     this._authService.registerUser({ username, password }).subscribe({
       complete: () => {
-        this._snackBar.open(Messages.Success);
+        this._snackBar.open(Messages.Success, null, { duration: 2000 });
         this.redirectToLogin();
       },
-      error: () => this._snackBar.open(Messages.Error),
+      error: () =>
+        this._snackBar.open(Messages.Error, null, { duration: 2000 }),
     });
   }
 

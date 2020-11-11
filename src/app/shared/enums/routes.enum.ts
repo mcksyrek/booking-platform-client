@@ -8,4 +8,6 @@ export enum Routes {
   Reservations = '/reservations',
   Client = '/client',
   Provider = '/provider',
+  Edit = '/edit',
+  MyOffers = '/myOffers',
 }

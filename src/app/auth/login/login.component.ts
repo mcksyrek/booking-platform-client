@@ -48,10 +48,11 @@ export class LoginComponent {
       )
       .subscribe({
         complete: () => {
-          this._snackBar.open(Messages.LoginSuccess);
+          this._snackBar.open(Messages.LoginSuccess, null, { duration: 2000 });
           this._router.navigateByUrl(Routes.Offers + Routes.All);
         },
-        error: () => this._snackBar.open(Messages.LoginError),
+        error: () =>
+          this._snackBar.open(Messages.LoginError, null, { duration: 2000 }),
       });
   }
 

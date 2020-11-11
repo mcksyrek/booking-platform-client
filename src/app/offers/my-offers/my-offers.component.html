@@ -1,0 +1,16 @@
+<article class="my-offers">
+  <section class="my-offers__conteiner" *ngIf="offers; else noOffers">
+    <mat-card class="my-offers__card" *ngFor="let offer of offers">
+      <h3>{{ offer.name }}</h3>
+      <div class="my-offers__buttons">
+        <button mat-raised-button (click)="viewOffer(offer.id)">View</button>
+        <button mat-raised-button color="primary" (click)="editOffer(offer.id)">
+          Edit
+        </button>
+      </div>
+    </mat-card>
+  </section>
+  <ng-template #noOffers>
+    <h2>Nothing to show!</h2>
+  </ng-template>
+</article>

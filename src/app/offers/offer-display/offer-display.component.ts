@@ -74,8 +74,10 @@ export class OfferDisplayComponent extends AbstractSubscriber {
           )
         )
         .subscribe({
-          complete: () => this._snackBar.open(Messages.Success),
-          error: () => this._snackBar.open(Messages.Error),
+          complete: () =>
+            this._snackBar.open(Messages.Success, null, { duration: 2000 }),
+          error: () =>
+            this._snackBar.open(Messages.Error, null, { duration: 2000 }),
         })
     );
   }

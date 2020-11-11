@@ -6,14 +6,20 @@ import { OffersListComponent } from './offers-list/offers-list.component';
 import { OfferDisplayComponent } from './offer-display/offer-display.component';
 import { ReservationsListComponent } from './reservations-list/reservations-list.component';
 import { AuthGuard } from '@booking/auth/auth-guard/auth.guard';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'all', pathMatch: 'full' },
   { path: 'all', component: OffersListComponent },
   { path: 'new', component: OfferFormComponent, canActivate: [AuthGuard] },
   {
-    path: 'reservations/:type',
+    path: 'reservations',
     component: ReservationsListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'myOffers',
+    component: MyOffersComponent,
     canActivate: [AuthGuard],
   },
   { path: ':id', component: OfferDisplayComponent },

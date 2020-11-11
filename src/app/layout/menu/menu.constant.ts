@@ -12,11 +12,11 @@ export const ALL_LIST_ITEMS: IMenuItem[] = [
 export const USER_LIST_ITEMS: IMenuItem[] = [
   { name: 'Create new offer', route: Routes.Offers + Routes.New },
   {
-    name: 'Your reservations',
-    route: Routes.Offers + Routes.Reservations + Routes.Client,
+    name: 'My offers',
+    route: Routes.Offers + Routes.MyOffers,
   },
   {
-    name: 'Your service reservation',
-    route: Routes.Offers + Routes.Reservations + Routes.Provider,
+    name: 'Your timetable',
+    route: Routes.Offers + Routes.Reservations,
   },
 ];

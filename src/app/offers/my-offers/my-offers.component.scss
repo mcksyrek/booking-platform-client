@@ -1,0 +1,37 @@
+@import 'src/styles/_mixins';
+
+.my-offers {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+
+  &__conteiner {
+    width: 80%;
+    display: flex;
+    @include small-width {
+      flex-direction: column;
+      width: 90%;
+    }
+  }
+
+  &__card {
+    width: 23%;
+    margin: 1%;
+
+    @include small-width {
+      width: 90%;
+    }
+
+    * {
+      margin: 3%;
+    }
+  }
+
+  &__buttons {
+    width: 90%;
+    button {
+      width: 40%;
+      margin: 5%;
+    }
+  }
+}
