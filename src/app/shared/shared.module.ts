@@ -17,6 +17,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { IconModule } from './icon.module';
 
@@ -41,6 +42,7 @@ const MATERIAL_MODULES: any[] = [
   MatDialogModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

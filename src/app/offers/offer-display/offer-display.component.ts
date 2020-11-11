@@ -5,6 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { IOffer, IProduct, IReservation } from '../offer.interface';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { GetOfferByIdAction } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
@@ -28,7 +29,8 @@ export class OfferDisplayComponent extends AbstractSubscriber {
     private _store: Store,
     activatedRoute: ActivatedRoute,
     private _dialog: MatDialog,
-    private _offersService: OffersService
+    private _offersService: OffersService,
+    private _snackBar: MatSnackBar
   ) {
     super();
     this.selectedOfferId = activatedRoute.snapshot.params.id;
@@ -69,8 +71,8 @@ export class OfferDisplayComponent extends AbstractSubscriber {
           )
         )
         .subscribe({
-          next: () => alert('success'),
-          error: () => alert('error'),
+          next: () => this._snackBar.open('Reservation made successfully'),
+          error: () => this._snackBar.open('Error, reservation is not created'),
         })
     );
   }
