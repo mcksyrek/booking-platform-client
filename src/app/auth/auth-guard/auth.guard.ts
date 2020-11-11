@@ -9,18 +9,17 @@ import {
 import { Routes } from '@booking/shared/enums';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { map } from 'rxjs/operators';
 import { AuthState } from '../auth.state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  @Select(AuthState.getToken)
-  token$: Observable<string>;
+  @Select(AuthState.isLogged)
+  isLogged$: Observable<boolean>;
 
-  constructor(private _auth: AuthService, public router: Router) {}
+  constructor(public router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -30,7 +29,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // TODO redirect with UrlTree
-    return this.token$.pipe(map(token => !!token));
+    return this.isLogged$.pipe(
+      map(isLogged =>
+        isLogged ? true : this.router.createUrlTree([Routes.Offers])
+      )
+    );
   }
 }
