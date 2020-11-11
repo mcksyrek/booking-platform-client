@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { AuthStateModel } from '../auth.state';
 import { Router } from '@angular/router';
 import { Routes } from '@booking/shared/enums';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Messages } from '@booking/shared/enums';
 
 @Component({
   selector: 'booking-login',
@@ -27,7 +29,8 @@ export class LoginComponent {
     formBuilder: FormBuilder,
     private _authService: AuthService,
     private _store: Store,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.loginForm = formBuilder.group({
       username: ['', [Validators.required]],
@@ -43,8 +46,12 @@ export class LoginComponent {
           this._handleServerResponse(serverRes)
         )
       )
-      .subscribe(() => {
-        this._router.navigateByUrl(Routes.Offers + Routes.All);
+      .subscribe({
+        complete: () => {
+          this._snackBar.open(Messages.LoginSuccess);
+          this._router.navigateByUrl(Routes.Offers + Routes.All);
+        },
+        error: () => this._snackBar.open(Messages.LoginError),
       });
   }
 

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Routes } from '@booking/shared/enums';
 import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Messages } from '@booking/shared/enums';
 
 @Component({
   selector: 'booking-registration',
@@ -20,10 +22,10 @@ export class RegistrationComponent {
   constructor(
     formBuilder: FormBuilder,
     private _authService: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.registrationForm = formBuilder.group({
-      // TODO length validators
       username: ['', [Validators.required]],
       passwords: formBuilder.group(
         {
@@ -32,18 +34,19 @@ export class RegistrationComponent {
         },
         { validator: this.checkPasswords }
       ),
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
     });
   }
 
   submitForm(): void {
     const { username } = this.registrationForm.value;
     const password = this.registrationForm.value.passwords.password;
-    this._authService
-      .registerUser({ username, password })
-      .subscribe(() => this.redirectToLogin());
+    this._authService.registerUser({ username, password }).subscribe({
+      complete: () => {
+        this._snackBar.open(Messages.Success);
+        this.redirectToLogin();
+      },
+      error: () => this._snackBar.open(Messages.Error),
+    });
   }
 
   redirectToLogin(): void {

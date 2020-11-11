@@ -62,13 +62,12 @@ export class OffersService {
     date: string,
     duration: string,
     id: string,
-    client: string,
     reservation: IReservation
   ): Observable<IReservation> {
     return this._http.post<IReservation>(
       `${environment.apiPrefix}${Endpoints.Timetable}`,
       reservation,
-      { params: { date, duration, id, client } }
+      { params: { date, duration, id } }
     );
   }
 
