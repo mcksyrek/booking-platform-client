@@ -49,6 +49,11 @@ export class SelectProductComponent extends AbstractSubscriber
     this.selectDateForm = formBuilder.group({
       selectedDate: ['', Validators.required],
       selectedHour: ['', Validators.required],
+      clientName: ['', Validators.required],
+      clientPhone: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{9}$/)],
+      ],
     });
   }
 
@@ -78,15 +83,24 @@ export class SelectProductComponent extends AbstractSubscriber
   }
 
   createReservation(): IReservation {
-    const { selectedDate, selectedHour } = this.selectDateForm.value;
+    const {
+      selectedDate,
+      selectedHour,
+      clientName,
+      clientPhone,
+    } = this.selectDateForm.value;
+
     if (!selectedDate) {
       return null;
     }
+
     return {
       product: this.productName,
       hour: this._mapHourStringToNumber(selectedHour),
       duration: this.duration,
       date: dateFormatter(selectedDate),
+      clientName,
+      clientPhone,
     };
   }
 

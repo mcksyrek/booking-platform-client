@@ -6,6 +6,11 @@
     width: 300px;
   }
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__hour-input {
     ::ng-deep .mat-form-field-infix {
       width: 100%;

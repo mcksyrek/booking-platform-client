@@ -23,6 +23,7 @@ export interface IReservation {
   hour: number;
   duration?: number;
   date?: string;
-  client?: string;
-  provider?: string;
+  clientName?: string;
+  clientPhone?: string | number;
+  offerId?: string;
 }

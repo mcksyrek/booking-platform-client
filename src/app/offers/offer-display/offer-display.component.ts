@@ -5,6 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { IOffer, IProduct, IReservation } from '../offer.interface';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { GetOfferByIdAction } from '../state/offers.actions';
 import { OffersState } from '../state/offers.state';
@@ -12,6 +13,7 @@ import { SelectProductComponent } from '../select-product/select-product.compone
 import { OffersService } from '../offers.service';
 import { switchMap } from 'rxjs/operators';
 import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber';
+import { Messages } from '@booking/shared/enums';
 
 @Component({
   selector: 'booking-offer-display',
@@ -28,7 +30,8 @@ export class OfferDisplayComponent extends AbstractSubscriber {
     private _store: Store,
     activatedRoute: ActivatedRoute,
     private _dialog: MatDialog,
-    private _offersService: OffersService
+    private _offersService: OffersService,
+    private _snackBar: MatSnackBar
   ) {
     super();
     this.selectedOfferId = activatedRoute.snapshot.params.id;
@@ -52,17 +55,28 @@ export class OfferDisplayComponent extends AbstractSubscriber {
       dialogRef
         .afterClosed()
         .pipe(
-          switchMap(({ duration, date, hour, product }: IReservation) => {
-            return this._offersService.postNewReservation(
+          switchMap(
+            ({
+              duration,
               date,
-              duration.toString(),
-              this.selectedOfferId.toString(),
-              username,
-              { hour, product }
-            );
-          })
+              hour,
+              product,
+              clientName,
+              clientPhone,
+            }: IReservation) => {
+              return this._offersService.postNewReservation(
+                date,
+                duration.toString(),
+                this.selectedOfferId.toString(),
+                { hour, product, clientName, clientPhone }
+              );
+            }
+          )
         )
-        .subscribe(res => console.log(res))
+        .subscribe({
+          complete: () => this._snackBar.open(Messages.Success),
+          error: () => this._snackBar.open(Messages.Error),
+        })
     );
   }
 }

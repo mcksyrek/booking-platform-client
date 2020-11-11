@@ -15,19 +15,28 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <br />
-    <mat-form-field
-      appearance="fill"
+
+    <ng-container
       *ngIf="selectDateForm.controls.selectedDate.valueChanges | async"
-      class="select-product__hour-input"
     >
-      <mat-label>Select avaliable hour</mat-label>
-      <mat-select formControlName="selectedHour">
-        <mat-option *ngFor="let hour of avaliableHours" [value]="hour">
-          {{ hour }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill" class="select-product__hour-input">
+        <mat-label>Select avaliable hour</mat-label>
+        <mat-select formControlName="selectedHour">
+          <mat-option *ngFor="let hour of avaliableHours" [value]="hour">
+            {{ hour }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Your name:</mat-label>
+        <input matInput type="text" formControlName="clientName" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Your phone number:</mat-label>
+        <input matInput type="text" formControlName="clientPhone" />
+      </mat-form-field>
+    </ng-container>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
