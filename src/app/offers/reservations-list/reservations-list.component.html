@@ -1,6 +1,5 @@
 <article class="reservations-list">
   <article>
-    <!-- <h3 *ngIf="type === 'client'; else provider">Your reservations:</h3> -->
     <ng-template #provider>
       <h3>List of your services reservations:</h3>
     </ng-template>
@@ -13,10 +12,8 @@
       </span>
       <span> <b>Service:</b> {{ reservation.product }} </span>
 
-      <span
-        ><b>Address:</b> {{ reservation.address }}, {{ reservation.city }}</span
-      >
-      <span><b>Contact number:</b> +48 {{ reservation.phone }}</span>
+      <span><b>Client name:</b> {{ reservation.clientName }}</span>
+      <span><b>Contact number:</b> +48 {{ reservation.clientPhone }}</span>
     </mat-card>
   </article>
 

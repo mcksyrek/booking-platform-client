@@ -5,4 +5,5 @@ export enum Endpoints {
   SignUp = '/signup',
   SignIn = '/signin',
   Author = '/author',
+  Reservations = '/reservations',
 }

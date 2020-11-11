@@ -25,7 +25,6 @@ export class AuthState {
 
   @Selector()
   static isLogged({ token }: AuthStateModel): boolean {
-    console.log(token);
     return !!token;
   }
 

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from '@booking/layout/layout.component';
-import { AuthGuard } from './auth/auth-guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'offers', pathMatch: 'full' },

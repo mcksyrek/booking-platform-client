@@ -27,3 +27,10 @@ export interface IReservation {
   clientPhone?: string | number;
   offerId?: string;
 }
+
+export interface IReservationShort {
+  product: string;
+  date: Date;
+  clientName: string;
+  clientPhone: number;
+}

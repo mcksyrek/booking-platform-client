@@ -64,6 +64,12 @@ export class OffersService {
     );
   }
 
+  getReservationsByAuthor(author: string): Observable<IReservation[]> {
+    return this._http.get<IReservation[]>(
+      `${environment.apiPrefix}${Endpoints.Offers}${Endpoints.Reservations}/${author}`
+    );
+  }
+
   postNewReservation(
     date: string,
     duration: string,

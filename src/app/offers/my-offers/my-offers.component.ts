@@ -41,7 +41,6 @@ export class MyOffersComponent extends AbstractSubscriber implements OnInit {
         )
         .subscribe(offers => {
           this.offers = offers;
-          console.log(offers);
           this._changeDetector.markForCheck();
         })
     );
