@@ -1,5 +1,9 @@
+<mat-toolbar>
+  <h2>My offers:</h2>
+</mat-toolbar>
+
 <article class="my-offers">
-  <section class="my-offers__conteiner" *ngIf="offers; else noOffers">
+  <section class="my-offers__container" *ngIf="offers; else noOffers">
     <mat-card class="my-offers__card" *ngFor="let offer of offers">
       <h3>{{ offer.name }}</h3>
       <div class="my-offers__buttons">

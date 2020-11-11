@@ -1,3 +1,5 @@
+@import 'src/styles/_mixins';
+
 .reservations-list {
   display: flex;
   padding: 0 1rem;
@@ -10,5 +12,10 @@
     justify-content: space-around;
     margin: 0.5rem 1rem;
     width: 90%;
+
+    @include small-width {
+      flex-direction: column;
+      width: 83%;
+    }
   }
 }
