@@ -12,7 +12,7 @@
       *ngFor="let reservation of reservations"
     >
       <span>
-        <b>Date:</b> {{ reservation.date | date: 'M/d/yy, h:mm a' }}
+        <b>Date:</b> {{ reservation.date | date: 'dd/MM/yy, h:mm a' }}
       </span>
       <span> <b>Service:</b> {{ reservation.product }} </span>
 
