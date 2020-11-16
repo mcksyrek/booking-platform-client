@@ -17,7 +17,6 @@ import { AbstractSubscriber } from '@booking/shared/classes/abstract-subscriber'
 export class OffersListComponent extends AbstractSubscriber implements OnInit {
   @Select(OffersState.getCustomizedOffers)
   readonly offers$: Observable<IOffer[]>;
-  // TODO figure out why cannot use Observable directly in template
 
   offersList: IOffer[];
 

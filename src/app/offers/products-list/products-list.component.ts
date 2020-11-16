@@ -19,7 +19,6 @@ import { DURATION_HOURS } from '@booking/shared/constants';
 })
 export class ProductsListComponent implements OnInit {
   @Input() readonly parentForm: FormGroup;
-  // productsList passed down to component to trigger changeDetection
   @Input() readonly productsList: IProduct[];
 
   @Output() readonly removeProduct = new EventEmitter<number>();

@@ -70,7 +70,6 @@ export class OfferFormComponent extends AbstractSubscriber
           Validators.maxLength(50),
         ],
       ],
-      // TODO set author from session data
       author: [''],
       address: ['', Validators.required],
       city: ['', [Validators.required, Validators.maxLength(50)]],
@@ -119,7 +118,6 @@ export class OfferFormComponent extends AbstractSubscriber
   }
 
   onSubmit(): void {
-    // TODO add snackBars to handleresponse
     if (this.selectedOfferId) {
       this._store.dispatch(new UpdateOfferAction(this.offerForm.value));
     } else {

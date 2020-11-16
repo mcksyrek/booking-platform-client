@@ -43,7 +43,6 @@ export class MenuComponent extends AbstractSubscriber implements OnInit {
   }
 
   toggleMenu(): void {
-    // TODO create directive for this issue
     this.sidenav.toggle();
     this._changeDetector.markForCheck();
   }

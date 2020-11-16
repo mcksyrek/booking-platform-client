@@ -10,5 +10,4 @@ export const OFFER_MOCK: IOffer = {
   phoneNumber: 111111111,
   category: 'other',
   description: 'Mock description',
-  // postedDate: new Date(),
 };
